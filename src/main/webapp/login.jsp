@@ -62,7 +62,7 @@
                         if (response == "success") {
                             window.location.href = "${ctx}/login";
                         } else {
-                            toastr.warning("User name or password wrong");
+                            toastr.error("User name or password wrong");
                         }
                     },
                     error: function (request, textStatus, errorThrown) {

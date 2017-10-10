@@ -3,6 +3,7 @@ package com.vimaan.controller;
 import com.vimaan.model.Login;
 import com.vimaan.model.User;
 import com.vimaan.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 @Controller
 public class LoginController {
+    static Logger log = Logger.getLogger(LoginController.class);
+
     @Autowired
     UserService userService;
 
@@ -20,6 +24,12 @@ public class LoginController {
     public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
         User user = (User) request.getSession().getAttribute("user");
         ModelAndView mav = null;
+
+        log.debug("This is debug message");
+        log.info("This is info message");
+        log.warn("This is warn message");
+        log.fatal("This is fatal message");
+        log.error("This is error message");
 
         if (null != user) {
             mav = new ModelAndView("welcome");
