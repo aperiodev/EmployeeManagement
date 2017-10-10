@@ -21,7 +21,7 @@
         <pattern>/welcome.jsp</pattern>
         <pattern>/login.jsp</pattern>
         <pattern>/index.jsp</pattern>
-        <pattern>/register.jsp</pattern>
+
     </decorator>
 
 <!--  <decorator name="headerFooterOnly" page="headerFooterLayout.jsp">
