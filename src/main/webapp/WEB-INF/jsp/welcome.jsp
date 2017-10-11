@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Welcome</title>
+    <title>Dashboard</title>
 </head>
 <body>
 <table>
@@ -20,10 +20,7 @@
     </tr>
     <tr>
     </tr>
-    <tr>
-        <td><a href="index.jsp">Home</a>
-        </td>
-    </tr>
+
 </table>
 </body>
 </html>

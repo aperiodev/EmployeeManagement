@@ -1,6 +1,5 @@
 package com.vimaan.DAO;
 
-import com.vimaan.model.Login;
 import com.vimaan.model.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class UserDaoImpl  extends BaseDao implements UserDao{
+public class UserDaoImpl extends BaseDao implements UserDao{
     @Autowired
     DataSource datasource;
 
@@ -28,8 +27,8 @@ public class UserDaoImpl  extends BaseDao implements UserDao{
         sessionFactory.openSession().saveOrUpdate(user);
     }
 
-    public User validateUser(Login login) {
-        String sql = "from User where username='" + login.getUsername() + "' and password='" + login.getPassword()
+    public User validateUser(User user) {
+        String sql = "from User where username='" + user.getUsername() + "' and password='" + user.getPassword()
                 + "'";
         List<User> users = sessionFactory.openSession().createQuery(sql).list();
         return users.size() > 0 ? users.get(0) : null;

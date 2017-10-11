@@ -12,7 +12,7 @@
         <p class="login-box-msg">Sign in to start your session</p>
         <%--<form id="loginForm" action="loginProcess" method="post">--%>
         <div class="form-group has-feedback">
-            <input path="username" name="username" id="username" type="text" class="form-control" placeholder="username"
+            <input path="username" name="username" id="username" type="text" class="form-control" placeholder="Username"
                    required>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
@@ -40,7 +40,7 @@
         <%--</form>--%>
         <br>
         <a href="#">I forgot my password</a><br>
-        <a href="${ctx}/register" class="text-center">Register a new membership</a>
+        <%--<a href="${ctx}/register" class="text-center">Register a new membership</a>--%>
     </div>
 </div>
 <script>
@@ -66,10 +66,10 @@
                         }
                     },
                     error: function (request, textStatus, errorThrown) {
-                        $('#errorMsg').empty().html("User name or password wrong");
+                        toastr.error("User name or password wrong");
                     },
                     failure: function () {
-                        $('#errorMsg').empty().html("User name or password wrong");
+                        toastr.error("User name or password wrong");
                     }
                 });
             } else {

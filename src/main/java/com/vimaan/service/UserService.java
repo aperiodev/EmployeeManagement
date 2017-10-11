@@ -1,6 +1,5 @@
 package com.vimaan.service;
 
-import com.vimaan.model.Login;
 import com.vimaan.model.User;
 
 /**
@@ -8,6 +7,6 @@ import com.vimaan.model.User;
  */
 public interface UserService {
 
-    User validateUser(Login login);
+   User validateUser(User user);
     void register(User user);
 }

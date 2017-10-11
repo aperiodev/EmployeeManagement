@@ -1,6 +1,5 @@
 package com.vimaan.DAO;
 
-import com.vimaan.model.Login;
 import com.vimaan.model.User;
 
 /**
@@ -8,5 +7,5 @@ import com.vimaan.model.User;
  */
 public interface UserDao  {
     void register(User user);
-    User validateUser(Login login);
+    User validateUser(User user);
 }
