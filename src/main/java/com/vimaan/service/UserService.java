@@ -1,13 +1,19 @@
 package com.vimaan.service;
 
-import com.vimaan.model.Login;
+import com.vimaan.model.Account;
 import com.vimaan.model.User;
+import com.vimaan.model.UserRole;
 
-/**
- * Created by pc on 9/25/2017.
- */
+import java.util.List;
+
 public interface UserService {
+    void userRegistration(User user, String userRole);
+    List getUsersList();
+    List<UserRole> getHrUsers();
+    User getUserByUsername(String username);
+    User checkUsername(User user);
+    int toggleAccountStatus(String username);
 
-    User validateUser(Login login);
-    void register(User user);
+    Account getAccountById(int id);
+
 }

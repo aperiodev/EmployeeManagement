@@ -18,9 +18,6 @@
     <link type="text/css" href="${theme}/css/AdminLTE.min.css" rel="stylesheet"/>
     <link type="text/css" href="${theme}/plugins/iCheck/square/blue.css" rel="stylesheet"/>
     <link type="text/css" href="${theme}/css/loginStyle.css" rel="stylesheet"/>
-
-    <decorator:head/>
-
 </head>
     <body>
     <decorator:body/>

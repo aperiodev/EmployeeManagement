@@ -1,0 +1,86 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.2.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--<context:component-scan base-package="com.vimaan.*" />-->
+    <http auto-config="true" use-expressions="true">
+        <access-denied-handler error-page="/accessdenied" />
+        <intercept-url pattern="/login.jsp*" access="permitAll"/>
+        <intercept-url pattern="/auth/**" access="isAuthenticated()" />
+        <intercept-url pattern="/auth/home**" access="isAuthenticated()" />
+        <intercept-url pattern="/auth/admin**" access="hasRole ('ROLE_ADMIN')"/>
+        <intercept-url pattern="/auth/user**" access="hasRole ('ROLE_USER')"/>
+        <!--<intercept-url pattern="/**" access="ROLE_USER"/>-->
+
+        <form-login
+                login-page="/login"
+                default-target-url="/auth/home"
+                authentication-failure-url="/login?error"
+                username-parameter="username"
+                password-parameter="password"/>
+        <logout logout-success-url="/login?logout"/>
+    </http>
+
+    <!--authentication-success-handler-ref="successHandler"
+    authentication-failure-handler-ref="failureHandler"-->
+    <!--<authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="mkyong" password="123456" authorities="ROLE_USER" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>-->
+
+    <global-method-security pre-post-annotations="enabled"/>
+    <!-- Select users and user_roles from database-->
+    <authentication-manager>
+        <authentication-provider>
+            <jdbc-user-service data-source-ref="dataSource"
+                               users-by-username-query="select username,password, enabled from users where username=?"
+                               authorities-by-username-query="select username, role from user_roles where username =?  "/>
+        </authentication-provider>
+    </authentication-manager>
+
+   <!--  Application entry point which will redirect to login if user is not authenticated
+    <beans:bean id="appAuthenticationEntryPoint" class="com.vimaan.controller.AppAuthenticationEntryPoint">
+        <beans:constructor-arg name="loginFormUrl" value="/login" />
+    </beans:bean>
+
+    &lt;!&ndash; if user authentication is successful then AppSuccessHandler will redirect to page based on role&ndash;&gt;
+    <beans:bean id="successHandler" class="com.vimaan.controller.AppSuccessHandler"/>
+
+    &lt;!&ndash; if user authentication is unsuccessful then failureHandler will redirect to access denied page&ndash;&gt;
+    <beans:bean id="failureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <beans:constructor-arg  name="defaultFailureUrl" value="/accessdenied"/>
+    </beans:bean>-->
+    <!--<beans:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"/>-->
+    <!--  &lt;!&ndash;<beans:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>&ndash;&gt;
+
+      &lt;!&ndash;Password reset token encoder&ndash;&gt;
+      <beans:bean id="passwordTokenEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder"/>
+
+      <beans:bean id="rememberMeAuthenticationProvider" class="org.springframework.security.authentication.RememberMeAuthenticationProvider">
+          <beans:constructor-arg value="e37f4b31-0c45-11dd-bd0b-0800200c9a66"/>
+      </beans:bean>-->
+
+    <!-- <authentication-manager alias="authenticationManager" erase-credentials="false">
+         <authentication-provider user-service-ref="userServiceImpl">
+             <password-encoder ref="passwordEncoder"/>
+         </authentication-provider>
+     </authentication-manager>-->
+    <!--<authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="userDetailsServiceImpl">
+            <password-encoder ref="encoder"></password-encoder>
+        </authentication-provider>
+    </authentication-manager>
+
+    <beans:bean id="userDetailsServiceImpl" class="com.hellokoding.account.service.UserDetailsServiceImpl"></beans:bean>
+-->
+</beans:beans>

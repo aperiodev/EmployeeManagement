@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc= "http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/context
       http://www.springframework.org/schema/context/spring-context-3.0.xsd
       http://www.springframework.org/schema/mvc
       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+
     <mvc:resources mapping="/theme/**" location="/theme/"/>
     <mvc:resources mapping="/static/**" location="/static/" />
-    <context:property-placeholder location="classpath*:database.properties"/>
+    <!--<context:property-placeholder location="classpath*:database.properties"/>-->
 
     <!-- Scan for spring annotated components -->
-    <context:component-scan base-package="com.vimaan" />
+    <context:component-scan base-package="com.vimaan.*" />
 
    <!-- Process annotations on registered beans like @Autowired... -->
    <!--<context:annotation-config />-->
@@ -35,7 +38,7 @@
     </bean>
 
     <bean id="userService" class="com.vimaan.service.UserServiceImpl" />
-    <bean id="userDao" class="com.vimaan.DAO.UserDaoImpl" />
+    <bean id="userDao" class="com.vimaan.dao.UserDaoImpl" />
 
     <!--<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="datasource" />
@@ -48,7 +51,7 @@
         <property name="password" value="root" />
     </bean>-->
 
-    <bean id="dataSource"
+   <!-- <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${database.driver}" />
         <property name="url" value="${database.url}" />
@@ -66,7 +69,7 @@
                 <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}  </prop>
             </props>
         </property>
-    </bean>
+    </bean>-->
 
     <bean class="org.springframework.orm.hibernate4.HibernateTransactionManager" id="hibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"></property>

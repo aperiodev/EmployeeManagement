@@ -1,12 +1,17 @@
-package com.vimaan.DAO;
+package com.vimaan.dao;
 
-import com.vimaan.model.Login;
+import com.vimaan.model.Account;
 import com.vimaan.model.User;
+import com.vimaan.model.UserRole;
 
-/**
- * Created by pc on 9/25/2017.
- */
+import java.util.List;
+
 public interface UserDao  {
-    void register(User user);
-    User validateUser(Login login);
+    User findByUserName(String username);
+    void register(User user, String userRole);
+    List<UserRole> getHrUsers();
+    List users();
+    User checkUsername(User user);
+    int  activateOrDeactivateAccount(String username);
+    Account findAccountById(int id);
 }

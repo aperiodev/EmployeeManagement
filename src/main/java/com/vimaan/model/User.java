@@ -1,104 +1,88 @@
 package com.vimaan.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
- * Created by pc on 9/25/2017.
+ * @author anusha
+ * User Entity to store username and password
  */
+
 @Entity
-public class User implements Serializable{
+@Table(name = "users")
+public class User implements Serializable {
+
+    private String username;
+    private String password;
+    private boolean enabled = new Boolean(true);
+    private Set<UserRole> userRole = new HashSet<UserRole>(0);
+
+    public User() {
+    }
+
+    public User(String username, String password, boolean enabled) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+    }
+
+    public User(String username, String password,
+                boolean enabled, Set<UserRole> userRole) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.userRole = userRole;
+    }
 
     @Id
-    @GeneratedValue
-    private int id;
-
-    @Column
-    private String username;
-
-    @Column
-    private String password;
-    @Column
-    private String firstname;
-    @Column
-    private String lastname;
-
-    @Column
-    private String email;
-
-    @Column
-    private String address;
-
-    @Column
-    private int phone;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
+    @Column(name = "username", unique = true,
+            nullable = false, length = 45)
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
+    @Column(name = "password",
+            nullable = false, length = 60)
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getFirstname() {
-        return firstname;
+    @Column(name = "enabled", nullable = true)
+    public boolean isEnabled() {
+        return this.enabled;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
-    public String getLastname() {
-        return lastname;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @Column(nullable = true)
+    public Set<UserRole> getUserRole() {
+        return this.userRole;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setUserRole(Set<UserRole> userRole) {
+        this.userRole = userRole;
     }
 
-    public String getEmail() {
-        return email;
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                ", userRole=" + userRole +
+                '}';
     }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public int getPhone() {
-        return phone;
-    }
-
-    public void setPhone(int phone) {
-        this.phone = phone;
-    }
-
-
 }

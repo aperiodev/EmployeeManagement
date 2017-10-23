@@ -13,6 +13,8 @@
     <title>Layout</title>
 
     <link type="text/css" href="${theme}/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="${theme}/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="${theme}/bower_components/datatables.net-bs/css/responsive.dataTables.min.css">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="${theme}/bower_components/font-awesome/css/font-awesome.min.css">
@@ -20,6 +22,10 @@
     <link rel="stylesheet" href="${theme}/bower_components/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="${theme}/css/AdminLTE.css">
+
+    <!-- Custom css style-->
+    <link type="text/css" href="${theme}/css/custom.css" rel="stylesheet"/>
+
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="${theme}/css/skins/_all-skins.css">
@@ -43,7 +49,7 @@
 
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
+        <%--<section class="content-header">
             <h1>
                 Dashboard
                 <small>Control panel</small>
@@ -52,7 +58,7 @@
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Dashboard</li>
             </ol>
-        </section>
+        </section>--%>
         <section class="content">
             <decorator:body/>
         </section>
@@ -61,45 +67,52 @@
     <%@ include file="/WEB-INF/includes/footer.jsp" %>
 </div>
 
-    <!-- jQuery UI 1.11.4 -->
-    <script src="${theme}/bower_components/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button);
-    </script>
+<!-- jQuery UI 1.11.4 -->
+<script src="${theme}/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+    $.widget.bridge('uibutton', $.ui.button);
+</script>
 
-    <script src="${theme}/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="${theme}/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 
-    <!-- Sparkline -->
-    <script src="${theme}/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+<script src="${theme}/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 
-    <!-- jQuery Knob Chart -->
-    <script src="${theme}/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+<script src="${theme}/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
 
-    <script src="${theme}/bower_components/moment/min/moment.min.js"></script>
+<!-- Sparkline -->
+<script src="${theme}/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 
-    <!-- daterangepicker -->
-    <script src="${theme}/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="${theme}/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
 
-    <!-- datepicker -->
-    <script src="${theme}/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="${theme}/bower_components/moment/min/moment.min.js"></script>
 
-    <!-- Bootstrap WYSIHTML5 -->
-    <script src="${theme}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<!-- daterangepicker -->
+<script src="${theme}/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-    <!-- Slimscroll -->
-    <script src="${theme}/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- datepicker -->
+<script src="${theme}/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
-    <!-- FastClick -->
-    <script src="${theme}/bower_components/fastclick/lib/fastclick.js"></script>
 
-    <!-- AdminLTE App -->
-    <script src="${theme}/js/adminlte.min.js"></script>
 
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="${theme}/js/pages/dashboard.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="${theme}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 
-    <!-- AdminLTE for demo purposes -->
-    <script src="${theme}/js/demo.js"></script>
+<!-- Slimscroll -->
+<script src="${theme}/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- FastClick -->
+<script src="${theme}/bower_components/fastclick/lib/fastclick.js"></script>
+
+<!-- AdminLTE App -->
+<script src="${theme}/js/adminlte.min.js"></script>
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="${theme}/js/pages/dashboard.js"></script>
+
+<!-- AdminLTE for demo purposes -->
+<script src="${theme}/js/demo.js"></script>
+
 </body>
 </html>

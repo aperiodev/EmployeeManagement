@@ -1,16 +1,18 @@
-package com.vimaan.DAO;
+package com.vimaan.dao;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 
 /**
- * Created by pc on 9/25/2017.
+ * @author anusha
  */
 public class BaseDao implements Serializable{
 
+    @Autowired
     private SessionFactory sessionFactory;
 
     public SessionFactory getSessionFactory() {
