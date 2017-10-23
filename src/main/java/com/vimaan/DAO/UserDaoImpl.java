@@ -1,6 +1,9 @@
 package com.vimaan.dao;
 
+
 import com.vimaan.model.Account;
+
+
 import com.vimaan.model.User;
 import com.vimaan.model.UserRole;
 import com.vimaan.model.enums.Authorities;
@@ -17,6 +20,7 @@ import java.util.List;
 
 @Repository
 @Transactional
+
 public class UserDaoImpl extends BaseDao implements UserDao {
     static Logger log = Logger.getLogger(UserDaoImpl.class);
 
@@ -53,6 +57,11 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         return users;
     }
 
+public class UserDaoImpl extends BaseDao implements UserDao{
+    @Autowired
+    DataSource datasource;
+
+
     public User findByUserName(String username) {
         List<User> users;
         users = getSession()
@@ -74,9 +83,16 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         return users.size() > 0 ? users : null;
     }
 
+
     public User checkUsername(User user) {
         String sql = "from User where username='" + user.getUsername() + "'";
         List<User> users = getSession().createQuery(sql).list();
+
+    public User validateUser(User user) {
+        String sql = "from User where username='" + user.getUsername() + "' and password='" + user.getPassword()
+                + "'";
+        List<User> users = sessionFactory.openSession().createQuery(sql).list();
+
         return users.size() > 0 ? users.get(0) : null;
     }
 
