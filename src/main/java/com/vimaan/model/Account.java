@@ -33,7 +33,8 @@ public class Account implements Serializable {
     private String address;
 
     @Column
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date dob;
 
     @Column
@@ -52,7 +53,8 @@ public class Account implements Serializable {
     private String gender;
 
     @Column
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date doj;
 
     @Column

@@ -13,10 +13,10 @@
         <div class="box-header with-border">
             <h3 class="box-title">Company Leaves</h3>
 
-            <div class="box-tools pull-right">
+            <%--<div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
-            </div>
+            </div>--%>
         </div>
         <%-- <form:form id="addcompanyleavesform" modelAttribute="companyleaves" action="savecompanyleaves" method="post">--%>
         <%--  <form:hidden path="id" id="id" name="id"></form:hidden>--%>

@@ -6,10 +6,14 @@ import com.vimaan.model.enums.Authorities;
 import com.vimaan.service.AccountService;
 import com.vimaan.service.UserService;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,9 +21,15 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.SimpleTimeZone;
+
+import static java.lang.Integer.parseInt;
 
 
 @Controller
@@ -80,7 +90,6 @@ public class RegistrationController extends BaseController {
     @RequestMapping(value = "/user/profile", method = RequestMethod.GET)
     public ModelAndView showProfile(Principal principal) {
         User user = getLoggedInUser();
-        System.out.println("user=== : " + user);
         ModelAndView mav = new ModelAndView("redirect:/auth/home");
         if (principal != null) {
             if (null != user) {
@@ -96,38 +105,11 @@ public class RegistrationController extends BaseController {
     }
 
     @RequestMapping(value = "/user/updateProfile", method = RequestMethod.POST)
-    public ModelAndView updateProfile(@ModelAttribute("account") Account account) {
-        ModelAndView mav = null;
-        System.out.println("account===" + account);
-        System.out.println("account id  " + account.getId());
-        try {
-            Account accountObj = userService.getAccountById(account.getId());
-            System.out.println("accountObj ==" + accountObj.getFirstname());
-/*
-           accountObj.setAadharnumber(account.getAadharnumber());
-           accountObj.setAddress(account.getAddress());
-           accountObj.setCurrentemployee(account.getCurrentemployee());
-           accountObj.setDesignation(account.getDesignation());
-           accountObj.setDob(new Date());
-           accountObj.setDoj(new Date());
-           accountObj.setEmail(account.getEmail());
-           accountObj.setEmergencycontactnumber(account.getEmergencycontactnumber());
-           accountObj.setPannumber(account.getPannumber());
-           accountObj.setFirstname(account.getFirstname());
-           accountObj.setLastname(account.getLastname());
-           accountObj.setEmployeecode(account.getEmployeecode());
-           accountObj.setGender(account.getGender());
-           accountObj.setPhonenumber(account.getPhonenumber());
-*/
-            System.out.println("before savng-----");
-            // accountService.registerAccount(accountObj);
-            sessionFactory.openSession().save(account);
-            System.out.println("after savng-----");
-
-        } catch (Exception e) {
-            System.out.println("exception---" + e.getMessage());
-        }
-        mav = new ModelAndView("redirect:/auth/home");
+    public ModelAndView updateProfile(HttpServletRequest request,
+                                      @RequestParam("doj") @DateTimeFormat(pattern = "yyyy-MM-dd") Date doj,
+                                      @RequestParam("dob") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dob) {
+        accountService.saveOrUpdateAccount(request, doj, dob);
+        ModelAndView mav = new ModelAndView("redirect:/auth/home");
         return mav;
     }
 

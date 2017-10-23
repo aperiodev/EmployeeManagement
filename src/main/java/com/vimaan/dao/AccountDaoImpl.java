@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 import java.util.List;
 
@@ -26,12 +27,18 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
     }
 
     public void registerAccount(Account account) {
-        System.out.println("in daoimpl===="+ account.getId());
         try {
             getSession().save(account);
-        } catch (Exception e){
-            System.out.println(" exce   "+ e.getMessage());
+        } catch (Exception e) {
+            System.out.println(" exce   " + e.getMessage());
         }
 
+    }
+
+    public void saveOrUpdateAccount(Account account) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.saveOrUpdate(account);
+        tx.commit();
     }
 }
