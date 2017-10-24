@@ -30,7 +30,6 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
         } catch (Exception e) {
             System.out.println(" exce   " + e.getMessage());
         }
-
     }
 
     public void saveOrUpdateAccount(Account account) {
