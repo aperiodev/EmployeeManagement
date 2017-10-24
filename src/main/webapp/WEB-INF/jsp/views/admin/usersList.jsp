@@ -54,7 +54,7 @@
             var username = $(this).data("user");
 
             $.ajax({
-                url: "${ctx}/admin/enableOrDisableAccount",
+                url: "${ctx}/auth/admin/enableOrDisableAccount",
                 type: "POST",
                 data: ({
                     username: username

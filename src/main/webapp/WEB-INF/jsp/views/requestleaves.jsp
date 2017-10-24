@@ -77,7 +77,7 @@
                 }
             } else {
                 $.ajax({
-                    url: "${ctx}/user/ajaxRequestLeave",
+                    url: "${ctx}/auth/user/ajaxRequestLeave",
                     type: "POST",
                     data: ({
                         touser: $("#touser").val(),
@@ -89,7 +89,7 @@
                     success: function (response) {
                         console.log(response);
                         if (response == "success") {
-                            window.location.href = "${ctx}/home";
+                            window.location.href = "${ctx}/auth/user/leavesLists";
                         } else {
                             toastr.error("Please tyr again...");
                             $("button").removeClass('disabled');
@@ -140,6 +140,7 @@
                 for (var dat in date_array) {
                     var new_date_array_val = date_array[dat];
                     new_date_array_val.setHours(0, 0, 0, 0);
+                    start.setHours(0, 0, 0, 0);
                     if (new_date_array_val.getTime() == start.getTime()) {
                         days_count = days_count - 1;
                     }

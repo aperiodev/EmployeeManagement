@@ -7,13 +7,18 @@ import com.vimaan.service.LeavesService;
 import com.vimaan.service.UserService;
 import com.vimaan.service.AccountService;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -24,6 +29,7 @@ import java.util.Locale;
 
 @Controller
 @RequestMapping(value = "/auth/user")
+@Transactional
 public class UserController extends BaseController {
     static Logger log = Logger.getLogger(UserController.class);
 
@@ -39,7 +45,7 @@ public class UserController extends BaseController {
     @Autowired
     LeavesService leavesService;
 
-    @RequestMapping(value = "/leavesLists", method = RequestMethod.GET)
+     @RequestMapping(value = "/leavesLists", method = RequestMethod.GET)
     public ModelAndView showLeavesLists(HttpServletRequest request, HttpServletResponse response) {
         User user = getLoggedInUser();
         ModelAndView model = null;
@@ -67,7 +73,7 @@ public class UserController extends BaseController {
         List<Holidays> holidaylist = holidaysService.getHolidays();
         ModelAndView mav = null;
         Account account = accountService.getAccount(user);
-        System.out.println("account obj is : " + account);
+       log.debug("account obj is : " + account);
 
         if (account != null) {
             mav = new ModelAndView("views/requestleaves");
@@ -86,21 +92,8 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/ajaxRequestLeave", method = RequestMethod.POST)
     public
     @ResponseBody
-    String requestLeaveCheck(HttpServletRequest request, HttpServletResponse response) throws ParseException {
-        Leaves leaves = new Leaves();
-        leaves.setFromDate(convdate(request.getParameter("fromdate")));
-        leaves.setNoOfDays(Integer.parseInt(request.getParameter("noofdays")));
-        leaves.setReason(request.getParameter("reason"));
-        leaves.setStatus(Status.values()[0]);
-        leaves.setStatusReason("");
-        leaves.setToDate(convdate(request.getParameter("todate")));
-        User tou = new User();
-        tou.setUsername(request.getParameter("touser"));
-        leaves.setToUser(tou);
-        User fromu = getLoggedInUser();
-        leaves.setUser(fromu);
-        System.out.println("user ----: " + leaves.getUser());
-        leavesService.saveleave(leaves);
+    String requestLeaveCheck(HttpServletRequest request, HttpServletResponse response, Principal principal) throws ParseException {
+        leavesService.saveleave(request);
         return "success";
     }
 
