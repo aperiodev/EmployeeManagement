@@ -18,7 +18,7 @@ public class Leaves implements Serializable {
     @GeneratedValue(strategy = AUTO)
     private int id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private User user;
 
     @Column(length = 4000)

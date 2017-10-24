@@ -77,7 +77,7 @@
                 }
             } else {
                 $.ajax({
-                    url: "${ctx}/user/ajaxRequestLeave",
+                    url: "${ctx}/auth/user/ajaxRequestLeave",
                     type: "POST",
                     data: ({
                         touser: $("#touser").val(),
@@ -89,7 +89,7 @@
                     success: function (response) {
                         console.log(response);
                         if (response == "success") {
-                            window.location.href = "${ctx}/home";
+                            window.location.href = "${ctx}/auth/user/leavesLists";
                         } else {
                             toastr.error("Please tyr again...");
                             $("button").removeClass('disabled');

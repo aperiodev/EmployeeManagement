@@ -3,12 +3,13 @@ package com.vimaan.dao;
 import com.vimaan.model.Leaves;
 import com.vimaan.model.User;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.DataSource;
 import java.util.List;
 
 @Repository
@@ -19,12 +20,10 @@ public class LeavesDaoImpl extends BaseDao implements LeavesDao {
     SessionFactory sessionFactory;
 
     public void saveleave(Leaves leaves) {
-        try {
-            System.out.println("leaves====" + leaves);
-            getSession().merge(leaves);
-        } catch (Exception e){
-            System.out.println("error message "+ e.getMessage());
-        }
+        Session session = getSession();
+        Transaction tx = session.beginTransaction();
+        session.merge(leaves);
+        tx.commit();
     }
 
     public void updateleave(Leaves leaves) {
