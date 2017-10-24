@@ -140,6 +140,7 @@
                 for (var dat in date_array) {
                     var new_date_array_val = date_array[dat];
                     new_date_array_val.setHours(0, 0, 0, 0);
+                    start.setHours(0, 0, 0, 0);
                     if (new_date_array_val.getTime() == start.getTime()) {
                         days_count = days_count - 1;
                     }
