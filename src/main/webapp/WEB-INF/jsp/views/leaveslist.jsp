@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <style>
     .reason {
@@ -13,7 +14,7 @@
 
 <div class="box box-warning">
     <div class="box-header">
-        <h3 class="box-title">User Leave List</h3>
+        <h3 class="box-title">Leaves List</h3>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -27,7 +28,7 @@
                 <th>Reason</th>
                 <th>Status</th>
                 <th>To</th>
-                <th></th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -39,20 +40,24 @@
                     <td>${item.noOfDays}</td>
                     <td class="reason">${item.reason}</td>
                     <td>${fn:replace(item.status, '_', ' ')}</td>
-                    <td>${item.toUser.username}</td>
-                    <td align="center">
-                        <button type="button"
-                                <c:choose>
-                                    <c:when test="${item.status == 'CANCEL'}">
-                                        class="cbutton btn btn-block btn-warning disabled" disabled
-                                    </c:when>
-                                    <c:otherwise>
-                                        class="cbutton btn btn-block btn-warning"
-                                    </c:otherwise>
-                                </c:choose>
-                                onclick="comfirm_decision(${item.id});">CANCEL
-                        </button>
-                    </td>
+                        <td>${item.toUser.username}</td>
+                        <td align="center">
+                            <c:if test="${item.status == 'WAITING_FOR_APPROVAL'}">
+                                <button type="button"
+                                        class="cbutton btn btn-block btn-warning ${item.status == 'CANCEL' ?'disabled' : ''} "
+                                    ${item.status == 'CANCEL' ?'disabled' : ''}
+                                    <%--<c:choose>
+                                        <c:when test="${item.status == 'CANCEL'}">
+                                            class="cbutton btn btn-block btn-warning disabled" disabled
+                                        </c:when>
+                                        <c:otherwise>
+                                            class="cbutton btn btn-block btn-warning"
+                                        </c:otherwise>
+                                    </c:choose>--%>
+                                        onclick="comfirm_decision(${item.id});">CANCEL
+                                </button>
+                            </c:if>
+                        </td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -83,7 +88,7 @@
         // this will pop up confirmation box and if yes is clicked it call servlet else return to page
         if (confirm("Do you want to cancel this leave request?")) {
             $.ajax({
-                url: "${ctx}/user/ajaxCancleLeave",
+                url: "${ctx}/auth/user/ajaxCancleLeave",
                 type: "POST",
                 data: ({
                     leaveId: leave_id
@@ -91,7 +96,7 @@
                 success: function (response) {
                     console.log(response);
                     if (response == "success") {
-                        window.location.href = "${ctx}/leavesLists";
+                        window.location.href = "${ctx}/auth/user/leavesLists";
                     } else {
                         toastr.error("Please tyr again...");
                         $(".cbutton").removeClass('disabled');

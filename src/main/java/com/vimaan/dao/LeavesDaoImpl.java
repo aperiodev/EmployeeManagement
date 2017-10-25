@@ -2,6 +2,7 @@ package com.vimaan.dao;
 
 import com.vimaan.model.Leaves;
 import com.vimaan.model.User;
+import com.vimaan.model.enums.Status;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -36,6 +37,12 @@ public class LeavesDaoImpl extends BaseDao implements LeavesDao {
 
     public List<Leaves> getLeaves(User user) {
         String sql = "from Leaves where user.username='" + user.getUsername() + "'";
+        List<Leaves> leaves = getSession().createQuery(sql).list();
+        return leaves.size() > 0 ? leaves : null;
+    }
+
+    public List<Leaves> getLeavesByStatus(Status status) {
+        String sql = "from Leaves where status = '"+ status +"'";
         List<Leaves> leaves = getSession().createQuery(sql).list();
         return leaves.size() > 0 ? leaves : null;
     }

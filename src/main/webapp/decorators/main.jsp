@@ -13,29 +13,34 @@
     <title>Layout</title>
 
     <link type="text/css" href="${theme}/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="${theme}/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="${theme}/bower_components/datatables.net-bs/css/responsive.dataTables.min.css">
+
+    <link rel="stylesheet" href="${theme}/css/fonts.css">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="${theme}/bower_components/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="${theme}/bower_components/Ionicons/css/ionicons.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="${theme}/css/AdminLTE.css">
 
-    <!-- Custom css style-->
-    <link type="text/css" href="${theme}/css/custom.css" rel="stylesheet"/>
-
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="${theme}/css/skins/_all-skins.css">
+    <link rel="stylesheet" href="${theme}/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="${theme}/bower_components/datatables.net-bs/css/responsive.dataTables.min.css">
 
     <!-- Date Picker -->
     <link rel="stylesheet" href="${theme}/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <!-- Daterange picker -->
     <link rel="stylesheet" href="${theme}/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="${theme}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="${theme}/css/AdminLTE.css">
+
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="${theme}/css/skins/_all-skins.css">
+
+    <!-- Custom css style-->
+    <link type="text/css" href="${theme}/css/custom.css" rel="stylesheet"/>
 
     <decorator:head/>
 </head>

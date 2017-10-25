@@ -58,6 +58,29 @@ public class UserController extends BaseController {
         return model;
     }
 
+    @RequestMapping(value = "/leaves", method = RequestMethod.GET)
+    public ModelAndView showLeavesLists(HttpServletRequest request) {
+        System.out.println("sstatusValue : " );
+        User user = getLoggedInUser();
+        Status status;
+        ModelAndView model = null;
+        if (user == null) {
+            return new ModelAndView("redirect:/auth/home");
+        }
+
+        if(!request.getParameterMap().containsKey("status")){
+            status = Status.WAITING_FOR_APPROVAL;
+            model = new ModelAndView("views/pendingleaveslist");
+        } else {
+            status = Status.valueOf(request.getParameter("status"));
+            model = new ModelAndView("views/leavesByStatus");
+        }
+        List<Leaves> user_leaves = leavesService.getLeavesByStatus(status);
+        model.addObject("userleaves", user_leaves);
+        model.addObject("LeaveType", status);
+        return model;
+    }
+
     @RequestMapping(value = "/requestLeave", method = RequestMethod.GET)
     public ModelAndView showRequestLeave(HttpServletRequest request, HttpServletResponse response) {
         User user = getLoggedInUser();
@@ -92,7 +115,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/ajaxRequestLeave", method = RequestMethod.POST)
     public
     @ResponseBody
-    String requestLeaveCheck(HttpServletRequest request, HttpServletResponse response, Principal principal) throws ParseException {
+    String requestLeaveCheck(HttpServletRequest request) throws ParseException {
         leavesService.saveleave(request);
         return "success";
     }
@@ -110,6 +133,17 @@ public class UserController extends BaseController {
         Leaves leaves = new Leaves();
         leaves.setId(Integer.parseInt(request.getParameter("leaveId")));
         leaves.setStatus(Status.values()[3]);
+        leavesService.updateleave(leaves);
+        return "success";
+    }
+
+    @RequestMapping(value = "/ajaxApproveOrRejectLeave", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String approveOrRejectLeave(HttpServletRequest request, HttpServletResponse response) throws ParseException {
+        Leaves leaves = new Leaves();
+        leaves.setId(Integer.parseInt(request.getParameter("leaveId")));
+        leaves.setStatus(Status.valueOf(request.getParameter("leaveStatus")));
         leavesService.updateleave(leaves);
         return "success";
     }

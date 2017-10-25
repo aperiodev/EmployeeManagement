@@ -52,8 +52,10 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-hourglass-end"></i> Pending Leaves</a></li>
-                    <li><a href="#"><i class="fa fa-paper-plane-o"></i> Approved Leaves</a></li>
+                    <li><a href="/auth/user/leaves"><i class="fa fa-hourglass-end"></i> Requested Leaves</a></li>
+                    <li><a href="/auth/user/leaves?status=APPROVED"><i class="fa fa-thumbs-up"></i> Approved Leaves</a></li>
+                    <li><a href="/auth/user/leaves?status=REJECTED"><i class="fa fa-thumbs-down"></i> Rejected Leaves</a></li>
+                    <li><a href="/auth/user/leaves?status=CANCEL"><i class="fa fa-ban"></i> Canceled Leaves</a></li>
 
                 </ul>
             </li>

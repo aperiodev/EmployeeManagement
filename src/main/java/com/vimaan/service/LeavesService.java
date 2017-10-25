@@ -3,6 +3,7 @@ package com.vimaan.service;
 import com.vimaan.model.Account;
 import com.vimaan.model.Leaves;
 import com.vimaan.model.User;
+import com.vimaan.model.enums.Status;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -14,4 +15,5 @@ public interface LeavesService {
     void saveleave(HttpServletRequest request);
     void updateleave(Leaves leaves);
     List<Leaves> getLeaves(User user);
+    List<Leaves> getLeavesByStatus(Status status);
 }

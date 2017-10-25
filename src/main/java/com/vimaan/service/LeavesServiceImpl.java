@@ -37,19 +37,19 @@ public class LeavesServiceImpl implements LeavesService {
     public void saveleave(HttpServletRequest request) {
         try {
             String loggedInUser = SecurityContextHolder.getContext().getAuthentication().getName();
+
             Leaves leaves = new Leaves();
-                leaves.setFromDate(convdate(request.getParameter("fromdate")));
-                leaves.setNoOfDays(Integer.parseInt(request.getParameter("noofdays")));
-                leaves.setToDate(convdate(request.getParameter("todate")));
-                leaves.setReason(request.getParameter("reason"));
-                leaves.setStatus(Status.values()[0]);
-                leaves.setStatusReason("");
-                leaves.setToUser(userService.getUserByUsername(request.getParameter("touser")));
-                leaves.setUser(userService.getUserByUsername(loggedInUser));
+            leaves.setFromDate(convdate(request.getParameter("fromdate")));
+            leaves.setNoOfDays(Integer.parseInt(request.getParameter("noofdays")));
+            leaves.setToDate(convdate(request.getParameter("todate")));
+            leaves.setReason(request.getParameter("reason"));
+            leaves.setStatus(Status.values()[0]);
+            leaves.setStatusReason("");
+            leaves.setToUser(userService.getUserByUsername(request.getParameter("touser")));
+            leaves.setUser(userService.getUserByUsername(loggedInUser));
+
             leavesDao.saveleave(leaves);
-
         } catch (Exception e) {
-
             System.out.println("Exception === " + e.getMessage());
         }
     }
@@ -66,6 +66,11 @@ public class LeavesServiceImpl implements LeavesService {
 
     public List<Leaves> getLeaves(User user) {
         List<Leaves> leaves = leavesDao.getLeaves(user);
+        return leaves;
+    }
+
+    public List<Leaves> getLeavesByStatus(Status status){
+        List<Leaves> leaves = leavesDao.getLeavesByStatus(status);
         return leaves;
     }
 }
