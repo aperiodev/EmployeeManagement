@@ -1,6 +1,7 @@
 <%@ include file="/common/taglibs.jsp" %>
 <%@page contentType="text/html;charset=UTF-8" %>
 <%@page pageEncoding="UTF-8" %>
+
 <script>
     $(function () {
         $('#doj').datepicker({
@@ -19,10 +20,6 @@
     <div class="box box-warning">
         <div class="box-header with-border">
             <h3 class="box-title">Profile</h3>
-            <%--<div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-            </div>--%>
         </div>
         <form:form id="updateForm" modelAttribute="account" action="updateProfile" method="post">
             <form:hidden path="user" id="user" name="user"/>
@@ -57,6 +54,7 @@
                             </label>
                             <form:select class="form-control" data-placeholder="Select a Role" id="gender" path="gender"
                                          name="gender">
+                                <form:option value="">Select..</form:option>
                                 <form:option value="MALE">MALE</form:option>
                                 <form:option value="FEMALE">FEMALE</form:option>
                             </form:select>
@@ -102,7 +100,8 @@
 
                         <div class="form-group">
                             <label>Date of Joining</label>
-                            <form:input type="text" class="form-control" id="doj" placeholder="Date of Joining" readonly="true"
+                            <form:input type="text" class="form-control" id="doj" placeholder="Date of Joining"
+                                        readonly="true"
                                         path="doj" name="doj" value="${account.doj}"/>
                         </div>
                     </div>
@@ -148,3 +147,50 @@
         </form:form>
     </div>
 </section>
+<script>
+    $(function () {
+        updateFormValidate();
+    });
+
+    function updateFormValidate() {
+        var updateForm = $("#updateForm");
+
+        updateForm.validate({
+            rules: {
+                firstname: {
+                    required: true,
+                    minlength: 2
+                },
+                lastname: {
+                    required: true,
+                    minlength: 1
+                },
+                gender: "required",
+                email: {
+                    required: true,
+                    email: true
+                },
+                dob: "required",
+                doj: "required",
+                designation: "required",
+                phonenumber: {
+                    required: true,
+                    number: true,
+                    maxlength: 10
+                },
+                /*emergencycontactnumber: {
+                    required: true,
+                    number: true,
+                    maxlength: 10
+                },*/
+                pannumber: "required",
+                aadharnumber: "required"
+                // employeecode: "required",
+                // currentemployee: "required"
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    }
+</script>

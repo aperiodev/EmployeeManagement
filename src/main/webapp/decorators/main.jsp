@@ -79,6 +79,8 @@
     $.widget.bridge('uibutton', $.ui.button);
 </script>
 
+<script src="${theme}/js/jquery.validate.js"></script>
+
 <script src="${theme}/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 
 <script src="${theme}/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -90,6 +92,7 @@
 
 <!-- jQuery Knob Chart -->
 <script src="${theme}/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+
 
 <script src="${theme}/bower_components/moment/min/moment.min.js"></script>
 
@@ -109,6 +112,7 @@
 
 <!-- FastClick -->
 <script src="${theme}/bower_components/fastclick/lib/fastclick.js"></script>
+
 
 <!-- AdminLTE App -->
 <script src="${theme}/js/adminlte.min.js"></script>
