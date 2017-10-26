@@ -54,7 +54,7 @@
         <%--</form>--%>
         <br>
         <a href="#">I forgot my password</a><br>
-        <a href="${ctx}/auth/user/register" class="text-center">Register a new membership</a>
+        <%--<a href="${ctx}/auth/user/register" class="text-center">Register a new membership</a>--%>
     </div>
 </form>
 
