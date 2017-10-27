@@ -15,4 +15,6 @@ public interface CompanyleavesService {
     Companyleaves checkFinancialyear(Companyleaves companyleaves);
 
     List getCompanyLeavesList();
+
+    int deleteFinancialyear(String year);
 }

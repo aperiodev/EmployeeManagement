@@ -42,6 +42,9 @@
     <!-- Custom css style-->
     <link type="text/css" href="${theme}/css/custom.css" rel="stylesheet"/>
 
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="${theme}/js/year-select.js"></script>
+
     <decorator:head/>
 </head>
 

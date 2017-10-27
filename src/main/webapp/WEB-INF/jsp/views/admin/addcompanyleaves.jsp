@@ -3,11 +3,30 @@
 <%@page pageEncoding="UTF-8" %>
 <jsp:useBean id="date" class="java.util.Date" />
 
+
+
 <script>
+    var specialKeys = new Array();
+    specialKeys.push(8); //Backspace
+
     $(function () {
-        $('#financialyear').datepicker({
-            format: 'yyyy-mm-dd'
+        $('.yearselect').yearselect({
+            order: 'desc'
         });
+
+        $(".numeric").bind("keypress", function (e) {
+            var keyCode = e.which ? e.which : e.keyCode
+            var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+            $(".error").css("display", ret ? "none" : "inline");
+            return ret;
+        });
+        $(".numeric").bind("paste", function (e) {
+            return false;
+        });
+        $(".numeric").bind("drop", function (e) {
+            return false;
+        });
+
     });
 </script>
 <section class="content">
@@ -26,7 +45,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="financialyear">Financial Year</label>
-                        <input type="text" class="form-control" id="financialyear" placeholder="Financial year"
+                        <input type="text" class="form-control yearselect" id="financialyear" placeholder="Financial year"
                                name="financialyear"></input>
                     </div>
                 </div>
@@ -35,16 +54,16 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="sickleaves">Sick Leaves</label>
-                        <input type="text" class="form-control" id="sickleaves" placeholder="Sick Leaves"
-                               name="sickleaves" maxlength="3"></input>
+                        <input type="text" class="form-control numeric" id="sickleaves" placeholder="Sick Leaves"
+                               name="sickleaves" maxlength="2"></input>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="casualleaves">Casual Leaves</label>
-                        <input type="text" class="form-control" id="casualleaves" placeholder="Casual Leaves"
-                               name="casualleaves" maxlength="3"></input>
+                        <input type="text" class="form-control numeric" id="casualleaves" placeholder="Casual Leaves"
+                               name="casualleaves" maxlength="2"></input>
                     </div>
                 </div>
             </div>
@@ -83,12 +102,12 @@
                         <td>${companyleave[0]}</td>
                         <td>${companyleave[1]}</td>
                         <td>${companyleave[2]}</td>
-                        <td data-user="${companyleave[4]}"
-                            class="editcompanyLeave btn btn-sm btn-flat btn-custom">
-                            <fmt:formatDate value="${date}" var="dateyear" pattern="yyyy" />
+                        <td data-year="${companyleave[0]}"
+                            class="deletecompanyLeave btn btn-sm btn-flat btn-custom">
+                            <%--<fmt:formatDate value="${date}" var="dateyear" pattern="yyyy" />
                             <c:if test="${companyleave[5] eq dateyear}">
                                 <b class="btn btn-primary" style="padding:3px 12px !important; text-align: left !important; display: inline !important;">Edit</b>
-                            </c:if>
+                            </c:if>--%>
                             <b class="btn btn-danger" style="padding:3px 12px !important;text-align: left !important; display: inline !important;">Delete</b>
                         </td>
                     </tr>
@@ -117,11 +136,12 @@
                     success: function (response) {
                         console.log(response);
                         if (response == "success") {
-                            clearfields();
-
-
-
+                            //clearfields();
                             toastr.success("Successfully financial year leaves added");
+                            setTimeout(function(){// wait for 5 secs(2)
+                                location.reload(); // then reload the page.(3)
+                            }, 5000);
+
                         } else if (response == "financialyearexists") {
                             toastr.error("Financial Year already exists, please try another");
                         }
@@ -190,24 +210,28 @@
 
         $('#example').DataTable({
             responsive: true,
-            order: [],
+            order: [0],
             columnDefs: [ { orderable: false, targets: [3] } ]
         });
 
         $('.deletecompanyLeave').on('click', function () {
-            var companyleaveid = $(this).data("user");
+            var year = $(this).data("year");
 
             $.ajax({
-                url: "${ctx}/admin/deleteCompanyleave",
+                url: "${ctx}/auth/admin/deleteCompanyleave",
                 type: "POST",
                 data: ({
-                    companyleaveid: companyleaveid
+                    year: year
                 }),
                 success: function (response) {
                     console.log(response);
                     if (response == "success") {
+
                         toastr.success("Financial Year leaves deleted successfully");
-                        window.setTimeout(function(){location.href = "${ctx}/admin/users"},800)
+                        setTimeout(function(){// wait for 5 secs(2)
+                            location.reload(); // then reload the page.(3)
+                        }, 5000);
+
                     } else {
                         toastr.error("Financial Year leaves cannot be deleted, Please try again!");
                     }

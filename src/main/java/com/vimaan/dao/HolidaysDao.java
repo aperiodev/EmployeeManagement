@@ -8,5 +8,14 @@ import java.util.List;
  * Created by IT Division on 10-10-2017.
  */
 public interface HolidaysDao {
+
     List<Holidays> getHolidays();
+
+    void addHoliday(Holidays holidays);
+
+    Holidays checkHoliday(Holidays holidays);
+
+    List getHolidayList();
+
+    int deleteHoliday(String id);
 }

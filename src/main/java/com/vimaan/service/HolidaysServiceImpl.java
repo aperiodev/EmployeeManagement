@@ -29,4 +29,24 @@ public class HolidaysServiceImpl implements HolidaysService {
         List<Holidays> holidays = holidaysDao.getHolidays();
         return holidays;
     }
+
+    public void addHoliday(Holidays holidays) {
+        holidaysDao.addHoliday(holidays);
+    }
+
+    public Holidays checkHoliday(Holidays holidays) {
+
+        Holidays holidays1 = holidaysDao.checkHoliday(holidays);
+        return holidays1;
+    }
+
+    public List getHolidayList(){
+        return holidaysDao.getHolidayList();
+    }
+
+    public int deleteHoliday(String id) {
+
+        return holidaysDao.deleteHoliday(id);
+
+    }
 }

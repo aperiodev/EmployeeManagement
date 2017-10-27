@@ -12,4 +12,12 @@ import java.util.List;
 public interface HolidaysService {
 
     List<Holidays> getHolidays();
+
+    void addHoliday(Holidays holidays);
+
+    Holidays checkHoliday(Holidays holidays);
+
+    List getHolidayList();
+
+    int deleteHoliday(String id);
 }

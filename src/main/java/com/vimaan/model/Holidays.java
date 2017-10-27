@@ -18,11 +18,15 @@ public class Holidays implements Serializable {
     @GeneratedValue(strategy = AUTO)
     private int id;
 
+    @Column
     @Temporal(TemporalType.DATE)
     private Date date;
 
     @Column
     private String occasion;
+
+    @Column(columnDefinition = "boolean default true")
+    private boolean isactive=true;
 
     public int getId() {
         return id;
@@ -46,5 +50,13 @@ public class Holidays implements Serializable {
 
     public void setOccasion(String occasion) {
         this.occasion = occasion;
+    }
+
+    public boolean isIsactive() {
+        return isactive;
+    }
+
+    public void setIsactive(boolean isactive) {
+        this.isactive = isactive;
     }
 }

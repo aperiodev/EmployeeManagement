@@ -39,4 +39,10 @@ public class CompanyleavesServiceImpl implements CompanyleavesService{
     public List getCompanyLeavesList(){
         return companyleavesDao.companyleaves();
     }
+
+    public int deleteFinancialyear(String year) {
+
+        return companyleavesDao.deleteFinancialyear(year);
+
+    }
 }

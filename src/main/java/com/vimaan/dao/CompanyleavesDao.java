@@ -14,4 +14,6 @@ public interface CompanyleavesDao {
     Companyleaves checkFinancialyear(Companyleaves companyleaves);
 
     List companyleaves();
+
+    int deleteFinancialyear(String year);
 }
