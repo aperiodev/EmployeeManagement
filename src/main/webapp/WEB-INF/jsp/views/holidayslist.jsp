@@ -1,8 +1,7 @@
 <%@ include file="/common/taglibs.jsp" %>
 <%@page contentType="text/html;charset=UTF-8" %>
 <%@page pageEncoding="UTF-8" %>
-<jsp:useBean id="date" class="java.util.Date" />
-
+<jsp:useBean id="date" class="java.util.Date"/>
 
 
 <script>
@@ -11,55 +10,60 @@
 
     $(function () {
         $('#fdate').datepicker({
-           format:'yyyy-mm-dd'
+            format: 'yyyy-mm-dd'
         });
 
     });
 </script>
 <section class="content">
-    <div class="box box-primary">
-        <div class="box-header with-border">
-            <h3 class="box-title">Add Holiday's</h3>
+    <c:if test="${role ne '[ROLE_USER]'}">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Add Holiday's</h3>
 
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-            </div>
-        </div>
-        <%-- <form:form id="addcompanyleavesform" modelAttribute="companyleaves" action="savecompanyleaves" method="post">--%>
-        <%--  <form:hidden path="id" id="id" name="id"></form:hidden>--%>
-        <div class="box-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="fdate">Date</label>
-                        <input type="text" class="form-control" id="fdate" placeholder="Date"
-                               name="fdate"></input>
-                    </div>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
                 </div>
-
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="occasion">Occasion</label>
-                        <textarea class="form-control" rows="3" placeholder="Occasion" id="occasion" name="occasion"></textarea>
-                    </div>
-                </div>
-
             </div>
+                <%-- <form:form id="addcompanyleavesform" modelAttribute="companyleaves" action="savecompanyleaves" method="post">--%>
+                <%--  <form:hidden path="id" id="id" name="id"></form:hidden>--%>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fdate">Date</label>
+                            <input type="text" class="form-control" id="fdate" placeholder="Date"
+                                   name="fdate"></input>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="occasion">Occasion</label>
+                            <textarea class="form-control" rows="3" placeholder="Occasion" id="occasion"
+                                      name="occasion"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="box-footer">
+                <button id="cancel" name="cancel" type="submit" class="btn btn-default">Cancel</button>
+                <button id="save" name="save" type="submit" class="btn btn-info pull-right">Save</button>
+            </div>
+                <%-- </form:form>--%>
         </div>
-        <div class="box-footer">
-            <button id="cancel" name="cancel" type="submit" class="btn btn-default">Cancel</button>
-            <button id="save" name="save" type="submit" class="btn btn-info pull-right">Save</button>
-        </div>
-        <%-- </form:form>--%>
-    </div>
+    </c:if>
 
     <div class="box box-info">
         <div class="box-header with-border">
             <h3 class="box-title">Holidays List</h3>
 
             <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
             </div>
         </div>
 
@@ -71,7 +75,9 @@
                 <tr>
                     <th>Date</th>
                     <th>Occasion</th>
-                    <th>Actions</th>
+                    <c:if test="${role ne '[ROLE_USER]'}">
+                        <th>Actions</th>
+                    </c:if>
                 </tr>
                 </thead>
                 <tbody>
@@ -79,15 +85,19 @@
                 <tr>
                     <td>${holiday[1]}</td>
                     <td>${holiday[2]}</td>
-                    <td data-id="${holiday[0]}"
-                        class="deleteholiday btn btn-sm btn-flat btn-custom">
-                            <%--<fmt:formatDate value="${date}" var="dateyear" pattern="yyyy" />
-                            <c:if test="${companyleave[5] eq dateyear}">
-                                <b class="btn btn-primary" style="padding:3px 12px !important; text-align: left !important; display: inline !important;">Edit</b>
-                            </c:if>--%>
-                        <b class="btn btn-primary" style="padding:3px 12px !important;text-align: left !important; display: inline !important;">Edit</b>
-                        <b class="btn btn-danger" style="padding:3px 12px !important;text-align: left !important; display: inline !important;">Delete</b>
-                    </td>
+                    <c:if test="${role ne '[ROLE_USER]'}">
+                        <td data-id="${holiday[0]}"
+                            class="deleteholiday btn btn-sm btn-flat btn-custom">
+                                <%--<fmt:formatDate value="${date}" var="dateyear" pattern="yyyy" />
+                                <c:if test="${companyleave[5] eq dateyear}">
+                                    <b class="btn btn-primary" style="padding:3px 12px !important; text-align: left !important; display: inline !important;">Edit</b>
+                                </c:if>--%>
+                            <b class="btn btn-primary"
+                               style="padding:3px 12px !important;text-align: left !important; display: inline !important;">Edit</b>
+                            <b class="btn btn-danger"
+                               style="padding:3px 12px !important;text-align: left !important; display: inline !important;">Delete</b>
+                        </td>
+                    </c:if>
                 </tr>
                 </c:forEach>
             </table>
@@ -122,7 +132,7 @@
                             $('#save').removeClass('disabled');
                             $('#save').prop("disabled", false);
                             toastr.success("Successfully holiday added");
-                            setTimeout(function(){// wait for 5 secs(2)
+                            setTimeout(function () {// wait for 5 secs(2)
                                 location.reload(); // then reload the page.(3)
                             }, 2000);
 
@@ -172,9 +182,10 @@
                     console.log(response);
                     if (response == "failure") {
                         toastr.error("Holiday already exists, please try another");
-                    } /*else {
-                     toastr.error("Something went wrong, please try again");
-                     }*/
+                    }
+                    /*else {
+                                        toastr.error("Something went wrong, please try again");
+                                        }*/
                 },
                 error: function (request, textStatus, errorThrown) {
                     toastr.error("Something went wrong");
@@ -198,7 +209,7 @@
         $('#example').DataTable({
             responsive: true,
             order: [0],
-            columnDefs: [ { orderable: false, targets: [2] } ]
+            columnDefs: [{orderable: false, targets: [2]}]
         });
 
         $('.deleteholiday').on('click', function () {
@@ -220,7 +231,7 @@
                         $('.deleteholiday').removeClass('disabled');
                         $('.deleteholiday').prop("disabled", false);
                         toastr.success("Holiday deleted successfully");
-                        setTimeout(function(){// wait for 5 secs(2)
+                        setTimeout(function () {// wait for 5 secs(2)
                             location.reload(); // then reload the page.(3)
                         }, 2000);
 

@@ -54,9 +54,7 @@ public class AdministratorController extends BaseController {
             List companyleaves = companyleavesService.getCompanyLeavesList();
             model = new ModelAndView("views/admin/addcompanyleaves");
             model.addObject("companyleaves", companyleaves);
-        }
-        else
-        {
+        } else {
             model = new ModelAndView("views/admin/home");
         }
         return model;
@@ -123,17 +121,10 @@ public class AdministratorController extends BaseController {
         Collection authorities = authentication.getAuthorities();
         log.info("LoggedIn user Authorities are : " + authorities);
         ModelAndView model = null;
-
-        if (authentication.getAuthorities().toString().contains("ROLE_ADMIN")) {
-
-            List holidays = holidaysService.getHolidayList();
-            model = new ModelAndView("views/holidayslist");
-            model.addObject("holidays", holidays);
-        }
-        else
-        {
-            model = new ModelAndView("views/admin/home");
-        }
+        List holidays = holidaysService.getHolidayList();
+        model = new ModelAndView("views/holidayslist");
+        model.addObject("holidays", holidays);
+        model.addObject("role", authentication.getAuthorities().toString());
         return model;
     }
 
