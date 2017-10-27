@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.sql.DataSource;
 import java.util.List;
+import java.util.Date;
 
 
 /**
@@ -51,7 +52,7 @@ public class HolidaysDaoImpl extends BaseDao implements HolidaysDao {
         return holidays;
     }
 
-    public int deleteHoliday(String id) {
+    public int deleteHoliday(int id) {
 
         String query = "update Holidays  set isactive = false where isactive=true and id = :id ";
 

@@ -124,7 +124,11 @@
             var sickleave = $('#sickleaves').val();
             var casualleave = $('#casualleaves').val();
 
+
             if (financialYear.length != 0 && sickleave.length != 0 && casualleave.length != 0) {
+
+                $('#save').addClass('disabled');
+                $('#save').prop("disabled", true);
                 $.ajax({
                     url: "${ctx}/auth/admin/savecompanyleaves",
                     type: "POST",
@@ -137,22 +141,34 @@
                         console.log(response);
                         if (response == "success") {
                             //clearfields();
+                            $('#save').removeClass('disabled');
+                            $('#save').prop("disabled", false);
                             toastr.success("Successfully financial year leaves added");
+
                             setTimeout(function(){// wait for 5 secs(2)
                                 location.reload(); // then reload the page.(3)
-                            }, 5000);
+                            }, 2000);
 
                         } else if (response == "financialyearexists") {
+                            $('#save').removeClass('disabled');
+                            $('#save').prop("disabled", false);
                             toastr.error("Financial Year already exists, please try another");
+
                         }
                         else {
+                            $('#save').removeClass('disabled');
+                            $('#save').prop("disabled", false);
                             toastr.warning("Something went wrong, please try again");
                         }
                     },
                     error: function (request, textStatus, errorThrown) {
+                        $('#save').removeClass('disabled');
+                        $('#save').prop("disabled", false);
                         toastr.error("Something went wrong, please try again");
                     },
                     failure: function () {
+                        $('#save').removeClass('disabled');
+                        $('#save').prop("disabled", false);
                         toastr.error("Something went wrong, please try again");
                     }
                 });
@@ -217,6 +233,9 @@
         $('.deletecompanyLeave').on('click', function () {
             var year = $(this).data("year");
 
+            $('.deletecompanyLeave').addClass('disabled');
+            $('.deletecompanyLeave').prop("disabled", true);
+
             $.ajax({
                 url: "${ctx}/auth/admin/deleteCompanyleave",
                 type: "POST",
@@ -227,19 +246,28 @@
                     console.log(response);
                     if (response == "success") {
 
+                        $('.deletecompanyLeave').removeClass('disabled');
+                        $('.deletecompanyLeave').prop("disabled", false);
+
                         toastr.success("Financial Year leaves deleted successfully");
                         setTimeout(function(){// wait for 5 secs(2)
                             location.reload(); // then reload the page.(3)
-                        }, 5000);
+                        }, 2000);
 
                     } else {
+                        $('.deletecompanyLeave').removeClass('disabled');
+                        $('.deletecompanyLeave').prop("disabled", false);
                         toastr.error("Financial Year leaves cannot be deleted, Please try again!");
                     }
                 },
                 error: function (request, textStatus, errorThrown) {
+                    $('.deletecompanyLeave').removeClass('disabled');
+                    $('.deletecompanyLeave').prop("disabled", false);
                     toastr.error("Financial Year leaves cannot be deleted, Please try again!");
                 },
                 failure: function () {
+                    $('.deletecompanyLeave').removeClass('disabled');
+                    $('.deletecompanyLeave').prop("disabled", false);
                     toastr.error("Financial Year leaves cannot be deleted, Please try again!");
                 }
             });

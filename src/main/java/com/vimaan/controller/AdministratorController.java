@@ -137,7 +137,7 @@ public class AdministratorController extends BaseController {
         return model;
     }
 
-    @RequestMapping(value = "/user/saveholiday", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/saveholiday", method = RequestMethod.POST)
     public
     @ResponseBody
     String holidaysave(HttpServletRequest request, HttpServletResponse response) throws ParseException {
@@ -159,7 +159,7 @@ public class AdministratorController extends BaseController {
         return status;
     }
 
-    @RequestMapping(value = "/user/ajaxcheckholiday", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/ajaxcheckholiday", method = RequestMethod.POST)
     public
     @ResponseBody
     String checkHoliday(HttpServletRequest request, HttpServletResponse response) throws ParseException {
@@ -177,13 +177,15 @@ public class AdministratorController extends BaseController {
         return status;
     }
 
-    @RequestMapping(value = "/user/deleteHoliday", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/deleteholiday", method = RequestMethod.POST)
     public
     @ResponseBody
-    String deleteHoliday(@RequestParam(value = "id") String id) throws ParseException {
+    String deleteHoliday(@RequestParam(value = "id") int id) throws ParseException {
 
-        int fdate = holidaysService.deleteHoliday(id);
-        return fdate == 1 ? "success" : "failure";
+        System.out.println("id" + id);
+
+        int fdate1 = holidaysService.deleteHoliday(id);
+        return fdate1 == 1 ? "success" : "failure";
     }
 
 }

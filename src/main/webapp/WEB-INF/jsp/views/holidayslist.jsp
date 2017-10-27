@@ -103,6 +103,10 @@
 
 
             if (fdate.length != 0 && occasion.length != 0) {
+
+                $('#save').addClass('disabled');
+                $('#save').prop("disabled", true);
+
                 $.ajax({
                     url: "${ctx}/auth/admin/saveholiday",
                     type: "POST",
@@ -114,22 +118,33 @@
                         console.log(response);
                         if (response == "success") {
                             //clearfields();
+
+                            $('#save').removeClass('disabled');
+                            $('#save').prop("disabled", false);
                             toastr.success("Successfully holiday added");
                             setTimeout(function(){// wait for 5 secs(2)
                                 location.reload(); // then reload the page.(3)
-                            }, 5000);
+                            }, 2000);
 
                         } else if (response == "holidayexists") {
+                            $('#save').removeClass('disabled');
+                            $('#save').prop("disabled", false);
                             toastr.error("Holiday already exists, please try another");
                         }
                         else {
+                            $('#save').removeClass('disabled');
+                            $('#save').prop("disabled", false);
                             toastr.warning("Something went wrong, please try again");
                         }
                     },
                     error: function (request, textStatus, errorThrown) {
+                        $('#save').removeClass('disabled');
+                        $('#save').prop("disabled", false);
                         toastr.error("Something went wrong, please try again");
                     },
                     failure: function () {
+                        $('#save').removeClass('disabled');
+                        $('#save').prop("disabled", false);
                         toastr.error("Something went wrong, please try again");
                     }
                 });
@@ -189,6 +204,9 @@
         $('.deleteholiday').on('click', function () {
             var id = $(this).data("id");
 
+            $('.deleteholiday').addClass('disabled');
+            $('.deleteholiday').prop("disabled", true);
+
             $.ajax({
                 url: "${ctx}/auth/admin/deleteholiday",
                 type: "POST",
@@ -199,19 +217,27 @@
                     console.log(response);
                     if (response == "success") {
 
+                        $('.deleteholiday').removeClass('disabled');
+                        $('.deleteholiday').prop("disabled", false);
                         toastr.success("Holiday deleted successfully");
                         setTimeout(function(){// wait for 5 secs(2)
                             location.reload(); // then reload the page.(3)
-                        }, 5000);
+                        }, 2000);
 
                     } else {
+                        $('.deleteholiday').removeClass('disabled');
+                        $('.deleteholiday').prop("disabled", false);
                         toastr.error("Holiday cannot be deleted, Please try again!");
                     }
                 },
                 error: function (request, textStatus, errorThrown) {
+                    $('.deleteholiday').removeClass('disabled');
+                    $('.deleteholiday').prop("disabled", false);
                     toastr.error("Holiday cannot be deleted, Please try again!");
                 },
                 failure: function () {
+                    $('.deleteholiday').removeClass('disabled');
+                    $('.deleteholiday').prop("disabled", false);
                     toastr.error("Holiday cannot be deleted, Please try again!");
                 }
             });

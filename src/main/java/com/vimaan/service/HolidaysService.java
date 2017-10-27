@@ -5,6 +5,7 @@ import com.vimaan.model.Holidays;
 import com.vimaan.model.User;
 
 import java.util.List;
+import java.util.Date;
 
 /**
  * Created by IT Division on 10-13-2017.
@@ -19,5 +20,5 @@ public interface HolidaysService {
 
     List getHolidayList();
 
-    int deleteHoliday(String id);
+    int deleteHoliday(int id);
 }
