@@ -63,7 +63,7 @@
                     console.log(response);
                     if (response == "success") {
                         toastr.success("Account status changed successfully");
-                        window.setTimeout(function(){location.href = "${ctx}/admin/users"},800)
+                        window.setTimeout(function(){location.href = "${ctx}/auth/admin/users"},800)
                     } else {
                         toastr.error("Account status cannot be changed, Please try again!");
                     }
