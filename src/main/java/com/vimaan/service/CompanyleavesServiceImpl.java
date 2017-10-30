@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
-
+import java.util.List;
 /**
  * Created by IT Division on 13-10-2017.
  */
@@ -34,5 +34,15 @@ public class CompanyleavesServiceImpl implements CompanyleavesService{
 
         Companyleaves companyleaves1 = companyleavesDao.checkFinancialyear(companyleaves);
         return companyleaves1;
+    }
+
+    public List getCompanyLeavesList(){
+        return companyleavesDao.companyleaves();
+    }
+
+    public int deleteFinancialyear(String year) {
+
+        return companyleavesDao.deleteFinancialyear(year);
+
     }
 }

@@ -26,8 +26,8 @@
                    <%-- <li><a href="#"><i class="fa fa-angle-left pull-left"></i> Employee Leaves</a></li>--%>
                    <%-- <li><a href="#"><i class="fa fa-angle-left pull-left"></i> Yearly Leaves</a></li>--%>
                     <li><a href="/auth/user/holidaysList"><i class="fa fa-angle-left pull-left"></i> Holidays</a></li>
-                    <li><a href="#"><i class="fa fa-angle-left pull-left"></i> Financial year</a></li>
-                    <li><a href="/auth/admin/companyleaves"><i class="fa fa-angle-left pull-left"></i>Company Leaves</a></li>
+                    <li><a href="/auth/admin/companyleaves"><i class="fa fa-angle-left pull-left"></i>Leaves Setup</a>
+                    </li>
                 </ul>
             </li>
             <li class="treeview">
@@ -38,8 +38,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="/auth/admin/register"><i class="fa fa-user-plus"></i> Register Users</a></li>
-                    <li><a href="/auth/admin/users"><i class="fa fa-user-circle-o"></i> Manage Accounts</a></li>
+                    <li class="active"><a href="/auth/admin/register"><i class="fa fa-user-plus"></i>User Registration</a></li>
+                    <li><a href="/auth/admin/users"><i class="fa fa-user-circle-o"></i>Manage Accounts</a></li>
                 </ul>
             </li>
 
@@ -52,10 +52,10 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/auth/user/leaves"><i class="fa fa-hourglass-end"></i> Requested Leaves</a></li>
-                    <li><a href="/auth/user/leaves?status=APPROVED"><i class="fa fa-thumbs-up"></i> Approved Leaves</a></li>
-                    <li><a href="/auth/user/leaves?status=REJECTED"><i class="fa fa-thumbs-down"></i> Rejected Leaves</a></li>
-                    <li><a href="/auth/user/leaves?status=CANCEL"><i class="fa fa-ban"></i> Canceled Leaves</a></li>
+                    <li><a href="/auth/user/leaves"><i class="fa fa-hourglass-end"></i>Requested Leaves</a></li>
+                    <li><a href="/auth/user/leaves?status=APPROVED"><i class="fa fa-thumbs-up"></i>Approved Leaves</a></li>
+                    <li><a href="/auth/user/leaves?status=REJECTED"><i class="fa fa-thumbs-down"></i>Rejected Leaves</a></li>
+                    <li><a href="/auth/user/leaves?status=CANCEL"><i class="fa fa-ban"></i>Canceled Leaves</a></li>
 
                 </ul>
             </li>
@@ -70,9 +70,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/auth/user/requestLeave"><i class="fa fa-plus-circle"></i> Leave Application</a></li>
-                    <li><a href="#"><i class="fa fa-hourglass-start"></i> Leave Status</a></li>
-                    <li><a href="/auth/user/leavesLists"><i class="fa fa-history"></i> Leaves History</a></li>
+                    <li><a href="/auth/user/requestLeave"><i class="fa fa-plus-circle"></i>Leave Application</a></li>
+                    <li><a href="/auth/user/leavesLists"><i class="fa fa-history"></i>Leaves History</a></li>
                     <li><a href="/auth/user/holidaysList"><i class="fa fa-circle-o"></i>Holidays List</a></li>
                     <li><a href="/auth/user/sendMail"><i class="fa fa-mail-reply"></i>Email</a></li>
                 </ul>
@@ -176,21 +175,50 @@
             </li>--%>
 
            <sec:authorize access="hasAnyRole('ROLE_HR')">
-           <li class="treeview">
-               <a href="#">
-                   <i class="fa fa-address-book"></i>
-                   <span>HR Management</span>
-                   <span class="pull-right-container">
+               <li class="treeview">
+                   <a href="#">
+                       <i class="fa fa-cogs"></i>
+                       <span>Configurations</span>
+                       <i class="fa fa-angle-left pull-right"></i>
+                       <i class="fa fa-angle-left pull-right"></i>
+                       </span>
+                   </a>
+                   <ul class="treeview-menu">
+                           <%-- <li><a href="#"><i class="fa fa-angle-left pull-left"></i> Employee Leaves</a></li>--%>
+                           <%-- <li><a href="#"><i class="fa fa-angle-left pull-left"></i> Yearly Leaves</a></li>--%>
+                       <li><a href="/auth/user/holidaysList"><i class="fa fa-angle-left pull-left"></i> Holidays</a></li>
+                       <li><a href="/auth/admin/companyleaves"><i class="fa fa-angle-left pull-left"></i>Leaves Setup</a>
+                       </li>
+                   </ul>
+               </li>
+               <li class="treeview">
+                   <a href="#">
+                       <i class="fa fa-users"></i> <span>Accounts</span>
+                       <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-               </a>
-               <ul class="treeview-menu">
-                   <li><a href="/auth/user/holidaysList"><i class="fa fa-circle-o"></i>Holidays List</a></li>
-                   <li><a href="#"><i class="fa fa-circle-o"></i>Leaves List</a></li>
-                   <li><a href="#"><i class="fa fa-circle-o"></i>Leave Request</a></li>
-                   <li><a href="#"><i class="fa fa-circle-o"></i>Leave Rejected</a></li>
-               </ul>
-           </li>
+                   </a>
+                   <ul class="treeview-menu">
+                       <li class="active"><a href="/auth/admin/register"><i class="fa fa-user-plus"></i>User Registration</a></li>
+                   </ul>
+               </li>
+
+               <li class="treeview">
+                   <a href="#">
+                       <i class="fa fa-envelope-o"></i>
+                       <span>Leave Management</span>
+                       <i class="fa fa-angle-left pull-right"></i>
+                       <i class="fa fa-angle-left pull-right"></i>
+                       </span>
+                   </a>
+                   <ul class="treeview-menu">
+                       <li><a href="/auth/user/leaves"><i class="fa fa-hourglass-end"></i>Requested Leaves</a></li>
+                       <li><a href="/auth/user/leaves?status=APPROVED"><i class="fa fa-thumbs-up"></i>Approved Leaves</a></li>
+                       <li><a href="/auth/user/leaves?status=REJECTED"><i class="fa fa-thumbs-down"></i>Rejected Leaves</a></li>
+                       <li><a href="/auth/user/leaves?status=CANCEL"><i class="fa fa-ban"></i>Canceled Leaves</a></li>
+
+                   </ul>
+               </li>
 
            <%--<ul class="sidebar-menu" data-widget="tree">
                <li class="header">HR Management</li>

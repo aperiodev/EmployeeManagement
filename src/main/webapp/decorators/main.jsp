@@ -32,6 +32,9 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="${theme}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="${theme}/bower_components/morris.js/morris.css">
+
     <!-- Theme style -->
     <link rel="stylesheet" href="${theme}/css/AdminLTE.css">
 
@@ -41,6 +44,9 @@
 
     <!-- Custom css style-->
     <link type="text/css" href="${theme}/css/custom.css" rel="stylesheet"/>
+
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="${theme}/js/year-select.js"></script>
 
     <decorator:head/>
 </head>
@@ -112,6 +118,10 @@
 
 <!-- FastClick -->
 <script src="${theme}/bower_components/fastclick/lib/fastclick.js"></script>
+
+<!-- Morris.js charts -->
+<script src="${theme}/bower_components/raphael/raphael.min.js"></script>
+<script src="${theme}/bower_components/morris.js/morris.min.js"></script>
 
 
 <!-- AdminLTE App -->

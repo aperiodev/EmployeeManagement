@@ -18,9 +18,9 @@ public class Companyleaves {
     @GeneratedValue(strategy = AUTO)
     private int id;
 
-    @Column(unique = true)
-    @Temporal(TemporalType.DATE)
-    private Date financialyear;
+    @Column
+    //@Temporal(TemporalType.DATE)
+    private String financialyear;
 
     @Column
     private int sickleaves;
@@ -39,11 +39,11 @@ public class Companyleaves {
         this.id = id;
     }
 
-    public Date getFinancialyear() {
+    public String getFinancialyear() {
         return financialyear;
     }
 
-    public void setFinancialyear(Date financialyear) {
+    public void setFinancialyear(String financialyear) {
         this.financialyear = financialyear;
     }
 

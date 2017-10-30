@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.util.List;
+import java.util.Date;
 
 /**
  * Created by IT Division on 10-10-2017.
@@ -28,5 +29,25 @@ public class HolidaysServiceImpl implements HolidaysService {
     public List<Holidays> getHolidays() {
         List<Holidays> holidays = holidaysDao.getHolidays();
         return holidays;
+    }
+
+    public void addHoliday(Holidays holidays) {
+        holidaysDao.addHoliday(holidays);
+    }
+
+    public Holidays checkHoliday(Holidays holidays) {
+
+        Holidays holidays1 = holidaysDao.checkHoliday(holidays);
+        return holidays1;
+    }
+
+    public List getHolidayList(){
+        return holidaysDao.getHolidayList();
+    }
+
+    public int deleteHoliday(int id) {
+
+        return holidaysDao.deleteHoliday(id);
+
     }
 }

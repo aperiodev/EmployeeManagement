@@ -29,7 +29,7 @@ public class HolidaysController extends BaseController {
     @Autowired
     HolidaysService holidaysService;
 
-    @RequestMapping(value = "/user/holidaysList", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/user/holidaysList", method = RequestMethod.GET)
     public ModelAndView showholidaysList(Principal user) {
         ModelAndView mav = new ModelAndView("redirect:/auth/home");
 
@@ -39,7 +39,7 @@ public class HolidaysController extends BaseController {
             mav.addObject("holidaylist", holidaylist);
         }
         return mav;
-    }
+    }*/
 
  /*   @RequestMapping(value = "/ajaxLoginProcess", method = RequestMethod.POST)
     public
