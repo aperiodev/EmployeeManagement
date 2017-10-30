@@ -7,8 +7,8 @@
             <div class="box box-widget widget-user">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header bg-aqua-active">
-                    <h3 class="widget-user-username">Alexander Pierce</h3>
-                    <h5 class="widget-user-desc">Founder &amp; CEO</h5>
+                    <h3 class="widget-user-username">${username}</h3>
+                    <h5 class="widget-user-desc">${userrole}</h5>
                 </div>
                 <div class="box-footer">
                     <div class="row">
@@ -17,7 +17,7 @@
                             <!-- small box -->
                             <div class="small-box bg-aqua">
                                 <div class="inner">
-                                    <h3>12</h3>
+                                    <h3>${leavesapply}</h3>
 
                                     <p>LEAVES APPLY</p>
                                 </div>
@@ -31,7 +31,7 @@
                             <!-- small box -->
                             <div class="small-box bg-green">
                                 <div class="inner">
-                                    <h3>8/10</h3>
+                                    <h3>${approvedleaves}</h3>
 
                                     <p>APPROVED LEAVES</p>
                                 </div>
@@ -45,7 +45,7 @@
                             <!-- small box -->
                             <div class="small-box bg-yellow">
                                 <div class="inner">
-                                    <h3>44</h3>
+                                    <h3>${cancelleaves}</h3>
 
                                     <p>CANCEL LEAVES</p>
                                 </div>
@@ -59,7 +59,7 @@
                             <!-- small box -->
                             <div class="small-box bg-red">
                                 <div class="inner">
-                                    <h3>65</h3>
+                                    <h3>${rejectedleaves}</h3>
 
                                     <p>REJECTED LEAVES</p>
 

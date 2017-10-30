@@ -1,5 +1,11 @@
 package com.vimaan.controller;
 
+import com.vimaan.model.Account;
+import com.vimaan.model.Leaves;
+import com.vimaan.model.User;
+import com.vimaan.service.AccountService;
+import com.vimaan.service.CompanyleavesService;
+import com.vimaan.service.LeavesService;
 import com.vimaan.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author anusha
@@ -19,9 +26,19 @@ import java.util.Collection;
 public class LoginController extends BaseController {
     static Logger log = Logger.getLogger(LoginController.class);
 
+    Authentication authentication;
+
     @Autowired
     UserService userService;
-    Authentication authentication;
+
+    @Autowired
+    AccountService accountService;
+
+    @Autowired
+    LeavesService leavesService;
+
+    @Autowired
+    CompanyleavesService companyleavesService;
 
     /**
      * This methods maps default url
@@ -83,9 +100,44 @@ public class LoginController extends BaseController {
             if (authentication.getAuthorities().toString().contains("ROLE_ADMIN")) {
                 log.info("In admin dashboard");
                 return new ModelAndView("views/admin/adminDashboard");
-            } else if (authentication.getAuthorities().toString().contains("ROLE_USER")){
+            } else if (authentication.getAuthorities().toString().contains("ROLE_USER")) {
                 log.info("In user dashboard");
-                return new ModelAndView("views/employee/userDashboard");
+                User user = getLoggedInUser();
+                ModelAndView model = null;
+                if (user == null) {
+                    return new ModelAndView("redirect:/auth/home");
+                } else {
+                    List<Leaves> user_leaves = leavesService.getLeaves(user);
+                    Account user_account = accountService.getAccount(user);
+                    model = new ModelAndView("views/employee/userDashboard");
+
+                    model.addObject("username", user_account.getFirstname() + " " + user_account.getLastname());
+                    model.addObject("userrole", user_account.getDesignation());
+
+                    model.addObject("totalleaves", user_leaves.size());
+                    int wfa = 0, apr = 0, rej = 0, can = 0;
+                    for (int i = 0; i < user_leaves.size(); i++) {
+                        Leaves leaves = user_leaves.get(i);
+                        if(leaves.getStatus().toString().trim().equals("WAITING_FOR_APPROVAL")){
+                            wfa = wfa +1;
+                        }
+                        else if(leaves.getStatus().toString().trim().equals("APPROVED")){
+                            apr = apr +1;
+                            int nol = leaves.getNoOfDays();
+                        }
+                        else if(leaves.getStatus().toString().trim().equals("REJECTED")){
+                            rej = rej +1;
+                        }
+                        else if(leaves.getStatus().toString().trim().equals("CANCEL")){
+                            can = can +1;
+                        }
+                    }
+                    model.addObject("leavesapply", wfa);
+                    model.addObject("approvedleaves", apr);
+                    model.addObject("cancelleaves", can);
+                    model.addObject("rejectedleaves", rej);
+                    return model;
+                }
             } else {
                 return new ModelAndView("views/hrDashboard");
             }
