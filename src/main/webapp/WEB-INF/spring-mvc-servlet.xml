@@ -31,6 +31,61 @@
 
    <bean class="org.springframework.orm.hibernate4.HibernateExceptionTranslator"/>
 
+
+    <!--<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="username" value="vimaandev@gmail.com" />
+        <property name="password" value="Vimaan@007" />
+
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="mailMail" class="com.vimaan.mail.MailServiceice">
+        <property name="mailSender" ref="mailSender" />
+    </bean>-->
+
+    <!-- SET default mail properties -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com"/>
+        <property name="port" value="587"/>
+        <property name="username" value="vimaandev@gmail.com"/>
+        <property name="password" value="Vimaan@007"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="mailMail" class="com.vimaan.mail.MailService">
+        <property name="mailSender" ref="mailSender" />
+    </bean>
+
+    <bean id="customeMailMessage"
+          class="org.springframework.mail.SimpleMailMessage">
+
+        <property name="from" value="vimaandev@gmail.com" />
+        <property name="to" value="anushac@apeiro.us" />
+        <property name="subject" value="Testing Subject" />
+        <property name="text">
+            <value>
+                <![CDATA[
+				Dear %s,
+				Mail Content : %s
+			]]>
+            </value>
+        </property>
+    </bean>
+
+
    <!-- View Resolver for JSPs -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/" />

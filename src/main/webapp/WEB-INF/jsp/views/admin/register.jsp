@@ -24,7 +24,7 @@
                 <label class="col-sm-2 control-label">Role</label>
                 <div class="col-sm-10">
                      <select name="userRole" id="userRole" class="form-control">
-                           <option value=""></option>
+                           <option value="">Select..</option>
                            <c:forEach items="${authorities}" var="authorities">
                                <option>${authorities}</option>
                            </c:forEach>

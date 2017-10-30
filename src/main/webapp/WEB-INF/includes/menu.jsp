@@ -74,6 +74,7 @@
                     <li><a href="#"><i class="fa fa-hourglass-start"></i> Leave Status</a></li>
                     <li><a href="/auth/user/leavesLists"><i class="fa fa-history"></i> Leaves History</a></li>
                     <li><a href="/auth/user/holidaysList"><i class="fa fa-circle-o"></i>Holidays List</a></li>
+                    <li><a href="/auth/user/sendMail"><i class="fa fa-mail-reply"></i>Email</a></li>
                 </ul>
             </li>
            </sec:authorize>
