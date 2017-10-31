@@ -9,8 +9,7 @@
                 <div class="widget-user-header bg-aqua-active">
                     <h3 class="widget-user-username">${username}</h3>
                     <h5 class="widget-user-desc">${userrole}</h5>
-                    <h5>Leaves for currrent Year: <b>${tnofleaves}</b>. No of Leaves taken: <b>${nol}</b>. No of Leaves
-                        you have: <b>${tnofleaves - nol}</b>. Current financial year: <b>${currentyear}</b>.</h5>
+                    <h5>In the current financial year <b>${currentyear}</b> you used <b>${nol}</b> leaves out of <b>${tnofleaves}</b> leaves. Right now you have <b>${tnofleaves - nol}</b> leaves to use.</h5>
                 </div>
                 <div class="box-footer">
                     <div class="row">
@@ -20,7 +19,7 @@
                             <div class="small-box bg-aqua">
                                 <div class="inner">
                                     <h3>${leavesapply}</h3>
-                                    <p>LEAVES APPLY</p>
+                                    <p>Total Application(s)</p>
                                 </div>
                                 <div class="icon">
                                     <i class="fa fa-fw fa-hand-rock-o"></i>
@@ -34,7 +33,7 @@
                                 <div class="inner">
                                     <h3>${approvedleaves}</h3>
 
-                                    <p>APPROVED LEAVES</p>
+                                    <p>Approved Application(s)</p>
                                 </div>
                                 <div class="icon">
                                     <i class="fa fa-fw fa-thumbs-o-up"></i>
@@ -48,7 +47,7 @@
                                 <div class="inner">
                                     <h3>${cancelleaves}</h3>
 
-                                    <p>CANCEL LEAVES</p>
+                                    <p>Cancel Application(s)</p>
                                 </div>
                                 <div class="icon">
                                     <i class="fa fa-fw fa-hand-scissors-o"></i>
@@ -62,7 +61,7 @@
                                 <div class="inner">
                                     <h3>${rejectedleaves}</h3>
 
-                                    <p>REJECTED LEAVES</p>
+                                    <p>Rejected Application(s)</p>
 
 
                                 </div>

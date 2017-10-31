@@ -2,6 +2,18 @@
 <%@page contentType="text/html;charset=UTF-8" %>
 <%@page pageEncoding="UTF-8" %>
 
+<style>
+    .sidebar-toggle, .logo, .main-sidebar {
+        display: none !important;
+    }
+
+    @media (min-width: 768px) {
+        .sidebar-mini.sidebar-collapse .main-header .navbar, .sidebar-mini.sidebar-collapse .content-wrapper, .sidebar-mini.sidebar-collapse .right-side, .sidebar-mini.sidebar-collapse .main-footer {
+            margin-left: 0px !important;
+        }
+    }
+</style>
+
 <script>
     $(function () {
         $('#doj').datepicker({
@@ -150,6 +162,7 @@
 <script>
     $(function () {
         updateFormValidate();
+        $("body").removeClass("skin-blue sidebar-mini").addClass("skin-blue sidebar-mini sidebar-collapse");
     });
 
     function updateFormValidate() {
@@ -177,11 +190,11 @@
                     required: true,
                     number: true,
                     maxlength: 10,
-                    minlength:10
+                    minlength: 10
                 },
                 emergencycontactnumber: {
                     number: true,
-                    minlength:10,
+                    minlength: 10,
                     maxlength: 10
                 },
                 pannumber: "required",

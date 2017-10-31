@@ -1,7 +1,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <style>
+    .sidebar-toggle, .logo, .main-sidebar {
+        display: none !important;
+    }
+
+    @media (min-width: 768px) {
+        .sidebar-mini.sidebar-collapse .main-header .navbar, .sidebar-mini.sidebar-collapse .content-wrapper, .sidebar-mini.sidebar-collapse .right-side, .sidebar-mini.sidebar-collapse .main-footer {
+            margin-left: 0px !important;
+        }
+    }
     #pswd_info {
         position:absolute;
         /*bottom:-75px;*/
@@ -137,6 +145,7 @@
         validateForm();
         $('#newPassword').hidePassword(true);
         $('#confirmPassword').hidePassword(true);
+        $("body").removeClass("skin-blue sidebar-mini").addClass("skin-blue sidebar-mini sidebar-collapse");
     });
 
     function onChangeOldPassword(){

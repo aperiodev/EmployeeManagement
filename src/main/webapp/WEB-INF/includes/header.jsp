@@ -29,16 +29,14 @@
                             <img src="${ctx}/theme/img/defaultImg.png" class="img-circle" alt="User Image">
 
                             <p>
-                                <sec:authentication property="principal.username" /> </small>
+                                <sec:authentication property="principal.username" /> </small></br>
                             </p>
+                            <p><a style="color: #FFFFFF;" href="/auth/user/profile" ><i class="fa  fa-pencil"></i> Profile</a></p>
                         </li>
                         <li>
                             <div class="row">
                                 <div class="col-xs-4 text-center">
                                     <a href="#"></a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="/auth/user/profile" >Profile</a>
                                 </div>
                             </div>
                         </li>
