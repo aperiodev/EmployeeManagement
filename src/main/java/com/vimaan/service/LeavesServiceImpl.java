@@ -2,6 +2,7 @@ package com.vimaan.service;
 
 
 import com.vimaan.dao.LeavesDao;
+import com.vimaan.mail.MailService;
 import com.vimaan.model.Leaves;
 import com.vimaan.model.User;
 import com.vimaan.model.enums.Status;
@@ -34,6 +35,9 @@ public class LeavesServiceImpl implements LeavesService {
     @Autowired
     UserService userService;
 
+    @Autowired
+    MailService mailService;
+
     public void saveleave(HttpServletRequest request) {
         try {
             String loggedInUser = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -49,6 +53,8 @@ public class LeavesServiceImpl implements LeavesService {
             leaves.setUser(userService.getUserByUsername(loggedInUser));
 
             leavesDao.saveleave(leaves);
+
+            mailService.sendMail(leaves.getUser().getUsername(), request.getParameter("touser"),"Leave Request",leaves.getReason());
         } catch (Exception e) {
             System.out.println("Exception === " + e.getMessage());
         }

@@ -7,6 +7,7 @@
         <div class="box box-warning">
             <div class="box-header">
                 <h3 class="box-title">Users List</h3>
+                <a href="${ctx}/auth/admin/register"  class="btn btn-sm btn-primary pull-right"><i class="fa fa-plus-circle"> Register</i></a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">

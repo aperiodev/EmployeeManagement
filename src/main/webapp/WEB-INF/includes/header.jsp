@@ -32,6 +32,16 @@
                                 <sec:authentication property="principal.username" /> </small>
                             </p>
                         </li>
+                        <li>
+                            <div class="row">
+                                <div class="col-xs-4 text-center">
+                                    <a href="#"></a>
+                                </div>
+                                <div class="col-xs-4 text-center">
+                                    <a href="/auth/user/profile" >Profile</a>
+                                </div>
+                            </div>
+                        </li>
                         <!-- Menu Body -->
                         <%--<li class="user-body">
                             <div class="row">
@@ -49,8 +59,11 @@
                         </li>--%>
                         <!-- Menu Footer-->
                         <li class="user-footer">
-                            <div class="pull-left">
+                           <%-- <div class="pull-left">
                                 <a href="/auth/user/profile" class="btn btn-primary btn-flat">Profile</a>
+                            </div>--%>
+                            <div class="pull-left">
+                                <a href="/auth/user/showChangePassword" class="btn btn-primary btn-flat">Change Password</a>
                             </div>
                             <div class="pull-right">
                                 <%--<c:url value="/j_spring_security_logout"  var="logoutUrl" />

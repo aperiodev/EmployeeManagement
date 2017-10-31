@@ -176,13 +176,14 @@
                 phonenumber: {
                     required: true,
                     number: true,
+                    maxlength: 10,
+                    minlength:10
+                },
+                emergencycontactnumber: {
+                    number: true,
+                    minlength:10,
                     maxlength: 10
                 },
-                /*emergencycontactnumber: {
-                    required: true,
-                    number: true,
-                    maxlength: 10
-                },*/
                 pannumber: "required",
                 aadharnumber: "required"
                 // employeecode: "required",

@@ -17,19 +17,22 @@
                 <label for="password" class="col-sm-2 control-label">Password</label>
 
                 <div class="col-sm-10">
-                    <form:input path="password" type="password" class="form-control" id="password" placeholder="Password"/>
+                    <form:input path="password" type="password" class="form-control" id="password"
+                                placeholder="Password"/>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Role</label>
                 <div class="col-sm-10">
-                     <select name="userRole" id="userRole" class="form-control">
-                           <option value="">Select..</option>
-                           <c:forEach items="${authorities}" var="authorities">
-                               <option>${authorities}</option>
-                           </c:forEach>
-                       </>
-                       </select>
+                    <select name="userRole" id="userRole" class="form-control">
+                        <option value="">Select..</option>
+                        <c:forEach items="${authorities}" var="authorities">
+                            <c:if test="${authorities != 'ROLE_ADMIN'}">
+                                <option>${authorities}</option>
+                            </c:if>
+                        </c:forEach>
+                    </>
+                    </select>
                 </div>
             </div>
         </div>
@@ -39,3 +42,38 @@
         </div>
     </form:form>
 </div>
+<script>
+    $(function () {
+        registerFormValidate();
+    });
+
+    function registerFormValidate() {
+        var registerForm = $("#regForm");
+
+        // email
+        jQuery.validator.addMethod("emailValidator", function (value, element) {
+            var emailPattern = /^([A-Za-z]{1})([A-Za-z0-9+_.-])+([\w$]{1})\@(([\w]{1})([\w-]+([\w$]{1})\.)+)([a-zA-Z0-9]{2,3})$/;
+            if (value.length > 0) {
+                return (emailPattern.test(value));
+            }
+            return true;
+        }, "Please enter valid email address");
+
+        registerForm.validate({
+            rules: {
+                username: {
+                    required: true,
+                    emailValidator: true
+                },
+                password: {
+                    required: true,
+                    minlength: 6,
+                },
+                userRole: "required"
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+    }
+</script>

@@ -12,10 +12,11 @@ public interface UserDao  {
 
     User findByUserName(String username);
     void register(User user, String userRole);
-    List<UserRole> getHrUsers();
+    List<Account> getHrUsers();
     List users();
     User checkUsername(User user);
     int  activateOrDeactivateAccount(String username);
     Account findAccountById(int id);
+    boolean confirmOldPassword(String password, String username);
 
 }

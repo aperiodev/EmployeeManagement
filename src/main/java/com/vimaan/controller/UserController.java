@@ -1,5 +1,6 @@
 package com.vimaan.controller;
 
+import com.vimaan.mail.MailService;
 import com.vimaan.model.*;
 import com.vimaan.model.enums.Status;
 import com.vimaan.service.HolidaysService;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
@@ -92,7 +94,7 @@ public class UserController extends BaseController {
             return new ModelAndView("redirect:/auth/home");
         }
 
-        List<UserRole> hr_users = userService.getHrUsers();
+        List<Account> hr_users = userService.getHrUsers();
         List<Holidays> holidaylist = holidaysService.getHolidays();
         ModelAndView mav = null;
         Account account = accountService.getAccount(user);
@@ -106,6 +108,7 @@ public class UserController extends BaseController {
             mav.addObject("doj", account.getDoj());
             mav.addObject("userslist", hr_users);
             mav.addObject("holidaylist", holidaylist);
+
         } else {
             mav = new ModelAndView("redirect:/auth/home");
         }
@@ -146,5 +149,35 @@ public class UserController extends BaseController {
         leaves.setStatus(Status.valueOf(request.getParameter("leaveStatus")));
         leavesService.updateleave(leaves);
         return "success";
+    }
+
+    @RequestMapping(value = "/showChangePassword", method = RequestMethod.GET)
+    public ModelAndView showChangePassword(){
+     ModelAndView mav = new ModelAndView("/views/changePassword");
+     mav.addObject("user", getLoggedInUser());
+     return mav;
+    }
+
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+    public ModelAndView changePassword(HttpServletRequest request){
+        ModelAndView mav = null;
+        mav = new ModelAndView("views/requestleaves");
+        return mav;
+    }
+
+
+    @RequestMapping(value = "/confirmOldPassword")
+    public
+    @ResponseBody
+    boolean confirmOldPassword(HttpServletRequest request){
+        System.out.println("password==="+ request.getParameter("oldPassword"));
+        boolean isOldPassword = false;
+        try{
+            isOldPassword = userService.checkOldPassword(request.getParameter("oldPassword").trim(), getLoggedInUserName());
+        }catch (Exception e){
+            System.out.println("ex...." + e.getCause());
+        }
+        System.out.println("isoldpasswors==="+ isOldPassword);
+        return isOldPassword;
     }
 }

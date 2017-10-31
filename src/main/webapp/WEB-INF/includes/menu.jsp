@@ -73,7 +73,6 @@
                     <li><a href="/auth/user/requestLeave"><i class="fa fa-plus-circle"></i>Leave Application</a></li>
                     <li><a href="/auth/user/leavesLists"><i class="fa fa-history"></i>Leaves History</a></li>
                     <li><a href="/auth/user/holidaysList"><i class="fa fa-circle-o"></i>Holidays List</a></li>
-                    <li><a href="/auth/user/sendMail"><i class="fa fa-mail-reply"></i>Email</a></li>
                 </ul>
             </li>
            </sec:authorize>

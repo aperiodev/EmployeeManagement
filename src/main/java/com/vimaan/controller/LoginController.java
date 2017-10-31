@@ -98,40 +98,53 @@ public class LoginController extends BaseController {
         if (isAuthenticated()) {
            /* The user is logged in :) */
             if (authentication.getAuthorities().toString().contains("ROLE_ADMIN")) {
+
                 log.info("In admin dashboard");
                 return new ModelAndView("views/admin/adminDashboard");
+
             } else if (authentication.getAuthorities().toString().contains("ROLE_USER")) {
                 log.info("In user dashboard");
+
                 User user = getLoggedInUser();
                 ModelAndView model = null;
+
                 if (user == null) {
                     return new ModelAndView("redirect:/auth/home");
                 } else {
                     List<Leaves> user_leaves = leavesService.getLeaves(user);
                     Account user_account = accountService.getAccount(user);
-                    model = new ModelAndView("views/employee/userDashboard");
 
+                    int totalLeaves = user_leaves != null ? user_leaves.size() : 0;
+
+                    /*String userName = " ";
+                    String designation = " ";
+
+                    if (user_account != null) {
+                        userName = user_account.getFirstname() + " " + user_account.getLastname();
+                        designation = user_account.getDesignation();
+                    }*/
+
+                    model = new ModelAndView("views/employee/userDashboard");
                     model.addObject("username", user_account.getFirstname() + " " + user_account.getLastname());
                     model.addObject("userrole", user_account.getDesignation());
+                    model.addObject("totalleaves", totalLeaves);
 
-                    model.addObject("totalleaves", user_leaves.size());
                     int wfa = 0, apr = 0, rej = 0, can = 0;
-                    for (int i = 0; i < user_leaves.size(); i++) {
+                    for (int i = 0; i < totalLeaves; i++) {
                         Leaves leaves = user_leaves.get(i);
-                        if(leaves.getStatus().toString().trim().equals("WAITING_FOR_APPROVAL")){
-                            wfa = wfa +1;
-                        }
-                        else if(leaves.getStatus().toString().trim().equals("APPROVED")){
-                            apr = apr +1;
+
+                        if (leaves.getStatus().toString().trim().equals("WAITING_FOR_APPROVAL")) {
+                            wfa = wfa + 1;
+                        } else if (leaves.getStatus().toString().trim().equals("APPROVED")) {
+                            apr = apr + 1;
                             int nol = leaves.getNoOfDays();
-                        }
-                        else if(leaves.getStatus().toString().trim().equals("REJECTED")){
-                            rej = rej +1;
-                        }
-                        else if(leaves.getStatus().toString().trim().equals("CANCEL")){
-                            can = can +1;
+                        } else if (leaves.getStatus().toString().trim().equals("REJECTED")) {
+                            rej = rej + 1;
+                        } else if (leaves.getStatus().toString().trim().equals("CANCEL")) {
+                            can = can + 1;
                         }
                     }
+
                     model.addObject("leavesapply", wfa);
                     model.addObject("approvedleaves", apr);
                     model.addObject("cancelleaves", can);
@@ -149,8 +162,10 @@ public class LoginController extends BaseController {
     @RequestMapping(value = {"/accessdenied"}, method = RequestMethod.GET)
     public ModelAndView accessDeniedPage() {
         ModelAndView model = new ModelAndView();
+
         model.addObject("message", "Either username or password is incorrect.");
         model.setViewName("error/403");
+
         return model;
     }
 

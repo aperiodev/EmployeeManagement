@@ -65,12 +65,12 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         } else {
             return null;
         }
-
     }
 
-    public List<UserRole> getHrUsers() {
+    public List<Account> getHrUsers() {
         String sql = "from UserRole where role='ROLE_HR'";
-        List<UserRole> users = getSession().createQuery(sql).list();
+        //String sql = "select a from Account a, UserRole ur where a.user.username = ur.user.username and ur.role='ROLE_HR' and a.email is not null" ;
+        List<Account> users = getSession().createQuery(sql).list();
         return users.size() > 0 ? users : null;
     }
 
@@ -97,12 +97,29 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         return result;
     }
 
-    public Account findAccountById(int id){
+    public Account findAccountById(int id) {
         List<Account> account = null;
         String sql = "from Account where id= :accountId ";
         account = getSession().createQuery(sql).setParameter("accountId", id).list();
         return account.size() > 0 ? account.get(0) : null;
 
+    }
+
+    public boolean confirmOldPassword(String password, String username) {
+        boolean isOldPassword = false;
+        String query = "from User u where u.username = :username and u.password=:password ";
+
+        List<User> users = getSession().createQuery(query)
+                        .setParameter("username", username)
+                        .setParameter("password",password )
+                        .list();
+        System.out.println("user list==="+ users );
+
+        if(users.size() > 0 ) {
+            isOldPassword = true;
+        }
+        System.out.println("isolpaaa==="+ users + "______" +isOldPassword);
+        return isOldPassword;
     }
 
    /* public UserDetails loadUserByUsername(String identify) throws UsernameNotFoundException {

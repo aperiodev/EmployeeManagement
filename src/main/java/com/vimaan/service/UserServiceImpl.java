@@ -71,7 +71,7 @@ public class UserServiceImpl implements  UserService, UserDetailsService {
         return Result;
     }
 
-    public List<UserRole> getHrUsers() {
+    public List<Account> getHrUsers() {
         return userDao.getHrUsers();
     }
 
@@ -90,5 +90,10 @@ public class UserServiceImpl implements  UserService, UserDetailsService {
 
      public Account getAccountById(int id){
         return  userDao.findAccountById(id);
+     }
+
+
+     public boolean checkOldPassword(String password, String username){
+         return userDao.confirmOldPassword(password, username);
      }
 }
