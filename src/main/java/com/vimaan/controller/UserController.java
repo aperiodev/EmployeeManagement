@@ -151,6 +151,10 @@ public class UserController extends BaseController {
         return "success";
     }
 
+    /**
+     * Show password page
+     * @return
+     */
     @RequestMapping(value = "/showChangePassword", method = RequestMethod.GET)
     public ModelAndView showChangePassword(){
      ModelAndView mav = new ModelAndView("/views/changePassword");
@@ -158,26 +162,31 @@ public class UserController extends BaseController {
      return mav;
     }
 
+    /**
+     * Update the current password to new password
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
     public ModelAndView changePassword(HttpServletRequest request){
         ModelAndView mav = null;
-        mav = new ModelAndView("views/requestleaves");
+        int result = userService.updatePassword(request.getParameter("newPassword"), getLoggedInUserName());
+        mav = new ModelAndView("redirect:/auth/home");
         return mav;
     }
 
 
+    /**
+     * Ajax call to check the old password
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/confirmOldPassword")
     public
     @ResponseBody
-    boolean confirmOldPassword(HttpServletRequest request){
-        System.out.println("password==="+ request.getParameter("oldPassword"));
+    String confirmOldPassword(HttpServletRequest request){
         boolean isOldPassword = false;
-        try{
-            isOldPassword = userService.checkOldPassword(request.getParameter("oldPassword").trim(), getLoggedInUserName());
-        }catch (Exception e){
-            System.out.println("ex...." + e.getCause());
-        }
-        System.out.println("isoldpasswors==="+ isOldPassword);
-        return isOldPassword;
+        isOldPassword = userService.checkOldPassword(request.getParameter("oldPassword").trim(), getLoggedInUserName());
+        return isOldPassword == false ? "false" : "true";
     }
 }

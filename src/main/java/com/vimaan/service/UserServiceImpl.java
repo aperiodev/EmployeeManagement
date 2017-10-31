@@ -96,4 +96,8 @@ public class UserServiceImpl implements  UserService, UserDetailsService {
      public boolean checkOldPassword(String password, String username){
          return userDao.confirmOldPassword(password, username);
      }
+
+     public int updatePassword(String newPassword, String username){
+         return userDao.updatePassword(newPassword, username);
+     }
 }

@@ -47,6 +47,45 @@
     #pswd_info ul{
         list-style-type: none;
     }
+
+    .hideShowPassword-toggle {
+        background-color: transparent;
+        background-image: url('/theme/img/wink.png'); /* fallback */
+        background-image: url('/theme/img/wink.svg'), none;
+        background-position: 0 center;
+        background-repeat: no-repeat;
+        border: 2px solid transparent;
+        border-radius: 0.25em;
+        cursor: pointer;
+        font-size: 100%;
+        height: 44px;
+        margin: 0;
+        max-height: 100%;
+        padding: 0;
+        overflow: 'hidden';
+        text-indent: -999em;
+        width: 46px;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+    }
+
+    .hideShowPassword-toggle{
+        position: absolute;
+        right: 0px;
+        top: 27%;
+        margin-top: -17px;
+        HEIGHT: 36pX;
+    }
+
+    .hideShowPassword-toggle-hide {
+        background-position: -44px center;
+    }
+
+    .hideShowPassword-toggle:hover,
+    .hideShowPassword-toggle:focus {
+        border-color: #0088cc;
+        outline: transparent;
+    }
 </style>
 <div class="box box-warning">
     <div class="box-header with-border">
@@ -59,12 +98,12 @@
                     <form:hidden path="password" id="password"/>
                     <div class="form-group">
                         <label for="oldPassword">Current Password :</label>
-                        <input type="text" id="oldPassword" name="oldPassword" class="form-control" />
+                        <input type="password" id="oldPassword" name="oldPassword" class="form-control" />
                     </div>
 
                     <div class="form-group">
                         <label for="newPassword">New Password :</label>
-                        <input type="text" id="newPassword" name="newPassword" class="form-control" />
+                        <input type="password" id="newPassword" name="newPassword" class="form-control" />
                     </div>
                     <div id="pswd_info">
                         <h5>Password must meet the following requirements:</h5>
@@ -78,7 +117,7 @@
 
                     <div class="form-group">
                         <label for="confirmPassword">Confirm Password :</label>
-                        <input type="text"  id="confirmPassword"  name="confirmPassword" class="form-control"/>
+                        <input type="password"  id="confirmPassword"  name="confirmPassword" class="form-control"/>
                     </div>
 
                     <div class="form-group">
@@ -92,9 +131,12 @@
 </div>
 <script>
     $(function() {
+        $('#pswd_info').hide();
         onChangeOldPassword();
         checkPasswordStrength();
         validateForm();
+        $('#newPassword').hidePassword(true);
+        $('#confirmPassword').hidePassword(true);
     });
 
     function onChangeOldPassword(){
@@ -110,13 +152,13 @@
                     },
                     success: function (response) {
                         if (response == "false") {
-                            toastr.error("Correct the Old Password",'danger');
+                            toastr.error("Enter Correct Old Password");
                             oldPassword.val('');
                             oldPassword.focus();
                         }
                     },
                     error:function () {
-                        toastr.error("Correct the Old Password",'danger');
+                        toastr.error("Enter Correct the Old Password");
                     }
                 });
             }

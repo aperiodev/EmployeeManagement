@@ -16,5 +16,6 @@ public interface UserService {
 
     Account getAccountById(int id);
     boolean checkOldPassword(String password, String username);
+    int updatePassword(String newPassword, String username);
 
 }

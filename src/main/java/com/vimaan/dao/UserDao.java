@@ -18,5 +18,6 @@ public interface UserDao  {
     int  activateOrDeactivateAccount(String username);
     Account findAccountById(int id);
     boolean confirmOldPassword(String password, String username);
+    int updatePassword(String newPassword, String username);
 
 }

@@ -132,6 +132,7 @@
 
 <!-- AdminLTE for demo purposes -->
 <script src="${theme}/js/demo.js"></script>
+<script src="${theme}/js/hideShowPassword.min.js"></script>
 
 </body>
 </html>

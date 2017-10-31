@@ -113,13 +113,21 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                         .setParameter("username", username)
                         .setParameter("password",password )
                         .list();
-        System.out.println("user list==="+ users );
-
         if(users.size() > 0 ) {
             isOldPassword = true;
         }
-        System.out.println("isolpaaa==="+ users + "______" +isOldPassword);
         return isOldPassword;
+    }
+
+    public int updatePassword(String newPassword, String username){
+        String query = "update User  set password = :newPassword where username = :username ";
+
+        int result = getSession()
+                .createQuery(query)
+                .setParameter("newPassword", newPassword)
+                .setParameter("username", username).executeUpdate();
+        System.out.println("the result is "+ result);
+        return result;
     }
 
    /* public UserDetails loadUserByUsername(String identify) throws UsernameNotFoundException {
