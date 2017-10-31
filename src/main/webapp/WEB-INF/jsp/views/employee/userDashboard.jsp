@@ -9,6 +9,8 @@
                 <div class="widget-user-header bg-aqua-active">
                     <h3 class="widget-user-username">${username}</h3>
                     <h5 class="widget-user-desc">${userrole}</h5>
+                    <h5>Leaves for currrent Year: <b>${tnofleaves}</b>. No of Leaves taken: <b>${nol}</b>. No of Leaves
+                        you have: <b>${tnofleaves - nol}</b>. Current financial year: <b>${currentyear}</b>.</h5>
                 </div>
                 <div class="box-footer">
                     <div class="row">
@@ -18,7 +20,6 @@
                             <div class="small-box bg-aqua">
                                 <div class="inner">
                                     <h3>${leavesapply}</h3>
-
                                     <p>LEAVES APPLY</p>
                                 </div>
                                 <div class="icon">
@@ -109,9 +110,8 @@
     }
 
     .widget-user-header {
-        height: 90px !important;
+        height: 100px !important;
     }
-
 </style>
 
 <script>
@@ -120,14 +120,7 @@
         var yearaly = new Morris.Line({
             element: 'revenue-chart',
             resize: true,
-            data: [
-                {y: '2012', item1: 0},
-                {y: '2013', item1: 2},
-                {y: '2014', item1: 7},
-                {y: '2015', item1: 8},
-                {y: '2016', item1: 5},
-                {y: '2017', item1: 5}
-            ],
+            data: ${allyears},
             xkey: 'y',
             ykeys: ['item1'],
             labels: ['NoOf Leaves'],
@@ -136,27 +129,14 @@
         });
 
         var curent_year = new Morris.Line({
-            element          : 'sales-chart',
-            resize           : true,
-            data             : [
-                { y: '2017-01', item1: 10 },
-                { y: '2017-02', item1: 20 },
-                { y: '2017-03', item1: 30 },
-                { y: '2017-04', item1: 40 },
-                { y: '2017-05', item1: 50 },
-                { y: '2017-06', item1: 60 },
-                { y: '2017-07', item1: 70 },
-                { y: '2017-08', item1: 08 },
-                { y: '2017-09', item1: 80 },
-                { y: '2017-10', item1: 90 },
-                { y: '2017-11', item1: 09 },
-                { y: '2017-12', item1: 100 }
-            ],
-            xkey             : 'y',
-            ykeys            : ['item1'],
-            labels           : ['NoOf Leaves'],
-            lineColors       : ['#3c8dbc'],
-            hideHover        : 'auto'
+            element: 'sales-chart',
+            resize: true,
+            data: ${cymonth},
+            xkey: 'y',
+            ykeys: ['item1'],
+            labels: ['NoOf Leaves'],
+            lineColors: ['#3c8dbc'],
+            hideHover: 'auto'
         });
         $("#revenue-chart").removeClass("active");
         $('.box ul.nav a').on('shown.bs.tab', function () {
