@@ -12,8 +12,10 @@ import java.util.List;
  * Created by IT Division on 10-10-2017.
  */
 public interface LeavesService {
+    List<Leaves> gettodayleave(HttpServletRequest request);
     void saveleave(HttpServletRequest request);
     void updateleave(Leaves leaves);
+    List<Leaves> getLeaves();
     List<Leaves> getLeaves(User user);
     List<Leaves> getLeavesByStatus(Status status);
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section class="content">
 
     <div class="row">
@@ -9,7 +10,15 @@
                 <div class="widget-user-header bg-aqua-active">
                     <h3 class="widget-user-username">${username}</h3>
                     <h5 class="widget-user-desc">${userrole}</h5>
-                    <h5>In the current financial year <b>${currentyear}</b> you used <b>${nol}</b> leaves out of <b>${tnofleaves}</b> leaves. Right now you have <b>${tnofleaves - nol}</b> leaves to use.</h5>
+                    <h5>In the current year <b>(${currentyear})</b> you have used <b>${nol}</b> leaves out of
+                        <b>${tnofleaves}</b> paid leaves.
+                        <c:if test="${(tnofleaves - nol) >= 0}">
+                            You have <b>${tnofleaves - nol}</b> paid leaves remaining.
+                        </c:if>
+                        <c:if test="${(tnofleaves - nol) < 0}">
+                            You have exceeded your paid leaves.
+                        </c:if>
+                    </h5>
                 </div>
                 <div class="box-footer">
                     <div class="row">

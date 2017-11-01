@@ -4,13 +4,19 @@ import com.vimaan.model.*;
 import com.vimaan.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 import java.util.*;
 
 /**
@@ -68,18 +74,24 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(@RequestParam(value = "error", required = false) String error,
                               @RequestParam(value = "logout", required = false) String logout,
-                              @RequestParam(value = "msg", required = false) String msg) {
+                              @RequestParam(value = "msg", required = false) String msg, HttpServletRequest request) {
 
         ModelAndView model = new ModelAndView();
-        if (error != null) {
-            model.addObject("error", "Invalid username and password!");
-        }
-
         if (logout != null) {
             model.addObject("msg", "You've been logged out successfully.");
         }
 
-        if(msg != null){
+        if (error != null) {
+
+            AuthenticationException ex = ((AuthenticationException) request.getSession().getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION));
+            if (ex instanceof DisabledException) {
+                model.addObject("msg", "Your Account is locked!");
+            } else {
+                model.addObject("error", "Invalid username and password!");
+            }
+        }
+
+        if (msg != null) {
             model.addObject("msg", msg);
 
         }
@@ -322,13 +334,77 @@ public class LoginController extends BaseController {
                             return model;
                         }
                     } else {
-                        model.addObject("msg","Account is not present" );
+                        model.addObject("msg", "Account is not present");
                         model.setViewName("redirect:/login");
                         return model;
                     }
                 }
             } else {
-                return new ModelAndView("views/hrDashboard");
+
+                ModelAndView model = new ModelAndView("views/hrDashboard");
+
+                List<Holidays> holidaylist = holidaysService.getHolidays();
+                List<Leaves> user_leaves = leavesService.getLeaves();
+
+                int uerLeaves = user_leaves != null ? user_leaves.size() : 0;
+                int holidays = holidaylist != null ? holidaylist.size() : 0;
+
+                List<String> date_all = new ArrayList<String>();
+                List<String> date_array = new ArrayList<String>();
+
+                for (int i = 0; i < holidays; i++) {
+                    date_array.add(holidaylist.get(i).getDate() + "");
+                }
+
+                for (int i = 0; i < uerLeaves; i++) {
+                    if (user_leaves.get(i).getStatus().toString().trim().equals("APPROVED")) {
+                        Date date1 = user_leaves.get(i).getFromDate();
+                        Date date2 = user_leaves.get(i).getToDate();
+                        Calendar cal1 = Calendar.getInstance();
+                        Calendar cal2 = Calendar.getInstance();
+                        cal1.setTime(date1);
+                        cal2.setTime(date2);
+
+                        while (cal1.before(cal2) || cal1.compareTo(cal2) == 0) {
+                            if ((Calendar.SATURDAY != cal1.get(Calendar.DAY_OF_WEEK)) && (Calendar.SUNDAY != cal1.get(Calendar.DAY_OF_WEEK))) {
+                                String month, datee;
+
+                                if (((cal1.get(Calendar.MONTH) + 1) + "").toString().length() > 1) {
+                                    month = (cal1.get(Calendar.MONTH) + 1) + "";
+                                } else {
+                                    month = "0" + (cal1.get(Calendar.MONTH) + 1);
+                                }
+
+                                if ((cal1.get(Calendar.DATE) + "").toString().length() > 1) {
+                                    datee = "" + cal1.get(Calendar.DATE);
+                                } else {
+                                    datee = "0" + cal1.get(Calendar.DATE);
+                                }
+
+                                date_all.add(cal1.get(Calendar.YEAR) + "-" + month + "-" + datee);
+                            }
+                            cal1.add(Calendar.DATE, 1);
+                        }
+                    }
+                }
+
+                HashSet<String> hashSet = new HashSet<String>();
+                hashSet.addAll(date_all);
+                date_all.clear();
+                date_all.addAll(hashSet);
+
+                for (int i = 0; i < date_all.size(); i++) {
+                    for (int j = 0; j < date_array.size(); j++) {
+                        if (date_all.get(i).equals(date_array.get(j))) {
+                            date_all.remove(date_array.get(j));
+                        }
+                    }
+                }
+
+                Collections.sort(date_all);
+
+                model.addObject("date_all", date_all);
+                return model;
             }
         } else {
             return new ModelAndView("redirect:/login");
@@ -343,24 +419,24 @@ public class LoginController extends BaseController {
         return model;
     }
 
-    /*@RequestMapping(value = "/ajaxLoginProcess", method = RequestMethod.POST)
+    @RequestMapping(value = "/auth/user/ajaxgettodayLeaves", method = RequestMethod.POST)
     public
     @ResponseBody
-    String loginCheck(HttpServletRequest request, HttpServletResponse response) {
-        Login login = new Login();
-
-        login.setUsername(request.getParameter("username"));
-        login.setPassword(request.getParameter("password"));
-
-        User user = userService.validateUser(login);
-
-        String status = " ";
-        if(user != null) {
-            status = "success";
-            request.getSession().setAttribute("user", user);
-        } else {
-            status = "failure";
+    String requestLeaveCheck(HttpServletRequest request) throws ParseException {
+        List<Leaves> leavesL = leavesService.gettodayleave(request);
+        String res = "[";
+        if (leavesL != null) {
+            for (int i = 0; i < leavesL.size(); i++) {
+                Leaves leave = leavesL.get(i);
+                if (i == 0) {
+                    res = res + "{ \"username\":\"" + leave.getUser().getUsername() + "\", \"reason\":\"" + leave.getReason() + "\"}";
+                } else {
+                    res = res + ",{ \"username\":\"" + leave.getUser().getUsername() + "\", \"reason\":\"" + leave.getReason() + "\"}";
+                }
+            }
         }
-        return status;
-    }*/
+        res = res + "]";
+        return res;
+    }
+
 }

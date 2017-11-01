@@ -1,58 +1,64 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-    .sidebar-toggle, .logo, .main-sidebar {
+    .sidebar-toggle, .main-sidebar {
         display: none !important;
     }
 
     @media (min-width: 768px) {
-        .sidebar-mini.sidebar-collapse .main-header .navbar, .sidebar-mini.sidebar-collapse .content-wrapper, .sidebar-mini.sidebar-collapse .right-side, .sidebar-mini.sidebar-collapse .main-footer {
+        .sidebar-mini.sidebar-collapse .content-wrapper, .sidebar-mini.sidebar-collapse .right-side, .sidebar-mini.sidebar-collapse .main-footer {
             margin-left: 0px !important;
         }
     }
+
     #pswd_info {
-        position:absolute;
+        position: absolute;
         /*bottom:-75px;*/
         /*bottom: -115px\9; /* IE Specific */
-        right:-70px;
-        width:450px;
-        padding:15px;
-        background:#fefefe;
-        font-size:.875em;
-        border-radius:5px;
-        box-shadow:0 1px 3px #ccc;
-        border:1px solid #ddd;
+        right: -70px;
+        width: 450px;
+        padding: 15px;
+        background: #fefefe;
+        font-size: .875em;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px #ccc;
+        border: 1px solid #ddd;
         z-index: 9999;
     }
+
     #pswd_info h4 {
-        margin:0 0 10px 0;
-        padding:0;
-        font-weight:normal;
+        margin: 0 0 10px 0;
+        padding: 0;
+        font-weight: normal;
     }
+
     #pswd_info::before {
         content: "\25B2";
-        position:absolute;
-        top:-12px;
-        left:45%;
-        font-size:14px;
-        line-height:14px;
-        color:#ddd;
-        text-shadow:none;
-        display:block;
+        position: absolute;
+        top: -12px;
+        left: 45%;
+        font-size: 14px;
+        line-height: 14px;
+        color: #ddd;
+        text-shadow: none;
+        display: block;
     }
+
     .invalid {
-        background:url(/theme/img/cross.png) no-repeat 0 50%;
-        padding-left:22px;
-        line-height:24px;
-        color:#ec3f41;
+        background: url(/theme/img/cross.png) no-repeat 0 50%;
+        padding-left: 22px;
+        line-height: 24px;
+        color: #ec3f41;
     }
+
     .pvalid {
-        background:url(/theme/img/tick.png) no-repeat 0 50%;
-        padding-left:22px;
-        line-height:24px;
-        color:#3a7d34;
+        background: url(/theme/img/tick.png) no-repeat 0 50%;
+        padding-left: 22px;
+        line-height: 24px;
+        color: #3a7d34;
     }
-    #pswd_info ul{
+
+    #pswd_info ul {
         list-style-type: none;
     }
 
@@ -77,7 +83,7 @@
         -webkit-appearance: none;
     }
 
-    .hideShowPassword-toggle{
+    .hideShowPassword-toggle {
         position: absolute;
         right: 0px;
         top: 27%;
@@ -99,19 +105,20 @@
     <div class="box-header with-border">
         <strong>Change Password</strong>
     </div>
-    <form:form id="changePasswordForm" modelAttribute="user" action="changePassword" method="post" class="form-horizontal">
-    <div class="box-body">
-        <div class="col-sm-6 col-md-4 col-md-offset-4">
-              <div class="box-body">
+    <form:form id="changePasswordForm" modelAttribute="user" action="changePassword" method="post"
+               class="form-horizontal">
+        <div class="box-body">
+            <div class="col-sm-6 col-md-4 col-md-offset-4">
+                <div class="box-body">
                     <form:hidden path="password" id="password"/>
                     <div class="form-group">
                         <label for="oldPassword">Current Password :</label>
-                        <input type="password" id="oldPassword" name="oldPassword" class="form-control" />
+                        <input type="password" id="oldPassword" name="oldPassword" class="form-control"/>
                     </div>
 
                     <div class="form-group">
                         <label for="newPassword">New Password :</label>
-                        <input type="password" id="newPassword" name="newPassword" class="form-control" />
+                        <input type="password" id="newPassword" name="newPassword" class="form-control"/>
                     </div>
                     <div id="pswd_info">
                         <h5>Password must meet the following requirements:</h5>
@@ -125,7 +132,7 @@
 
                     <div class="form-group">
                         <label for="confirmPassword">Confirm Password :</label>
-                        <input type="password"  id="confirmPassword"  name="confirmPassword" class="form-control"/>
+                        <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"/>
                     </div>
 
                     <div class="form-group">
@@ -133,12 +140,12 @@
                         <button type="reset" class="btn btn-default">Reset</button>
                     </div>
                 </div>
+            </div>
         </div>
-    </div>
-</form:form>
+    </form:form>
 </div>
 <script>
-    $(function() {
+    $(function () {
         $('#pswd_info').hide();
         onChangeOldPassword();
         checkPasswordStrength();
@@ -148,9 +155,9 @@
         $("body").removeClass("skin-blue sidebar-mini").addClass("skin-blue sidebar-mini sidebar-collapse");
     });
 
-    function onChangeOldPassword(){
+    function onChangeOldPassword() {
         var oldPassword = $('#oldPassword');
-        oldPassword.on('focusout',function(e){
+        oldPassword.on('focusout', function (e) {
             e.stopImmediatePropagation();
             if ($(this).val().trim() != '') {
                 $.ajax({
@@ -166,7 +173,7 @@
                             oldPassword.focus();
                         }
                     },
-                    error:function () {
+                    error: function () {
                         toastr.error("Enter Correct the Old Password");
                     }
                 });
@@ -174,35 +181,35 @@
         });
     }
 
-    function checkPasswordStrength(){
+    function checkPasswordStrength() {
         $('#pswd_info').hide();
 
-        $('input[name="newPassword"]').keyup(function() {
+        $('input[name="newPassword"]').keyup(function () {
             var pswd = $(this).val();
 
             //validate the length
-            if ( pswd.length < 8 ) {
+            if (pswd.length < 8) {
                 makeClassInValid('length');
             } else {
                 makeValidClass('length');
             }
 
             //validate letter
-            if ( pswd.match(/[A-z]/) ) {
+            if (pswd.match(/[A-z]/)) {
                 makeValidClass('letter');
             } else {
                 makeClassInValid('letter');
             }
 
             //validate capital letter
-            if ( pswd.match(/[A-Z]/) ) {
+            if (pswd.match(/[A-Z]/)) {
                 makeValidClass('capital');
             } else {
                 makeClassInValid('capital');
             }
 
             //validate number
-            if ( pswd.match(/\d/) ) {
+            if (pswd.match(/\d/)) {
                 makeValidClass('number');
             } else {
                 makeClassInValid('number');
@@ -210,10 +217,10 @@
 
             submitDisabledStatus();
 
-        }).focus(function() {
+        }).focus(function () {
             $('#pswd_info').show();
             submitDisabledStatus();
-        }).blur(function() {
+        }).blur(function () {
             $('#pswd_info').hide();
             submitDisabledStatus();
         });
@@ -224,13 +231,12 @@
     }
 
     function makeValidClass(element) {
-        $('#'+element).removeClass('invalid').addClass('pvalid');
+        $('#' + element).removeClass('invalid').addClass('pvalid');
     }
 
     function makeClassInValid(element) {
-        $('#'+element).removeClass('pvalid').addClass('invalid');
+        $('#' + element).removeClass('pvalid').addClass('invalid');
     }
-
 
 
     function validateForm() {
