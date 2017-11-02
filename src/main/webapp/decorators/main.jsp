@@ -109,7 +109,6 @@
 <script src="${theme}/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
 
-
 <!-- Bootstrap WYSIHTML5 -->
 <script src="${theme}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 
@@ -133,6 +132,12 @@
 <!-- AdminLTE for demo purposes -->
 <script src="${theme}/js/demo.js"></script>
 <script src="${theme}/js/hideShowPassword.min.js"></script>
+
+<style>
+    .table-striped > tbody > tr:nth-of-type(odd) {
+        background-color: #e6e6e6;
+    }
+</style>
 
 </body>
 </html>
