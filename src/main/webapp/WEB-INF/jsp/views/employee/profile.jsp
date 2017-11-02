@@ -3,12 +3,12 @@
 <%@page pageEncoding="UTF-8" %>
 
 <style>
-    .sidebar-toggle, .logo, .main-sidebar {
+    .sidebar-toggle, .main-sidebar {
         display: none !important;
     }
 
     @media (min-width: 768px) {
-        .sidebar-mini.sidebar-collapse .main-header .navbar, .sidebar-mini.sidebar-collapse .content-wrapper, .sidebar-mini.sidebar-collapse .right-side, .sidebar-mini.sidebar-collapse .main-footer {
+        .sidebar-mini.sidebar-collapse .content-wrapper, .sidebar-mini.sidebar-collapse .right-side, .sidebar-mini.sidebar-collapse .main-footer {
             margin-left: 0px !important;
         }
     }

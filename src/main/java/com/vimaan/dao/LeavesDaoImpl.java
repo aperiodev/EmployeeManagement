@@ -37,8 +37,20 @@ public class LeavesDaoImpl extends BaseDao implements LeavesDao {
        // mailService.sendMail(leaves.getUser().getUsername(), leaves.getToUser().getUsername(),leaves.getStatus().toString() ,"Your Leave has been " + leaves.getStatus());
     }
 
+    public List<Leaves> getLeaves() {
+        String sql = "from Leaves";
+        List<Leaves> leaves = getSession().createQuery(sql).list();
+        return leaves.size() > 0 ? leaves : null;
+    }
+
     public List<Leaves> getLeaves(User user) {
         String sql = "from Leaves where user.username='" + user.getUsername() + "'";
+        List<Leaves> leaves = getSession().createQuery(sql).list();
+        return leaves.size() > 0 ? leaves : null;
+    }
+
+    public List<Leaves> gettodayleave(String todaydate) {
+        String sql = "from  Leaves where fromDate  <= '" + todaydate + "' and toDate  >= '" + todaydate + "' and status = 'APPROVED'";
         List<Leaves> leaves = getSession().createQuery(sql).list();
         return leaves.size() > 0 ? leaves : null;
     }

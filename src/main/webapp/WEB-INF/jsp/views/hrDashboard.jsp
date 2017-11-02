@@ -1,17 +1,137 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: pc
-  Date: 10/18/2017
-  Time: 2:34 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-Hr Dashboard
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style>
+    .datepicker table tr td.active, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover {
+        background-image: linear-gradient(to bottom, #09ccb9, #09ccb9);
+    }
 
-</body>
-</html>
+    .datepicker table tr td.active:hover {
+        background-image: linear-gradient(to bottom, #6fccc5, #6fccc5);
+    }
+
+    .table {
+        padding: 15px;
+    }
+
+    .datepicker-days tbody tr td.red {
+        color: #f00 !important;
+    }
+
+</style>
+<div class="box box-solid bg-teal color-palette">
+    <div class="box-header">
+        <i class="fa fa-calendar"></i>
+        <h3 class="box-title">Calendar</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body no-padding">
+        <!--The calendar -->
+        <div id="calendar" style="width: 100%"></div>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer text-black">
+        <div class="row">
+            <table id="userLeaveList" class="table table-striped table-bordered nowrap" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Reason</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<Script>
+    $(function () {
+        var curentdate = new Date();
+        var flag = 0;
+        var holidays = [
+            <c:forEach items="${date_all}" var="ctag" varStatus="loop">
+            new Date('${ctag}')${!loop.last ? ', ' : ''}
+            </c:forEach>
+        ];
+
+        $('#calendar').datepicker({
+            startDate: curentdate,
+            daysOfWeekDisabled: [0, 6],
+            beforeShowDay: function (date) {
+                for (var i = 0; i < holidays.length; i++) {
+                    holidays[i].setHours(0, 0, 0, 0);
+                    date.setHours(0, 0, 0, 0);
+                    var dd = holidays[i].toString();
+                    var ddd = date.toString();
+                    if (dd == ddd) {
+                        flag = flag + 1;
+                    }else{
+                        flag = flag + 0;
+                    }
+                }
+                if( flag == 1){
+                    flag = 0;
+                    return true;
+                }else{
+                    return false;
+
+                }
+            }
+        }).datepicker("setDate", new Date()).on('changeDate', function (ev) {
+            go(formatDate(ev.date));
+        });
+        go(formatDate(curentdate));
+
+        table = $('#userLeaveList').DataTable({
+            'paging': false,
+            'lengthChange': false,
+            'searching': false,
+            'ordering': true,
+            'info': false,
+            'autoWidth': true,
+            'responsive': true,
+            "columns": [
+                {
+                    "data": "username"
+                },
+                {
+                    "data": "reason",
+                    'orderable': false
+                }
+            ]
+        });
+
+        function go(selecteddate) {
+            $.ajax({
+                url: "${ctx}/auth/user/ajaxgettodayLeaves",
+                type: "POST",
+                data: ({
+                    selecteddate: selecteddate
+                }),
+                success: function (response) {
+                    table.clear().draw();
+                    table.rows.add(JSON.parse(response)).draw();
+                },
+                error: function (request, textStatus, errorThrown) {
+                    toastr.error("Please tyr again...");
+                    //$("button").removeClass('disabled');
+                    //$("button").prop("disabled", false);
+                },
+                failure: function () {
+                    toastr.error("Please tyr again...");
+                    //$("button").removeClass('disabled');
+                    //$("button").prop("disabled", false);
+                }
+            });
+        }
+
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+    });
+</Script>

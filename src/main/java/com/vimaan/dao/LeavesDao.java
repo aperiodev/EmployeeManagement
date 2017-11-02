@@ -12,6 +12,8 @@ import java.util.List;
 public interface LeavesDao {
     void saveleave(Leaves leaves);
     void updateleave(Leaves leaves);
+    List<Leaves> getLeaves();
     List<Leaves> getLeaves(User user);
+    List<Leaves> gettodayleave(String todaydate);
     List<Leaves> getLeavesByStatus(Status status);
 }

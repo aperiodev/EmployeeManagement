@@ -38,6 +38,11 @@ public class LeavesServiceImpl implements LeavesService {
     @Autowired
     MailService mailService;
 
+    public List<Leaves> gettodayleave(HttpServletRequest request) {
+            List<Leaves> leaves = leavesDao.gettodayleave(request.getParameter("selecteddate"));
+            return leaves;
+    }
+
     public void saveleave(HttpServletRequest request) {
         try {
             String loggedInUser = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -68,6 +73,11 @@ public class LeavesServiceImpl implements LeavesService {
 
     public void updateleave(Leaves leaves) {
         leavesDao.updateleave(leaves);
+    }
+
+    public List<Leaves> getLeaves() {
+        List<Leaves> leaves = leavesDao.getLeaves();
+        return leaves;
     }
 
     public List<Leaves> getLeaves(User user) {
