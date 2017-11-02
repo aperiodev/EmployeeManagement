@@ -24,9 +24,12 @@
     }
 </style>
 
-<div class="box box-warning">
-    <div class="box-header">
+<div class="box box-primary">
+    <div class="box-header with-border">
         <h3 class="box-title">Requested Leaves</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -73,7 +76,10 @@
 <script>
     $(function () {
 
-        $('#userLeaveList').DataTable({});
+        $('#userLeaveList').DataTable({
+            responsive: true,
+            columnDefs: [ { orderable: false, targets: [6] } ]
+        });
     });
 
     function approval_decision(leave_id, status) {

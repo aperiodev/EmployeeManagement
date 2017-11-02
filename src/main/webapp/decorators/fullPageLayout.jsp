@@ -5,7 +5,7 @@
 <%@ include file="/common/toastr.jsp" %>
 <%--<%@ page language="java" pageEncoding="UTF-8" %>--%>
 <head>
-    <title>Login Page</title>
+    <title>EM</title>
 
     <%@page contentType="text/html;charset=UTF-8" %>
     <%@page pageEncoding="UTF-8" %>

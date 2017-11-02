@@ -10,7 +10,7 @@
     <div class="login-logo">
         <b>Forgot Password</b>
     </div>
-        <p> Enter your username and we'll send a link to reset your password </p>
+        <p> Enter your email and we'll send a link to reset your password </p>
     <div class="login-box-body">
         <c:if test="${not empty msg}">
             <div class="msg">${msg}</div>
@@ -18,7 +18,7 @@
         <form:form method="POST" id="forgotPassword" action="sendPasswordUrl">
             <div class="form-group has-feedback">
                 <input path="username" name='username' id="username" type="text" class="form-control"
-                       placeholder="username"/>
+                       placeholder="email"/>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="col-xs-4">

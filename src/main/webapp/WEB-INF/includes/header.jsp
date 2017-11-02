@@ -6,13 +6,13 @@
         <span class="logo-mini"><b>EM</b></span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg">
-            <b>EM </b></span>
+            <b>EM</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only">Navigation</span>
         </a>
 
         <div class="navbar-custom-menu">
@@ -26,7 +26,7 @@
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="${ctx}/theme/img/defaultImg.png" class="img-circle" alt="User Image">
+                            <%--<img src="${ctx}/theme/img/defaultImg.png" class="img-circle" alt="User Image">--%>
 
                             <p>
                                 <sec:authentication property="principal.username" /> </small></br>

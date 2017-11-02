@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <style>
     .reason {
@@ -10,9 +11,14 @@
     }
 </style>
 
-<div class="box box-warning">
-    <div class="box-header">
-        <h3 class="box-title">${LeaveType} LEAVES LIST</h3>
+<div class="box box-primary">
+
+    <div class="box-header with-border">
+        <h3 class="box-title" style="text-transform: capitalize">${fn:toLowerCase(LeaveType)} Leaves</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -43,6 +49,9 @@
 
 <script>
     $(function () {
-        $('#datatable').DataTable({});
+        $('#datatable').DataTable({
+
+            responsive: true
+        });
     });
 </script>

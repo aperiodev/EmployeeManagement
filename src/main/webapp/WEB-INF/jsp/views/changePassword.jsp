@@ -101,9 +101,13 @@
         outline: transparent;
     }
 </style>
-<div class="box box-warning">
+<div class="box box-primary">
     <div class="box-header with-border">
-        <strong>Change Password</strong>
+        <h3 class="box-title">Change Password</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
     </div>
     <form:form id="changePasswordForm" modelAttribute="user" action="changePassword" method="post"
                class="form-horizontal">

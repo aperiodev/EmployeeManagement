@@ -1,16 +1,20 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="box box-warning">
+<div class="box box-primary">
     <div class="box-header with-border">
-        <h3 class="box-title">User Registration</h3>
+        <h3 class="box-title">Employee Registration</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
     </div>
     <form:form id="regForm" modelAttribute="user" action="registration" method="post" class="form-horizontal">
         <div class="box-body">
             <div class="form-group">
-                <label for="username" class="col-sm-2 control-label">Username</label>
+                <label for="username" class="col-sm-2 control-label">Email</label>
 
                 <div class="col-sm-10">
-                    <form:input path="username" type="text" class="form-control" id="username" placeholder="username"/>
+                    <form:input path="username" type="text" class="form-control" id="username" placeholder="Email"/>
                 </div>
             </div>
             <div class="form-group">

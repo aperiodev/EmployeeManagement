@@ -57,9 +57,9 @@
         </div>
     </c:if>
 
-    <div class="box box-info">
+    <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title">Holidays List</h3>
+            <h3 class="box-title">Holidays Lists</h3>
 
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -92,8 +92,8 @@
                                 <c:if test="${companyleave[5] eq dateyear}">
                                     <b class="btn btn-primary" style="padding:3px 12px !important; text-align: left !important; display: inline !important;">Edit</b>
                                 </c:if>--%>
-                            <b class="btn btn-primary"
-                               style="padding:3px 12px !important;text-align: left !important; display: inline !important;">Edit</b>
+                           <%-- <b class="btn btn-primary"
+                               style="padding:3px 12px !important;text-align: left !important; display: inline !important;">Edit</b>--%>
                             <b class="btn btn-danger"
                                style="padding:3px 12px !important;text-align: left !important; display: inline !important;">Delete</b>
                         </td>

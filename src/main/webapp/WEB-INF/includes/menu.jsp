@@ -25,21 +25,20 @@
                 <ul class="treeview-menu">
                    <%-- <li><a href="#"><i class="fa fa-angle-left pull-left"></i> Employee Leaves</a></li>--%>
                    <%-- <li><a href="#"><i class="fa fa-angle-left pull-left"></i> Yearly Leaves</a></li>--%>
-                    <li><a href="/auth/user/holidaysList"><i class="fa fa-angle-left pull-left"></i> Holidays</a></li>
-                    <li><a href="/auth/admin/companyleaves"><i class="fa fa-angle-left pull-left"></i>Leaves Setup</a>
+                    <li><a href="/auth/user/holidaysList"><i class="fa pull-left"></i> Holidays</a></li>
+                    <li><a href="/auth/admin/companyleaves"><i class="fa pull-left"></i>Leaves Setup</a>
                     </li>
                 </ul>
             </li>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-users"></i> <span>Accounts</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+              <i class="fa fa-angle-left pull-right"></i><i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="/auth/admin/register"><i class="fa fa-user-plus"></i>User Registration</a></li>
-                    <li><a href="/auth/admin/users"><i class="fa fa-user-circle-o"></i>Manage Accounts</a></li>
+                    <li><a href="/auth/admin/register"><i class="fa fa-user-plus"></i>Employee Registration</a></li>
+                    <li><a href="/auth/admin/users"><i class="fa fa-user-circle-o"></i>Manage Employees</a></li>
                 </ul>
             </li>
 
@@ -65,8 +64,8 @@
                 <a href="#">
                     <i class="fa fa-list"></i>
                     <span>Leaves</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+                    <i class="fa fa-angle-left pull-right"></i>
+                    <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
@@ -185,20 +184,20 @@
                    <ul class="treeview-menu">
                            <%-- <li><a href="#"><i class="fa fa-angle-left pull-left"></i> Employee Leaves</a></li>--%>
                            <%-- <li><a href="#"><i class="fa fa-angle-left pull-left"></i> Yearly Leaves</a></li>--%>
-                       <li><a href="/auth/user/holidaysList"><i class="fa fa-angle-left pull-left"></i> Holidays</a></li>
-                       <li><a href="/auth/admin/companyleaves"><i class="fa fa-angle-left pull-left"></i>Leaves Setup</a>
+                       <li><a href="/auth/user/holidaysList"><i class="fa pull-left"></i> Holidays</a></li>
+                       <li><a href="/auth/admin/companyleaves"><i class="fa pull-left"></i>Leaves Setup</a>
                        </li>
                    </ul>
                </li>
                <li class="treeview">
                    <a href="#">
                        <i class="fa fa-users"></i> <span>Accounts</span>
-                       <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+                       <i class="fa fa-angle-left pull-right"></i>
+                       <i class="fa fa-angle-left pull-right"></i>
             </span>
                    </a>
                    <ul class="treeview-menu">
-                       <li class="active"><a href="/auth/admin/register"><i class="fa fa-user-plus"></i>User Registration</a></li>
+                       <li><a href="/auth/admin/register"><i class="fa fa-user-plus"></i>Employee Registration</a></li>
                    </ul>
                </li>
 

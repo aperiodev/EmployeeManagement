@@ -94,7 +94,7 @@ public class LoginController extends BaseController {
             if (ex instanceof DisabledException) {
                 model.addObject("msg", "Your Account is locked!");
             } else {
-                model.addObject("error", "Invalid username and password!");
+                model.addObject("error", "Invalid email and password!");
             }
         }
 

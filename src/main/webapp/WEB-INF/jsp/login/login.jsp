@@ -22,7 +22,7 @@
         <form name='loginForm'
               action="<c:url value='/j_spring_security_check' />" method='POST'>
         <div class="form-group has-feedback">
-            <input path="username" name='username' id="username" type="text" class="form-control" placeholder="username"
+            <input path="username" name='username' id="username" type="text" class="form-control" placeholder="Email"
                    required>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
