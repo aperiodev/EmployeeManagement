@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.mail.MessagingException;
+
 @Controller
 @RequestMapping(value = "/auth/user")
 public class MailController {
@@ -14,7 +16,7 @@ public class MailController {
     MailService mailService;
 
     @RequestMapping(value = "/sendMail")
-    public ModelAndView sendEmailMail(){
+    public ModelAndView sendEmailMail() throws MessagingException {
         mailService.sendMail("vimaandev@gmail.com", "anushac@apeiro.us", "Test Mail", "Hi you r successful in sending email");
         return new ModelAndView("redirect:/auth/home");
     }

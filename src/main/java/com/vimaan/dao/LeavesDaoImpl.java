@@ -1,5 +1,6 @@
 package com.vimaan.dao;
 
+import com.vimaan.mail.MailService;
 import com.vimaan.model.Leaves;
 import com.vimaan.model.User;
 import com.vimaan.model.enums.Status;
@@ -33,6 +34,7 @@ public class LeavesDaoImpl extends BaseDao implements LeavesDao {
         query.setParameter("leaveStatus", leaves.getStatus());
         query.setParameter("leavesId", leaves.getId());
         query.executeUpdate();
+       // mailService.sendMail(leaves.getUser().getUsername(), leaves.getToUser().getUsername(),leaves.getStatus().toString() ,"Your Leave has been " + leaves.getStatus());
     }
 
     public List<Leaves> getLeaves(User user) {

@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.security.Principal;
 import java.sql.Date;
 import java.text.DateFormat;
@@ -47,7 +49,10 @@ public class UserController extends BaseController {
     @Autowired
     LeavesService leavesService;
 
-     @RequestMapping(value = "/leavesLists", method = RequestMethod.GET)
+    @Autowired
+    MailService mailService;
+
+    @RequestMapping(value = "/leavesLists", method = RequestMethod.GET)
     public ModelAndView showLeavesLists(HttpServletRequest request, HttpServletResponse response) {
         User user = getLoggedInUser();
         ModelAndView model = null;
@@ -62,7 +67,6 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/leaves", method = RequestMethod.GET)
     public ModelAndView showLeavesLists(HttpServletRequest request) {
-        System.out.println("sstatusValue : " );
         User user = getLoggedInUser();
         Status status;
         ModelAndView model = null;
@@ -148,6 +152,15 @@ public class UserController extends BaseController {
         leaves.setId(Integer.parseInt(request.getParameter("leaveId")));
         leaves.setStatus(Status.valueOf(request.getParameter("leaveStatus")));
         leavesService.updateleave(leaves);
+        /*try {
+            mailService.sendMail(leaves.getUser().getUsername(), leaves.getToUser().getUsername(),leaves.getStatus().toString() , leaves.getStatus().toString());
+        } catch (Exception e){
+            StringWriter sw = new StringWriter();
+            new Throwable("").printStackTrace(new PrintWriter(sw));
+            String stackTrace = sw.toString();
+            System.out.println("Exception=="+ stackTrace);
+
+        }*/
         return "success";
     }
 

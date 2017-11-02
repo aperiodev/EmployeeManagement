@@ -1,26 +1,33 @@
 package com.vimaan.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import com.vimaan.mail.MailService;
 import com.vimaan.model.*;
 import com.vimaan.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
  * @author anusha
  */
+@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
 @Controller
 public class LoginController extends BaseController {
     static Logger log = Logger.getLogger(LoginController.class);
 
-    Authentication authentication;
 
     @Autowired
     UserService userService;
@@ -36,6 +43,9 @@ public class LoginController extends BaseController {
 
     @Autowired
     HolidaysService holidaysService;
+
+    @Autowired
+    MailService mailService;
 
     /**
      * This methods maps default url
@@ -68,18 +78,24 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(@RequestParam(value = "error", required = false) String error,
                               @RequestParam(value = "logout", required = false) String logout,
-                              @RequestParam(value = "msg", required = false) String msg) {
+                              @RequestParam(value = "msg", required = false) String msg, HttpServletRequest request) {
 
         ModelAndView model = new ModelAndView();
-        if (error != null) {
-            model.addObject("error", "Invalid username and password!");
-        }
-
         if (logout != null) {
             model.addObject("msg", "You've been logged out successfully.");
         }
 
-        if(msg != null){
+        if (error != null) {
+
+            AuthenticationException ex = ((AuthenticationException) request.getSession().getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION));
+            if (ex instanceof DisabledException) {
+                model.addObject("msg", "Your Account is locked!");
+            } else {
+                model.addObject("error", "Invalid username and password!");
+            }
+        }
+
+        if (msg != null) {
             model.addObject("msg", msg);
 
         }
@@ -322,7 +338,7 @@ public class LoginController extends BaseController {
                             return model;
                         }
                     } else {
-                        model.addObject("msg","Account is not present" );
+                        model.addObject("msg", "Account is not present");
                         model.setViewName("redirect:/login");
                         return model;
                     }
@@ -342,6 +358,50 @@ public class LoginController extends BaseController {
         model.setViewName("error/403");
         return model;
     }
+
+    @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
+    @RequestMapping(value = {"/forgot"}, method = RequestMethod.GET)
+    public ModelAndView forgotPassword() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("login/forgotPassword");
+        return model;
+
+    }
+
+    @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
+    @RequestMapping(value = "/sendPasswordUrl", method = RequestMethod.POST)
+    public ModelAndView sendPasswordUrl(HttpServletRequest request) {
+        String userEmail = request.getParameter("username");
+
+        //get user object from username
+        User user = userService.getUserByUsername(userEmail);
+        ModelAndView mav = new ModelAndView("login/forgotPassword");
+        try {
+            if (user != null) {
+                String message = "Please login with the password : " + user.getPassword();
+               // mailService.sendMail("vimaan@gmail.com", userEmail, "Forgot Password", message);
+            }
+            mav.addObject("msg", "Thanks! You password was sent to given email successfully!");
+
+        } catch (Exception e) {
+            mav.addObject("msg", "User not registered with provided email or does not exist!");
+        }
+        return mav;
+    }
+
+    protected String getSaltString() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 18) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
+
+    }
+
 
     /*@RequestMapping(value = "/ajaxLoginProcess", method = RequestMethod.POST)
     public

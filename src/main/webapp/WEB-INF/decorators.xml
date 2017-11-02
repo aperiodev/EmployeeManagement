@@ -10,9 +10,10 @@
         <pattern>/META-INF/*</pattern>
     </excludes>
 
-
     <decorator name="fullPage" page="/decorators/fullPageLayout.jsp">
         <pattern>/login</pattern>
+        <pattern>/forgot</pattern>
+        <pattern>/sendPasswordUrl</pattern>
         <pattern>/welcome/*</pattern>
         <pattern>/index.jsp</pattern>
     </decorator>
