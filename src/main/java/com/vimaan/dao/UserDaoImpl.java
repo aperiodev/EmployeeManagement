@@ -40,6 +40,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
         Account account = new Account();
         account.setUser(user);
+        account.setEmail(user.getUsername());
         session.save(account);
         session.getTransaction().commit();
     }

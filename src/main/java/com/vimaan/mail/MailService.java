@@ -4,9 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import java.io.FileNotFoundException;
 import java.util.Properties;
 
 public class MailService {
@@ -18,7 +24,7 @@ public class MailService {
         this.mailSender = mailSender;
     }
 
-    public void sendMail(String from, String to, String subject, String msg) throws MessagingException {
+    public void sendMail(String from, String to, String subject, String msg) throws MessagingException, FileNotFoundException {
     /* SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(to);
@@ -53,6 +59,30 @@ public class MailService {
 
             // Set Subject: header field
             message.setSubject(subject);
+
+           /* // Create the message part
+            BodyPart messageBodyPart = new MimeBodyPart();
+
+            // Now set the actual message
+            messageBodyPart.setText(msg);
+
+            // Create a multipar message
+            Multipart multipart = new MimeMultipart();
+
+            // Set text message part
+            multipart.addBodyPart(messageBodyPart);
+
+            // Part two is attachment
+            messageBodyPart = new MimeBodyPart();
+            String filename = "/website_logo-3.png";
+            DataSource source = new FileDataSource(filename);
+            messageBodyPart.setDataHandler(new DataHandler(source));
+            messageBodyPart.setFileName(filename);
+            multipart.addBodyPart(messageBodyPart);
+
+            // Send the complete message parts
+            message.setContent(multipart);
+*/
 
             // Send the actual HTML message, as big as you like
             message.setContent(msg,"text/html");

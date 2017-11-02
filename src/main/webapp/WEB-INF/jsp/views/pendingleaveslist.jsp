@@ -37,12 +37,11 @@
                width="100%">
             <thead>
             <tr>
-                <th>ID</th>
+                <th>Requested By</th>
                 <th>From Date</th>
                 <th>To Date</th>
                 <th>No of Days</th>
                 <th>Reason</th>
-                <%--<th>Status</th>--%>
                 <th>To</th>
                 <th width="60px"></th>
             </tr>
@@ -50,12 +49,11 @@
             <tbody>
             <c:forEach var="item" items="${userleaves}">
                 <tr>
-                    <td>${item.id}</td>
+                    <td>${item.user.username}</td>
                     <td>${item.fromDate}</td>
                     <td>${item.toDate}</td>
                     <td>${item.noOfDays}</td>
-                    <td class="reason">${item.reason}</td>
-                        <%--<td>${fn:replace(item.status, '_', ' ')}</td>--%>
+                    <td class="reason"><a href="#" onclick="showModal('${item.reason}')">${item.reason}</a></td>
                     <td>${item.toUser.username}</td>
                     <td>
                         <button type="button" class="cbutton btn btn-block btn-success btn-sm" data-type="APPROVED"
@@ -71,7 +69,26 @@
         </table>
     </div>
 </div>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Leave Reason </h4>
+            </div>
+            <div class="modal-body">
+                <p id="reasonTxt">Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <script>
     $(function () {
@@ -81,6 +98,11 @@
             columnDefs: [ { orderable: false, targets: [6] } ]
         });
     });
+
+    function showModal(reason) {
+        $('#myModal').modal();
+        $('#reasonTxt').empty().html(reason);
+    }
 
     function approval_decision(leave_id, status) {
         // this will pop up confirmation box and if yes is clicked it call servlet else return to page

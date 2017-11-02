@@ -1,6 +1,9 @@
+<%@ include file="/common/taglibs.jsp" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
+    <sec:authorize access="!hasRole('ROLE_ADMIN')">
+    <c:if test="${account.firstname == null || account.lastname == null || account.designation == null}">
     .sidebar-toggle, .main-sidebar {
         display: none !important;
     }
@@ -11,6 +14,8 @@
         }
     }
 
+    </c:if>
+    </sec:authorize>
     #pswd_info {
         position: absolute;
         /*bottom:-75px;*/
@@ -151,12 +156,18 @@
 <script>
     $(function () {
         $('#pswd_info').hide();
+        $('#newPassword').hidePassword(true);
+        $('#confirmPassword').hidePassword(true);
+
         onChangeOldPassword();
         checkPasswordStrength();
         validateForm();
-        $('#newPassword').hidePassword(true);
-        $('#confirmPassword').hidePassword(true);
-        $("body").removeClass("skin-blue sidebar-mini").addClass("skin-blue sidebar-mini sidebar-collapse");
+
+        <sec:authorize access="!hasRole('ROLE_ADMIN')">
+            <c:if test="${account.firstname == null || account.lastname == null || account.designation == null}">
+                $("body").removeClass("skin-blue sidebar-mini").addClass("skin-blue sidebar-mini sidebar-collapse");
+            </c:if>
+        </sec:authorize>
     });
 
     function onChangeOldPassword() {

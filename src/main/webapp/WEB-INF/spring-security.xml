@@ -17,7 +17,7 @@
         <intercept-url pattern="/login.jsp*" access="permitAll"/>
         <intercept-url pattern="/auth/**" access="isAuthenticated()" />
         <intercept-url pattern="/auth/home**" access="isAuthenticated()" />
-        <intercept-url pattern="/auth/admin**" access="hasRole ('ROLE_ADMIN')"/>
+        <intercept-url pattern="/auth/admin**" access="hasAnyRole ('ROLE_ADMIN', 'ROLE_HR')"/>
         <intercept-url pattern="/auth/user**" access="hasRole ('ROLE_USER')"/>
         <!--<intercept-url pattern="/**" access="ROLE_USER"/>-->
 

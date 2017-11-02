@@ -26,7 +26,7 @@
                    <%-- <li><a href="#"><i class="fa fa-angle-left pull-left"></i> Employee Leaves</a></li>--%>
                    <%-- <li><a href="#"><i class="fa fa-angle-left pull-left"></i> Yearly Leaves</a></li>--%>
                     <li><a href="/auth/user/holidaysList"><i class="fa pull-left"></i> Holidays</a></li>
-                    <li><a href="/auth/admin/companyleaves"><i class="fa pull-left"></i>Leaves Setup</a>
+                    <li><a href="/auth/companyleaves"><i class="fa pull-left"></i>Leaves Setup</a>
                     </li>
                 </ul>
             </li>
@@ -185,7 +185,7 @@
                            <%-- <li><a href="#"><i class="fa fa-angle-left pull-left"></i> Employee Leaves</a></li>--%>
                            <%-- <li><a href="#"><i class="fa fa-angle-left pull-left"></i> Yearly Leaves</a></li>--%>
                        <li><a href="/auth/user/holidaysList"><i class="fa pull-left"></i> Holidays</a></li>
-                       <li><a href="/auth/admin/companyleaves"><i class="fa pull-left"></i>Leaves Setup</a>
+                       <li><a href="/auth/companyleaves"><i class="fa pull-left"></i>Leaves Setup</a>
                        </li>
                    </ul>
                </li>

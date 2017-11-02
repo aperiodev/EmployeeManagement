@@ -3,6 +3,8 @@
 <%@page pageEncoding="UTF-8" %>
 
 <style>
+    <sec:authorize access="!hasRole('ROLE_ADMIN')">
+    <c:if test="${account.firstname == null || account.lastname == null || account.designation == null}">
     .sidebar-toggle, .main-sidebar {
         display: none !important;
     }
@@ -12,6 +14,9 @@
             margin-left: 0px !important;
         }
     }
+
+    </c:if>
+    </sec:authorize>
 </style>
 
 <script>
@@ -48,6 +53,7 @@
                         <div class="form-group">
                             <label for="email">Email</label>
                             <form:input type="text" class="form-control" id="email" placeholder="Email" path="email"
+                                        readonly="true"
                                         name="email"/>
                         </div>
                     </div>
@@ -162,7 +168,12 @@
 <script>
     $(function () {
         updateFormValidate();
-        $("body").removeClass("skin-blue sidebar-mini").addClass("skin-blue sidebar-mini sidebar-collapse");
+
+        <sec:authorize access="!hasRole('ROLE_ADMIN')">
+            <c:if test="${account.firstname == null || account.lastname == null || account.designation == null}">
+                $("body").removeClass("skin-blue sidebar-mini").addClass("skin-blue sidebar-mini sidebar-collapse");
+            </c:if>
+        </sec:authorize>
     });
 
     function updateFormValidate() {

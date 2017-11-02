@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.mail.MessagingException;
+import java.io.FileNotFoundException;
 
 @Controller
 @RequestMapping(value = "/auth/user")
@@ -16,7 +17,7 @@ public class MailController {
     MailService mailService;
 
     @RequestMapping(value = "/sendMail")
-    public ModelAndView sendEmailMail() throws MessagingException {
+    public ModelAndView sendEmailMail() throws MessagingException, FileNotFoundException {
         mailService.sendMail("vimaandev@gmail.com", "anushac@apeiro.us", "Test Mail", "Hi you r successful in sending email");
         return new ModelAndView("redirect:/auth/home");
     }

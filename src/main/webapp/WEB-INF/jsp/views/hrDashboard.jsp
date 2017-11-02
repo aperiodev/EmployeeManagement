@@ -16,8 +16,25 @@
         color: #f00 !important;
     }
 
+    .day {
+        background: grey !important;;
+        color: white !important;
+        border: white solid 5px !important;
+    }
+
+    .disabled {
+        background: none !important;
+        color: grey !important;
+    }
+
+    .active {
+        background: #367fa9 !important;;
+        color: white !important;
+        border: white solid 5px !important;
+    }
+
 </style>
-<div class="box box-solid bg-teal color-palette">
+<div class="box box-solid box-primary">
     <div class="box-header">
         <i class="fa fa-calendar"></i>
         <h3 class="box-title">Calendar</h3>
@@ -52,7 +69,7 @@
         ];
 
         $('#calendar').datepicker({
-            startDate: curentdate,
+            //startDate: curentdate,
             daysOfWeekDisabled: [0, 6],
             beforeShowDay: function (date) {
                 for (var i = 0; i < holidays.length; i++) {
@@ -62,14 +79,14 @@
                     var ddd = date.toString();
                     if (dd == ddd) {
                         flag = flag + 1;
-                    }else{
+                    } else {
                         flag = flag + 0;
                     }
                 }
-                if( flag == 1){
+                if (flag == 1) {
                     flag = 0;
                     return true;
-                }else{
+                } else {
                     return false;
 
                 }

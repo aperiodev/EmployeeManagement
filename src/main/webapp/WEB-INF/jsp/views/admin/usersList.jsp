@@ -16,7 +16,7 @@
                        cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th>Email</th>
+                        <th> Email</th>
                         <th>Designation</th>
                         <th>Employee Id</th>
                         <th>isEmployee</th>
@@ -28,7 +28,7 @@
                     <tbody>
                     <c:forEach items="${users}" var="user">
                     <tr>
-                        <td>${user[0]}</td>
+                        <td><a href="/auth/user/profile?user=${user[0]}">${user[0]}</a></td>
                         <td>${user[1]}</td>
                         <td>${user[2]}</td>
                         <td>${user[3].toString().toUpperCase()}</td>

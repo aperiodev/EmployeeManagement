@@ -171,7 +171,9 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/showChangePassword", method = RequestMethod.GET)
     public ModelAndView showChangePassword(){
      ModelAndView mav = new ModelAndView("/views/changePassword");
+    Account account = accountService.getAccount(getLoggedInUser());
      mav.addObject("user", getLoggedInUser());
+     mav.addObject("account", account);
      return mav;
     }
 

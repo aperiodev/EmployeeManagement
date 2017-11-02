@@ -1,5 +1,7 @@
 package com.vimaan.controller;
 
+import com.vimaan.mail.MailMessages;
+import com.vimaan.mail.MailService;
 import com.vimaan.model.Account;
 import com.vimaan.model.User;
 import com.vimaan.model.enums.Authorities;
@@ -18,8 +20,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -46,6 +50,9 @@ public class RegistrationController extends BaseController {
     @Autowired
     SessionFactory sessionFactory;
 
+    @Autowired
+    MailService mailService;
+
     @Secured({"ROLE_ADMIN"})
     @RequestMapping(value = "/admin/register", method = RequestMethod.GET)
     public ModelAndView showRegister() {
@@ -57,7 +64,7 @@ public class RegistrationController extends BaseController {
 
     @Secured({"ROLE_ADMIN"})
     @RequestMapping(value = "/admin/registration", method = RequestMethod.POST)
-    public ModelAndView addUser(HttpServletRequest request) {
+    public ModelAndView addUser(HttpServletRequest request) throws FileNotFoundException, MessagingException {
 
         User user = new User();
         user.setUsername(request.getParameter("username"));
@@ -65,6 +72,8 @@ public class RegistrationController extends BaseController {
 
         String userRole = request.getParameter("userRole");
         userService.userRegistration(user, userRole);
+        String message = new MailMessages().loginMessage(user);
+        mailService.sendMail("admi@apeiro.us", user.getUsername(), "Account Creation", message);
         return new ModelAndView("redirect:/auth/admin/users");
     }
 
@@ -88,8 +97,14 @@ public class RegistrationController extends BaseController {
 
     @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_HR"})
     @RequestMapping(value = "/user/profile", method = RequestMethod.GET)
-    public ModelAndView showProfile(Principal principal) {
-        User user = getLoggedInUser();
+    public ModelAndView showProfile(Principal principal, HttpServletRequest request) {
+        User user;
+        if(request.getParameterMap().containsKey("user")){
+            user = userService.getUserByUsername(request.getParameter("user"));
+        }  else {
+            user = getLoggedInUser();
+        }
+
         ModelAndView mav = new ModelAndView("redirect:/auth/home");
         if (principal != null) {
             if (null != user) {
@@ -112,7 +127,6 @@ public class RegistrationController extends BaseController {
         ModelAndView mav = new ModelAndView("redirect:/auth/home");
         return mav;
     }
-
 
     @RequestMapping(value = "/admin/ajaxcheckUsername", method = RequestMethod.POST)
     public

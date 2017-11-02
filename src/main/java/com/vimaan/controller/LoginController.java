@@ -1,5 +1,6 @@
 package com.vimaan.controller;
 
+import com.vimaan.mail.MailMessages;
 import com.vimaan.mail.MailService;
 import com.vimaan.model.*;
 import com.vimaan.service.*;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -120,10 +122,13 @@ public class LoginController extends BaseController {
             int year = now.get(Calendar.YEAR);
             String yearInString = String.valueOf(year);
            /* The user is logged in :) */
-            if (authentication.getAuthorities().toString().contains("ROLE_ADMIN")) {
+
+            //TODO: need to do admin dashboard
+            /*if (authentication.getAuthorities().toString().contains("ROLE_ADMIN")) {
                 log.info("In admin dashboard");
                 return new ModelAndView("views/admin/adminDashboard");
-            } else if (authentication.getAuthorities().toString().contains("ROLE_USER")) {
+            } else*/
+            if (authentication.getAuthorities().toString().contains("ROLE_USER") && !authentication.getAuthorities().toString().contains("ROLE_ADMIN")) {
                 log.info("In user dashboard");
                 User user = getLoggedInUser();
                 ModelAndView model = null;
@@ -356,6 +361,10 @@ public class LoginController extends BaseController {
 
                 List<String> date_all = new ArrayList<String>();
                 List<String> date_array = new ArrayList<String>();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date currentDate = new Date();
+
+                date_all.add(sdf.format(currentDate));
 
                 for (int i = 0; i < holidays; i++) {
                     date_array.add(holidaylist.get(i).getDate() + "");
@@ -463,8 +472,8 @@ public class LoginController extends BaseController {
         ModelAndView mav = new ModelAndView("login/forgotPassword");
         try {
             if (user != null) {
-                String message = "Please login with the password : " + user.getPassword();
-                 mailService.sendMail("vimaan@gmail.com", userEmail, "Forgot Password", message);
+                String message = new MailMessages().forgotPasswordMsg(user);
+                mailService.sendMail("vimaan@gmail.com", userEmail, "Forgot Password", message);
             }
             mav.addObject("msg", "Thanks! You password was sent to given email successfully!");
 

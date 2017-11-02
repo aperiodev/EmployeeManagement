@@ -42,20 +42,19 @@ public class AdministratorController extends BaseController {
     @Autowired
     HolidaysService holidaysService;
 
-    @Secured({"ROLE_ADMIN"})
-    @RequestMapping(value = "/admin/companyleaves", method = RequestMethod.GET)
+    @Secured({"ROLE_ADMIN, ROLE_HR"})
+    @RequestMapping(value = "/companyleaves", method = RequestMethod.GET)
     public ModelAndView showcompanyleaves(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         Collection authorities = authentication.getAuthorities();
         log.info("LoggedIn user Authorities are : " + authorities);
         ModelAndView model = null;
 
-        if (authentication.getAuthorities().toString().contains("ROLE_ADMIN")) {
-
+        if (authentication.getAuthorities().toString().contains("ROLE_ADMIN") || authentication.getAuthorities().toString().contains("ROLE_HR")) {
             List companyleaves = companyleavesService.getCompanyLeavesList();
             model = new ModelAndView("views/admin/addcompanyleaves");
             model.addObject("companyleaves", companyleaves);
         } else {
-            model = new ModelAndView("views/admin/home");
+            model = new ModelAndView("redirect:/auth/home");
         }
         return model;
     }
