@@ -1,12 +1,10 @@
 package com.vimaan.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.vimaan.mail.MailService;
 import com.vimaan.model.*;
 import com.vimaan.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.Authentication;
@@ -19,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.text.ParseException;
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 import java.util.*;
 
 /**
@@ -466,7 +464,7 @@ public class LoginController extends BaseController {
         try {
             if (user != null) {
                 String message = "Please login with the password : " + user.getPassword();
-                // mailService.sendMail("vimaan@gmail.com", userEmail, "Forgot Password", message);
+                 mailService.sendMail("vimaan@gmail.com", userEmail, "Forgot Password", message);
             }
             mav.addObject("msg", "Thanks! You password was sent to given email successfully!");
 
