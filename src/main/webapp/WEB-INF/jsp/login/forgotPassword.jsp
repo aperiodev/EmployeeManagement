@@ -1,5 +1,5 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="/common/taglibs.jsp" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <script src="${theme}/bower_components/jquery/dist/jquery.min.js"></script>
 <style>
     p{
@@ -26,7 +26,7 @@
                 </button>
             </div>
             <div class="col-xs-4 pull-right">
-                <a href="/" name="login" type="button" class="btn btn-success btn-block btn-flat"> <i class="fa fa-reply"></i>  Home
+                <a href="${ctx}/login" name="login" type="button" class="btn btn-success btn-block btn-flat"> <i class="fa fa-reply"></i>  Home
                 </a>
             </div>
         </form:form>

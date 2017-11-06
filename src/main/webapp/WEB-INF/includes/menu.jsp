@@ -25,8 +25,9 @@
                 <ul class="treeview-menu">
                    <%-- <li><a href="#"><i class="fa fa-angle-left pull-left"></i> Employee Leaves</a></li>--%>
                    <%-- <li><a href="#"><i class="fa fa-angle-left pull-left"></i> Yearly Leaves</a></li>--%>
-                    <li><a href="/auth/user/holidaysList"><i class="fa pull-left"></i> Holidays</a></li>
-                    <li><a href="/auth/companyleaves"><i class="fa pull-left"></i>Leaves Setup</a>
+                    <li><a href="/EM/auth/user/holidaysList"><i class="fa pull-left"></i> Holidays</a></li>
+                    <li><a href="/EM/auth/companyleaves"><i class="fa pull-left"></i>Leaves Setup</a>
+                    <%--<li><a href="/read"><i class="fa pull-left"></i>Read PDF</a>--%>
                     </li>
                 </ul>
             </li>
@@ -37,8 +38,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/auth/admin/register"><i class="fa fa-user-plus"></i>Employee Registration</a></li>
-                    <li><a href="/auth/admin/users"><i class="fa fa-user-circle-o"></i>Manage Employees</a></li>
+                    <li><a href="/EM/auth/admin/register"><i class="fa fa-user-plus"></i>Employee Registration</a></li>
+                    <li><a href="/EM/auth/admin/users"><i class="fa fa-user-circle-o"></i>Manage Employees</a></li>
                 </ul>
             </li>
 
@@ -51,10 +52,10 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/auth/user/leaves"><i class="fa fa-hourglass-end"></i>Requested Leaves</a></li>
-                    <li><a href="/auth/user/leaves?status=APPROVED"><i class="fa fa-thumbs-up"></i>Approved Leaves</a></li>
-                    <li><a href="/auth/user/leaves?status=REJECTED"><i class="fa fa-thumbs-down"></i>Rejected Leaves</a></li>
-                    <li><a href="/auth/user/leaves?status=CANCEL"><i class="fa fa-ban"></i>Canceled Leaves</a></li>
+                    <li><a href="/EM/auth/user/leaves"><i class="fa fa-hourglass-end"></i>Requested Leaves</a></li>
+                    <li><a href="/EM/auth/user/leaves?status=APPROVED"><i class="fa fa-thumbs-up"></i>Approved Leaves</a></li>
+                    <li><a href="/EM/auth/user/leaves?status=REJECTED"><i class="fa fa-thumbs-down"></i>Rejected Leaves</a></li>
+                    <li><a href="/EM/auth/user/leaves?status=CANCEL"><i class="fa fa-ban"></i>Canceled Leaves</a></li>
 
                 </ul>
             </li>
@@ -69,9 +70,9 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/auth/user/requestLeave"><i class="fa fa-plus-circle"></i>Leave Application</a></li>
-                    <li><a href="/auth/user/leavesLists"><i class="fa fa-history"></i>Leaves History</a></li>
-                    <li><a href="/auth/user/holidaysList"><i class="fa fa-circle-o"></i>Holidays List</a></li>
+                    <li><a href="/EM/auth/user/requestLeave"><i class="fa fa-plus-circle"></i>Leave Application</a></li>
+                    <li><a href="/EM/auth/user/leavesLists"><i class="fa fa-history"></i>Leaves History</a></li>
+                    <li><a href="/EM/auth/user/holidaysList"><i class="fa fa-circle-o"></i>Holidays List</a></li>
                 </ul>
             </li>
            </sec:authorize>
@@ -184,8 +185,8 @@
                    <ul class="treeview-menu">
                            <%-- <li><a href="#"><i class="fa fa-angle-left pull-left"></i> Employee Leaves</a></li>--%>
                            <%-- <li><a href="#"><i class="fa fa-angle-left pull-left"></i> Yearly Leaves</a></li>--%>
-                       <li><a href="/auth/user/holidaysList"><i class="fa pull-left"></i> Holidays</a></li>
-                       <li><a href="/auth/companyleaves"><i class="fa pull-left"></i>Leaves Setup</a>
+                       <li><a href="/EM/auth/user/holidaysList"><i class="fa pull-left"></i> Holidays</a></li>
+                       <li><a href="/EM/auth/companyleaves"><i class="fa pull-left"></i>Leaves Setup</a>
                        </li>
                    </ul>
                </li>
@@ -197,7 +198,7 @@
             </span>
                    </a>
                    <ul class="treeview-menu">
-                       <li><a href="/auth/admin/register"><i class="fa fa-user-plus"></i>Employee Registration</a></li>
+                       <li><a href="/EM/auth/admin/register"><i class="fa fa-user-plus"></i>Employee Registration</a></li>
                    </ul>
                </li>
 
@@ -210,10 +211,10 @@
                        </span>
                    </a>
                    <ul class="treeview-menu">
-                       <li><a href="/auth/user/leaves"><i class="fa fa-hourglass-end"></i>Requested Leaves</a></li>
-                       <li><a href="/auth/user/leaves?status=APPROVED"><i class="fa fa-thumbs-up"></i>Approved Leaves</a></li>
-                       <li><a href="/auth/user/leaves?status=REJECTED"><i class="fa fa-thumbs-down"></i>Rejected Leaves</a></li>
-                       <li><a href="/auth/user/leaves?status=CANCEL"><i class="fa fa-ban"></i>Canceled Leaves</a></li>
+                       <li><a href="/EM/auth/user/leaves"><i class="fa fa-hourglass-end"></i>Requested Leaves</a></li>
+                       <li><a href="/EM/auth/user/leaves?status=APPROVED"><i class="fa fa-thumbs-up"></i>Approved Leaves</a></li>
+                       <li><a href="/EM/auth/user/leaves?status=REJECTED"><i class="fa fa-thumbs-down"></i>Rejected Leaves</a></li>
+                       <li><a href="/EM/auth/user/leaves?status=CANCEL"><i class="fa fa-ban"></i>Canceled Leaves</a></li>
 
                    </ul>
                </li>

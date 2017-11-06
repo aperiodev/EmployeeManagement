@@ -8,8 +8,10 @@
     <artifactId>EmployeeManagement</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>EmployeeManagement Maven Webapp</name>
+    <name>EM</name>
     <url>http://maven.apache.org</url>
+
+
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -186,8 +188,17 @@
             <version>1.4.3</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.7</version>
+        </dependency>
+
+
     </dependencies>
     <build>
+        <finalName>EM</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -208,5 +219,6 @@
                 </configuration>
             </plugin>
         </plugins>
+
     </build>
 </project>

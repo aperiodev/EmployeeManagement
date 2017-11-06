@@ -1,7 +1,7 @@
 <%@include file="/common/taglibs.jsp" %>
 <header class="main-header">
     <!-- Logo -->
-    <a href="/welcome" class="logo">
+    <a href="/EM/welcome" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>EM</b></span>
         <!-- logo for regular state and mobile devices -->
@@ -31,7 +31,7 @@
                             <p>
                                 <sec:authentication property="principal.username" /> </small></br>
                             </p>
-                            <p><a style="color: #FFFFFF;" href="/auth/user/profile" ><i class="fa  fa-pencil"></i> Profile</a></p>
+                            <p><a style="color: #FFFFFF;" href="/EM/auth/user/profile" ><i class="fa  fa-pencil"></i> Profile</a></p>
                         </li>
                         <li>
                             <div class="row">
@@ -61,7 +61,7 @@
                                 <a href="/auth/user/profile" class="btn btn-primary btn-flat">Profile</a>
                             </div>--%>
                             <div class="pull-left">
-                                <a href="/auth/user/showChangePassword" class="btn btn-primary btn-flat">Change Password</a>
+                                <a href="/EM/auth/user/showChangePassword" class="btn btn-primary btn-flat">Change Password</a>
                             </div>
                             <div class="pull-right">
                                 <%--<c:url value="/j_spring_security_logout"  var="logoutUrl" />
@@ -69,7 +69,7 @@
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                 </form>--%>
 
-                                <a href="/j_spring_security_logout"  class="btn btn-danger btn-flat"> Sign Out</a>
+                                <a href="/EM/j_spring_security_logout"  class="btn btn-danger btn-flat"> Sign Out</a>
                             </div>
                         </li>
                     </ul>

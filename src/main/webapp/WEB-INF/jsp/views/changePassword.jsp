@@ -50,14 +50,14 @@
     }
 
     .invalid {
-        background: url(/theme/img/cross.png) no-repeat 0 50%;
+        background: url(${ctx}/theme/img/cross.png) no-repeat 0 50%;
         padding-left: 22px;
         line-height: 24px;
         color: #ec3f41;
     }
 
     .pvalid {
-        background: url(/theme/img/tick.png) no-repeat 0 50%;
+        background: url(${ctx}/theme/img/tick.png) no-repeat 0 50%;
         padding-left: 22px;
         line-height: 24px;
         color: #3a7d34;
@@ -69,8 +69,8 @@
 
     .hideShowPassword-toggle {
         background-color: transparent;
-        background-image: url('/theme/img/wink.png'); /* fallback */
-        background-image: url('/theme/img/wink.svg'), none;
+        background-image: url('${ctx}/theme/img/wink.png'); /* fallback */
+        background-image: url('${ctx}/theme/img/wink.svg'), none;
         background-position: 0 center;
         background-repeat: no-repeat;
         border: 2px solid transparent;
