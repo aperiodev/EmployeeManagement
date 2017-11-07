@@ -8,5 +8,7 @@
         <mapping class="com.vimaan.model.Holidays"/>
         <mapping class="com.vimaan.model.Leaves"/>
         <mapping class="com.vimaan.model.Companyleaves"/>
+        <mapping class="com.vimaan.model.Payslips"/>
+        <mapping class="com.vimaan.model.EmployeePayslips"/>
     </session-factory>
 </hibernate-configuration>
