@@ -28,7 +28,7 @@
                     <tbody>
                     <c:forEach items="${users}" var="user">
                     <tr>
-                        <td><a href="/auth/user/profile?user=${user[0]}">${user[0]}</a></td>
+                        <td><a href="${ctx}/auth/user/profile?user=${user[0]}">${user[0]}</a></td>
                         <td>${user[1]}</td>
                         <td>${user[2]}</td>
                         <td>${user[3].toString().toUpperCase()}</td>

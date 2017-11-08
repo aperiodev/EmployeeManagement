@@ -182,23 +182,55 @@
         updateForm.validate({
             rules: {
                 firstname: {
-                    required: true,
+                    required: {
+                        depends: function () {
+                            $(this).val($.trim($(this).val()));
+                            return true;
+                        },},
                     minlength: 2
                 },
                 lastname: {
-                    required: true,
+                    required: {
+                        depends: function () {
+                            $(this).val($.trim($(this).val()));
+                            return true;
+                        },},
                     minlength: 1
                 },
                 gender: "required",
                 email: {
-                    required: true,
+                    required: {
+                        depends: function () {
+                            $(this).val($.trim($(this).val()));
+                            return true;
+                        }
+                    },
                     email: true
                 },
-                dob: "required",
-                doj: "required",
+                dob: {
+                    required: {
+                        depends: function () {
+                            $(this).val($.trim($(this).val()));
+                            return true;
+                        }
+                    }
+                },
+                doj: {
+                    required: {
+                        depends: function () {
+                            $(this).val($.trim($(this).val()));
+                            return true;
+                        }
+                    }
+                },
                 designation: "required",
                 phonenumber: {
-                    required: true,
+                    required: {
+                        depends: function () {
+                            $(this).val($.trim($(this).val()));
+                            return true;
+                        }
+                    },
                     number: true,
                     maxlength: 10,
                     minlength: 10
@@ -208,8 +240,22 @@
                     minlength: 10,
                     maxlength: 10
                 },
-                pannumber: "required",
-                aadharnumber: "required"
+                pannumber:{
+                    required: {
+                        depends: function () {
+                            $(this).val($.trim($(this).val()));
+                            return true;
+                        }
+                    },
+                },
+                aadharnumber: {
+                    required: {
+                        depends: function () {
+                            $(this).val($.trim($(this).val()));
+                            return true;
+                        }
+                    },
+                },
                 // employeecode: "required",
                 // currentemployee: "required"
             },

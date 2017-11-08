@@ -39,7 +39,7 @@
                         <td>${item.user.username}</td>
                         <td>${item.fromDate} <b>To</b> ${item.toDate}</td>
                         <td>${item.noOfDays}</td>
-                        <td class="reason"><a href="#" onclick="showModal('${item.reason}')">${item.reason}</a></td>
+                        <td class="reason"><a href="#" onclick="showModal(this)">${item.reason}</a></td>
                         <td>${item.status}</td>
                     </tr>
                 </c:forEach>
@@ -74,8 +74,8 @@
         });
     });
 
-    function showModal(reason) {
+    function showModal(identifier) {
         $('#myModal').modal();
-        $('#reasonTxt').empty().html(reason);
+        $('#reasonTxt').empty().html($(identifier).data('reason'));
     }
 </script>

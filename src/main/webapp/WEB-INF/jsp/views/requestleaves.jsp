@@ -78,7 +78,7 @@
                     toastr.error("No of day must be greater then \"0\"");
                 }
                 if ($("#reason").val().trim() == "") {
-                    toastr.error("Reason sould not be null");
+                    toastr.error("Reason Cannot be Empty");
                 }
             } else {
                 $.ajax({

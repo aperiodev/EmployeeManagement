@@ -1,8 +1,5 @@
 <%@ include file="/common/taglibs.jsp" %>
-<%@page contentType="text/html;charset=UTF-8" %>
-<%@page pageEncoding="UTF-8" %>
 <jsp:useBean id="date" class="java.util.Date"/>
-
 
 <script>
     var specialKeys = new Array();
@@ -42,7 +39,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="occasion">Occasion</label>
-                            <textarea class="form-control" rows="3" placeholder="Occasion" id="occasion"
+                            <textarea class="form-control" rows="3" placeholder="Occasion" id="occasion" maxlength="200"
                                       name="occasion"></textarea>
                         </div>
                     </div>
@@ -50,8 +47,8 @@
                 </div>
             </div>
             <div class="box-footer">
-                <button id="cancel" name="cancel" type="submit" class="btn btn-default">Cancel</button>
-                <button id="save" name="save" type="submit" class="btn btn-info pull-right">Save</button>
+                <button id="save" name="save" type="submit" class="btn btn-info">Save</button>
+                <button id="cancel" name="cancel" type="reset" class="btn btn-default">Cancel</button>
             </div>
                 <%-- </form:form>--%>
         </div>
@@ -68,8 +65,9 @@
         </div>
 
 
+    <div class="table-responsive">
         <div class="box-body">
-            <table id="example" class="display responsive table table-striped table-bordered nowrap cell-border"
+            <table id="example" class="display table-responsive table table-striped table-bordered nowrap cell-border"
                    cellspacing="0" width="100%">
                 <thead>
                 <tr>
@@ -84,7 +82,7 @@
                 <c:forEach items="${holidays}" var="holiday">
                 <tr>
                     <td>${holiday[1]}</td>
-                    <td>${holiday[2]}</td>
+                    <td >${holiday[2]}</td>
                     <c:if test="${role ne '[ROLE_USER]'}">
                         <td data-id="${holiday[0]}"
                             class="deleteholiday btn btn-sm btn-flat btn-custom">
@@ -102,6 +100,7 @@
                 </c:forEach>
             </table>
         </div>
+    </div>
     </div>
 
 </section>
@@ -207,9 +206,9 @@
         }
 
         $('#example').DataTable({
-            responsive: true,
-            order: [0],
-            columnDefs: [{orderable: false, targets: [2]}]
+          //  responsive: true,
+           order: [0],
+           columnDefs: [{orderable: false, targets: [2]}]
         });
 
         $('.deleteholiday').on('click', function () {

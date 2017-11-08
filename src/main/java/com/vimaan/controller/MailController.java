@@ -17,7 +17,7 @@ public class MailController {
     MailService mailService;
 
     @RequestMapping(value = "/sendMail")
-    public ModelAndView sendEmailMail() throws MessagingException, FileNotFoundException {
+    public ModelAndView sendEmailMail() throws Exception {
         mailService.sendMail("vimaandev@gmail.com", "anushac@apeiro.us", "Test Mail", "Hi you r successful in sending email");
         return new ModelAndView("redirect:/auth/home");
     }

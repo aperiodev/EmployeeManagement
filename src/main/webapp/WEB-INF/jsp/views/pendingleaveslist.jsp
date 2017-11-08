@@ -54,7 +54,7 @@
                     <td>${item.fromDate}</td>
                     <td>${item.toDate}</td>
                     <td>${item.noOfDays}</td>
-                    <td class="reason"><a href="#" onclick="showModal('${item.reason}')">${item.reason}</a></td>
+                    <td class="reason"><a href="#" onclick="showModal(this)">${item.reason}</a></td>
                     <td>${item.toUser.username}</td>
                     <td>
                         <button type="button" class="cbutton btn btn-block btn-success btn-sm" data-type="APPROVED"
@@ -100,9 +100,9 @@
         });
     });
 
-    function showModal(reason) {
+    function showModal(identifier) {
         $('#myModal').modal();
-        $('#reasonTxt').empty().html(reason);
+        $('#reasonTxt').empty().html($(identifier).data('reason'));
     }
 
     function approval_decision(leave_id, status) {

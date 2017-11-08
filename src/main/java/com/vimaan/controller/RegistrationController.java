@@ -64,8 +64,8 @@ public class RegistrationController extends BaseController {
 
     @Secured({"ROLE_ADMIN"})
     @RequestMapping(value = "/admin/registration", method = RequestMethod.POST)
-    public ModelAndView addUser(HttpServletRequest request) throws FileNotFoundException, MessagingException {
-
+    public ModelAndView addUser(HttpServletRequest request) throws Exception {
+        ModelAndView mav = new ModelAndView("redirect:/auth/admin/users");
         User user = new User();
         user.setUsername(request.getParameter("username"));
         user.setPassword(request.getParameter("password"));
@@ -73,8 +73,12 @@ public class RegistrationController extends BaseController {
         String userRole = request.getParameter("userRole");
         userService.userRegistration(user, userRole);
         String message = new MailMessages().loginMessage(user);
-        mailService.sendMail("admi@apeiro.us", user.getUsername(), "Account Creation", message);
-        return new ModelAndView("redirect:/auth/admin/users");
+        try {
+            mailService.sendMail("admi@apeiro.us", user.getUsername(), "Account Creation", message);
+        } catch (Exception e) {
+            mav.addObject("msg", e.getMessage());
+        }
+        return mav;
     }
 
     @Secured({"ROLE_ADMIN"})
@@ -99,9 +103,9 @@ public class RegistrationController extends BaseController {
     @RequestMapping(value = "/user/profile", method = RequestMethod.GET)
     public ModelAndView showProfile(Principal principal, HttpServletRequest request) {
         User user;
-        if(request.getParameterMap().containsKey("user")){
+        if (request.getParameterMap().containsKey("user")) {
             user = userService.getUserByUsername(request.getParameter("user"));
-        }  else {
+        } else {
             user = getLoggedInUser();
         }
 

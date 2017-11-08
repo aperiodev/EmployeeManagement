@@ -24,7 +24,7 @@ public class MailService {
         this.mailSender = mailSender;
     }
 
-    public void sendMail(String from, String to, String subject, String msg) throws MessagingException, FileNotFoundException {
+    public void sendMail(String from, String to, String subject, String msg) throws Exception {
     /* SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(to);
@@ -92,9 +92,10 @@ public class MailService {
 
             System.out.println("Sent message successfully....");
 
+        } catch (SendFailedException mailException)  {
+            throw new SendFailedException(mailException.getMessage());
         } catch (MessagingException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
+            throw new MessagingException(e.getMessage());
         }
     }
 }

@@ -46,7 +46,7 @@
                     <td>${item.fromDate}</td>
                     <td>${item.toDate}</td>
                     <td>${item.noOfDays}</td>
-                    <td class="reason"><a href="#" onclick="showModal('${item.reason}')">${item.reason}</a></td>
+                    <td class="reason"><a href="#" data-reason="${item.reason}" onclick="showModal(this)">${item.reason}</a></td>
                     <td>${fn:replace(item.status, '_', ' ')}</td>
                     <td>${item.toUser.username}</td>
                     <td align="center">
@@ -112,9 +112,9 @@
             }]
         });
     });
-    function showModal(reason) {
+    function showModal(identifier) {
         $('#myModal').modal();
-        $('#reasonTxt').empty().html(reason);
+        $('#reasonTxt').empty().html($(identifier).data('reason'));
     }
     function comfirm_decision(leave_id) {
         // this will pop up confirmation box and if yes is clicked it call servlet else return to page

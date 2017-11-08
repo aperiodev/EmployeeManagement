@@ -2,6 +2,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
+
+    .hideShowPassword-toggle:hover, .hideShowPassword-toggle:focus {
+        border-color: transparent;
+        outline: transparent;
+    }
+
     <sec:authorize access="!hasRole('ROLE_ADMIN')">
     <c:if test="${account.firstname == null || account.lastname == null || account.designation == null}">
     .sidebar-toggle, .main-sidebar {
@@ -100,10 +106,8 @@
         background-position: -44px center;
     }
 
-    .hideShowPassword-toggle:hover,
-    .hideShowPassword-toggle:focus {
-        border-color: #0088cc;
-        outline: transparent;
+    .error {
+        position: absolute !important;
     }
 </style>
 <div class="box box-primary">
@@ -123,11 +127,13 @@
                     <div class="form-group">
                         <label for="oldPassword">Current Password :</label>
                         <input type="password" id="oldPassword" name="oldPassword" class="form-control"/>
+                        <span></span>
                     </div>
 
                     <div class="form-group">
                         <label for="newPassword">New Password :</label>
                         <input type="password" id="newPassword" name="newPassword" class="form-control"/>
+                        <span></span>
                     </div>
                     <div id="pswd_info">
                         <h5>Password must meet the following requirements:</h5>
@@ -164,9 +170,9 @@
         validateForm();
 
         <sec:authorize access="!hasRole('ROLE_ADMIN')">
-            <c:if test="${account.firstname == null || account.lastname == null || account.designation == null}">
-                $("body").removeClass("skin-blue sidebar-mini").addClass("skin-blue sidebar-mini sidebar-collapse");
-            </c:if>
+        <c:if test="${account.firstname == null || account.lastname == null || account.designation == null}">
+        $("body").removeClass("skin-blue sidebar-mini").addClass("skin-blue sidebar-mini sidebar-collapse");
+        </c:if>
         </sec:authorize>
     });
 

@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.mail.MessagingException;
+import javax.mail.SendFailedException;
 import javax.servlet.http.HttpServletRequest;
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -474,11 +477,12 @@ public class LoginController extends BaseController {
             if (user != null) {
                 String message = new MailMessages().forgotPasswordMsg(user);
                 mailService.sendMail("vimaan@gmail.com", userEmail, "Forgot Password", message);
+                 mav.addObject("msg", "Thanks! You password was sent to given email successfully!");
+            } else {
+                mav.addObject("msg", "User not registered with provided email or does not exist!");
             }
-            mav.addObject("msg", "Thanks! You password was sent to given email successfully!");
-
-        } catch (Exception e) {
-            mav.addObject("msg", "User not registered with provided email or does not exist!");
+        }catch (Exception e){
+            mav.addObject("msg", e.getMessage());
         }
         return mav;
     }
