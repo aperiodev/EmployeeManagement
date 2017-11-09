@@ -1,6 +1,7 @@
 <%@ include file="/common/taglibs.jsp" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div class="col-lg-offset-1 col-lg-10">
 <div class="box box-primary">
     <div class="box-header with-border">
         <h3 class="box-title">Employee Registration</h3>
@@ -14,21 +15,21 @@
             <div class="form-group">
                 <label for="username" class="col-sm-2 control-label">Email</label>
 
-                <div class="col-sm-10">
+                <div class="col-lg-6">
                     <form:input path="username" type="text" class="form-control" id="username" placeholder="Email"/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="password" class="col-sm-2 control-label">Password</label>
 
-                <div class="col-sm-10">
+                <div class="col-lg-6">
                     <form:input path="password" type="password" class="form-control" id="password"
                                 placeholder="Password"/>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Role</label>
-                <div class="col-sm-10">
+                <div class="col-lg-6">
                     <select name="userRole" id="userRole" class="form-control">
                         <option value="">Select..</option>
                         <c:forEach items="${authorities}" var="authorities">
@@ -42,10 +43,12 @@
             </div>
         </div>
         <div class="box-footer">
-            <button type="reset" class="btn btn-default">Cancel</button>
             <form:button type="submit" id="register" name="register" class="btn btn-primary ">Save</form:button>
+           &nbsp;
+            <button type="reset" class="btn btn-default">Cancel</button>
         </div>
     </form:form>
+</div>
 </div>
 <script>
     $(function () {

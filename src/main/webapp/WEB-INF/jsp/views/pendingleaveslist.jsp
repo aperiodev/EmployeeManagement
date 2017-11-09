@@ -33,41 +33,44 @@
         </div>
     </div>
     <!-- /.box-header -->
-    <div class="box-body">
-        <table id="userLeaveList" class="table table-striped table-bordered table-hover nowrap" cellspacing="0"
-               width="100%">
-            <thead>
-            <tr>
-                <th>Requested By</th>
-                <th>From Date</th>
-                <th>To Date</th>
-                <th>No of Days</th>
-                <th>Reason</th>
-                <th>To</th>
-                <th width="60px"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="item" items="${userleaves}">
+    <div class="table-responsive">
+        <div class="box-body">
+            <table id="userLeaveList" class="table table-striped table-bordered table-hover nowrap" cellspacing="0"
+                   width="100%">
+                <thead>
                 <tr>
-                    <td>${item.user.username}</td>
-                    <td>${item.fromDate}</td>
-                    <td>${item.toDate}</td>
-                    <td>${item.noOfDays}</td>
-                    <td class="reason"><a href="#" onclick="showModal(this)">${item.reason}</a></td>
-                    <td>${item.toUser.username}</td>
-                    <td>
-                        <button type="button" class="cbutton btn btn-block btn-success btn-sm" data-type="APPROVED"
-                                onclick="approval_decision(${item.id}, 'APPROVED');">Approve
-                        </button>
-                        <button type="button" class="cbutton btn btn-block btn-danger btn-sm" data-type="REJECTED"
-                                onclick="approval_decision(${item.id}, 'REJECTED');">Reject
-                        </button>
-                    </td>
+                    <th>Requested By</th>
+                    <th>From Date</th>
+                    <th>To Date</th>
+                    <th>No of Days</th>
+                    <th>Reason</th>
+                    <th>To</th>
+                    <th width="60px"></th>
                 </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <c:forEach var="item" items="${userleaves}">
+                    <tr>
+                        <td>${item.user.username}</td>
+                        <td>${item.fromDate}</td>
+                        <td>${item.toDate}</td>
+                        <td>${item.noOfDays}</td>
+                        <td class="reason"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}"
+                                              onclick="showModal(this)">${item.reason}</a></td>
+                        <td>${item.toUser.username}</td>
+                        <td>
+                            <button type="button" class="cbutton btn btn-block btn-success btn-sm" data-type="APPROVED"
+                                    onclick="approval_decision(${item.id}, 'APPROVED');">Approve
+                            </button>
+                            <button type="button" class="cbutton btn btn-block btn-danger btn-sm" data-type="REJECTED"
+                                    onclick="approval_decision(${item.id}, 'REJECTED');">Reject
+                            </button>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <!-- Modal -->
@@ -75,13 +78,14 @@
     <div class="modal-dialog">
 
         <!-- Modal content-->
-        <div class="modal-content">
+        <div class="modal-content" style="width: 800px;">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Leave Reason </h4>
             </div>
             <div class="modal-body">
-                <p id="reasonTxt">Some text in the modal.</p>
+                <p  id="reasonTxt"></p>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -93,10 +97,8 @@
 
 <script>
     $(function () {
-
         $('#userLeaveList').DataTable({
-            responsive: true,
-            columnDefs: [ { orderable: false, targets: [6] } ]
+            columnDefs: [{orderable: false, targets: [6]}]
         });
     });
 

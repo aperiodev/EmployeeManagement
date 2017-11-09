@@ -46,16 +46,18 @@
         <div id="calendar" style="width: 100%"></div>
     </div>
     <!-- /.box-body -->
-    <div class="box-footer text-black">
-        <div class="row">
-            <table id="userLeaveList" class="table table-striped table-bordered nowrap" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                    <th>User</th>
-                    <th>Reason</th>
-                </tr>
-                </thead>
-            </table>
+    <div class="table-responsive">
+        <div class="box-footer text-black">
+            <div class="row">
+                <table id="userLeaveList" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Reason</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -123,9 +125,9 @@
                 data: ({
                     selecteddate: selecteddate
                 }),
-                success: function (response) {
+                success: function (demo) {
                     table.clear().draw();
-                    table.rows.add(JSON.parse(response)).draw();
+                    table.rows.add(JSON.parse(demo)).draw();
                 },
                 error: function (request, textStatus, errorThrown) {
                     toastr.error("Please tyr again...");

@@ -55,7 +55,7 @@
 
 <script>
     $(function () {
-
+        $("#reason").wysihtml5();
         $("#clear").click(function () {
             $("#touser").val("select");
             $("#reason").val("");

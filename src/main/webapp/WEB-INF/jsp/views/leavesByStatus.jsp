@@ -22,9 +22,10 @@
         </div>
     </div>
     <!-- /.box-header -->
-    <div class="box-body">
-        <table id="datatable" class="table table-striped table-bordered nowrap" cellspacing="0" width="100%">
-            <thead>
+    <div class="table-responsive">
+        <div class="box-body">
+            <table id="datatable" class="table table-striped table-bordered nowrap" cellspacing="0" width="100%">
+                <thead>
                 <tr>
                     <th>Requested By</th>
                     <th>Between</th>
@@ -32,19 +33,21 @@
                     <th>Reason</th>
                     <th>Status</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <c:forEach var="item" items="${userleaves}">
                     <tr>
                         <td>${item.user.username}</td>
                         <td>${item.fromDate} <b>To</b> ${item.toDate}</td>
                         <td>${item.noOfDays}</td>
-                        <td class="reason"><a href="#" onclick="showModal(this)">${item.reason}</a></td>
+                        <td class="reason"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}"
+                                              onclick="showModal(this)">${item.reason}</a></td>
                         <td>${item.status}</td>
                     </tr>
                 </c:forEach>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <!-- Modal -->
@@ -52,7 +55,7 @@
     <div class="modal-dialog">
 
         <!-- Modal content-->
-        <div class="modal-content">
+        <div class="modal-content" style="width: 800px;">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Leave Reason </h4>
@@ -70,7 +73,6 @@
 <script>
     $(function () {
         $('#datatable').DataTable({
-            responsive: true
         });
     });
 

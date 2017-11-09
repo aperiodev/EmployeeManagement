@@ -12,9 +12,8 @@
 
     <title>EM - APEIRO</title>
 
-    <link type="text/css" href="${theme}/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+    <link type="text/css" href="${theme}/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
 
-    <link rel="stylesheet" href="${theme}/css/fonts.css">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="${theme}/bower_components/font-awesome/css/font-awesome.min.css">
@@ -24,6 +23,9 @@
     <link rel="stylesheet" href="${theme}/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="${theme}/bower_components/datatables.net-bs/css/responsive.dataTables.min.css">
 
+    <!-- Theme style -->
+    <link rel="stylesheet" href="${theme}/css/AdminLTE.css">
+    <link rel="stylesheet" href="${theme}/css/fonts.css">
     <!-- Date Picker -->
     <link rel="stylesheet" href="${theme}/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <!-- Daterange picker -->
@@ -35,8 +37,6 @@
     <!-- Morris chart -->
     <link rel="stylesheet" href="${theme}/bower_components/morris.js/morris.css">
 
-    <!-- Theme style -->
-    <link rel="stylesheet" href="${theme}/css/AdminLTE.css">
 
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
@@ -45,7 +45,7 @@
     <!-- Custom css style-->
     <link type="text/css" href="${theme}/css/custom.css" rel="stylesheet"/>
 
-    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="${theme}/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="${theme}/js/year-select.js"></script>
 
     <decorator:head/>
@@ -87,9 +87,10 @@
 
 <script src="${theme}/js/jquery.validate.js"></script>
 
-<script src="${theme}/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="${theme}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <script src="${theme}/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="${theme}/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 <script src="${theme}/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
 

@@ -372,6 +372,8 @@ public class LoginController extends BaseController {
                 for (int i = 0; i < holidays; i++) {
                     date_array.add(holidaylist.get(i).getDate() + "");
                 }
+                System.out.println("---date_array : "+ date_array.size());
+                System.out.println("---date_all : "+ date_all.size());
 
                 for (int i = 0; i < uerLeaves; i++) {
                     if (user_leaves.get(i).getStatus().toString().trim().equals("APPROVED")) {
@@ -414,6 +416,7 @@ public class LoginController extends BaseController {
                     for (int j = 0; j < date_array.size(); j++) {
                         if (date_all.get(i).equals(date_array.get(j))) {
                             date_all.remove(date_array.get(j));
+                            break;
                         }
                     }
                 }
@@ -446,9 +449,9 @@ public class LoginController extends BaseController {
             for (int i = 0; i < leavesL.size(); i++) {
                 Leaves leave = leavesL.get(i);
                 if (i == 0) {
-                    res = res + "{ \"username\":\"" + leave.getUser().getUsername() + "\", \"reason\":\"" + leave.getReason() + "\"}";
+                    res = res + "{ \"username\":\"" + leave.getUser().getUsername() + "\", \"reason\":\"" + leave.getReason().replaceAll("[^a-zA-Z0-9]", "") + "\"}";
                 } else {
-                    res = res + ",{ \"username\":\"" + leave.getUser().getUsername() + "\", \"reason\":\"" + leave.getReason() + "\"}";
+                    res = res + ",{ \"username\":\"" + leave.getUser().getUsername() + "\", \"reason\":\"" + leave.getReason().replaceAll("[^a-zA-Z0-9]", "") + "\"}";
                 }
             }
         }
