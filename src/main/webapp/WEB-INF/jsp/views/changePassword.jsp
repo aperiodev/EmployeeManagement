@@ -96,19 +96,31 @@
 
     .hideShowPassword-toggle {
         position: absolute;
-        right: 0px;
-        top: 27%;
-        margin-top: -17px;
-        HEIGHT: 36pX;
+        right: 0px !important;
+        top: 65% !important;
+        margin-top: -23px !important;
+        HEIGHT: 36pX !important;
     }
 
     .hideShowPassword-toggle-hide {
         background-position: -44px center;
     }
 
-    .error {
-        position: absolute !important;
+    form label.error {
+        font-size: 12px !important;
+        /*color: #ED7476 !important;
+        margin-left: 5px !important;*/
+        position: absolute;
     }
+
+    /*form input.error, form input.error:hover, form input.error:focus, form select.error, form textarea.error {
+        border: 1px solid #ED7476 !important;
+        background: #FFEDED !important;
+    }*/
+    .form-group {
+        margin-bottom: 20px !important;
+    }
+
 </style>
 <div class="box box-primary">
     <div class="box-header with-border">
