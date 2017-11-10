@@ -22,6 +22,7 @@ import javax.mail.MessagingException;
 import javax.mail.SendFailedException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileNotFoundException;
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -372,8 +373,8 @@ public class LoginController extends BaseController {
                 for (int i = 0; i < holidays; i++) {
                     date_array.add(holidaylist.get(i).getDate() + "");
                 }
-                System.out.println("---date_array : "+ date_array.size());
-                System.out.println("---date_all : "+ date_all.size());
+                System.out.println("---date_array : " + date_array.size());
+                System.out.println("---date_all : " + date_all.size());
 
                 for (int i = 0; i < uerLeaves; i++) {
                     if (user_leaves.get(i).getStatus().toString().trim().equals("APPROVED")) {
@@ -449,9 +450,9 @@ public class LoginController extends BaseController {
             for (int i = 0; i < leavesL.size(); i++) {
                 Leaves leave = leavesL.get(i);
                 if (i == 0) {
-                    res = res + "{ \"username\":\"" + leave.getUser().getUsername() + "\", \"reason\":\"" + leave.getReason().replaceAll("[^a-zA-Z0-9]", "") + "\"}";
+                    res = res + "{ \"username\":\"" + leave.getUser().getUsername() + "\", \"reason\":\"" + String.format("%040x", new BigInteger(1, leave.getReason().getBytes(/*YOUR_CHARSET?*/))) + "\"}";
                 } else {
-                    res = res + ",{ \"username\":\"" + leave.getUser().getUsername() + "\", \"reason\":\"" + leave.getReason().replaceAll("[^a-zA-Z0-9]", "") + "\"}";
+                    res = res + ",{ \"username\":\"" + leave.getUser().getUsername() + "\", \"reason\":\"" + String.format("%040x", new BigInteger(1, leave.getReason().getBytes(/*YOUR_CHARSET?*/))) + "\"}";
                 }
             }
         }
@@ -480,11 +481,11 @@ public class LoginController extends BaseController {
             if (user != null) {
                 String message = new MailMessages().forgotPasswordMsg(user);
                 mailService.sendMail("vimaan@gmail.com", userEmail, "Forgot Password", message);
-                 mav.addObject("msg", "Thanks! You password was sent to given email successfully!");
+                mav.addObject("msg", "Thanks! You password was sent to given email successfully!");
             } else {
                 mav.addObject("msg", "User not registered with provided email or does not exist!");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             mav.addObject("msg", e.getMessage());
         }
         return mav;

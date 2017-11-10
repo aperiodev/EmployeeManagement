@@ -46,18 +46,16 @@
         <div id="calendar" style="width: 100%"></div>
     </div>
     <!-- /.box-body -->
-    <div class="table-responsive">
-        <div class="box-footer text-black">
-            <div class="row">
-                <table id="userLeaveList" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                    <tr>
-                        <th>User</th>
-                        <th>Reason</th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
+    <div class="box-footer text-black">
+        <div class="row">
+            <table id="userLeaveList" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Reason</th>
+                </tr>
+                </thead>
+            </table>
         </div>
     </div>
 </div>
@@ -113,10 +111,22 @@
                 },
                 {
                     "data": "reason",
-                    'orderable': false
+                    'orderable': false,
+                    "render": function (data, type, row, meta) {
+                        return hex2a(data);
+                    }
                 }
             ]
         });
+
+        function hex2a(hex) {
+            var str = '';
+            for (var i = 0; i < hex.length; i += 2) {
+                var v = parseInt(hex.substr(i, 2), 16);
+                if (v) str += String.fromCharCode(v);
+            }
+            return str;
+        }
 
         function go(selecteddate) {
             $.ajax({
