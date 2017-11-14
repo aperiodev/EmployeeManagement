@@ -373,8 +373,6 @@ public class LoginController extends BaseController {
                 for (int i = 0; i < holidays; i++) {
                     date_array.add(holidaylist.get(i).getDate() + "");
                 }
-                System.out.println("---date_array : " + date_array.size());
-                System.out.println("---date_all : " + date_all.size());
 
                 for (int i = 0; i < uerLeaves; i++) {
                     if (user_leaves.get(i).getStatus().toString().trim().equals("APPROVED")) {

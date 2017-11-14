@@ -5,7 +5,7 @@
 <style>
     .reason {
         display: inline-block;
-        width: 180px;
+        width: 344px !important;
         white-space: nowrap;
         overflow: hidden !important;
         text-overflow: ellipsis;
@@ -34,7 +34,7 @@
     <!-- /.box-header -->
    <%-- <div class="table-responsive">--%>
         <div class="box-body">
-            <table id="datatable" class="display responsive table table-striped table-bordered nowrap cell-border" cellspacing="0" width="100%">
+            <table id="datatable" class="display responsive table table-striped table-bordered  cell-border" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th style="width: 22% !important;">Requested By</th>
@@ -47,12 +47,12 @@
                 <tbody>
                 <c:forEach var="item" items="${userleaves}">
                     <tr>
-                        <td style="width: 22% !important;" class="text-wrap">${item.user.username}</td>
-                        <td style="width: 22% !important;" class="text-wrap">${item.fromDate} <b>To</b> ${item.toDate}</td>
-                        <td style="width: 22% !important;">${item.noOfDays}</td>
-                        <td style="width: 22% !important;" class="reason text-wrap"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}"
+                        <td>${item.user.username}</td>
+                        <td>${item.fromDate} <b>To</b> ${item.toDate}</td>
+                        <td>${item.noOfDays}</td>
+                        <td class="reason"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}"
                                               onclick="showModal(this)">${item.reason}</a></td>
-                        <td style="width: 12% !important;" class="text-wrap">${item.status}</td>
+                        <td>${item.status}</td>
                     </tr>
                 </c:forEach>
                 </tbody>

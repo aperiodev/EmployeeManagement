@@ -67,6 +67,28 @@
     </div>
 
 </div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="width: 800px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Leave Reason </h4>
+            </div>
+            <div class="modal-body table-responsive">
+                <p  id="reasonTxt"></p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 <Script>
     $(function () {
         var curentdate = new Date();
@@ -121,7 +143,10 @@
                     "data": "reason",
                     'orderable': false,
                     "render": function (data, type, row, meta) {
-                        return hex2a(data);
+                        var sc = '<script> function showModal(identifier) {console.log($(identifier).data("reason")); $("#myModal").modal();$("#reasonTxt").empty().html($(identifier).data("reason"));} ';
+
+                        var str = '<a data-reason= '+ hex2a(data) +'  onclick="showModal(this);">'+hex2a(data)+'</a> '+ sc;
+                        return  str;
                     }
                 }
             ]
@@ -133,7 +158,8 @@
                 var v = parseInt(hex.substr(i, 2), 16);
                 if (v) str += String.fromCharCode(v);
             }
-            return str;
+            //return str.replace(/"/g, '');
+            return str.replace(/[_\s]/g, '');
         }
 
         function go(selecteddate) {
