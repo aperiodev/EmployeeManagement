@@ -46,13 +46,6 @@
         <div id="calendar" style="width: 100%"></div>
     </div>
     <!-- /.box-body -->
-   <%-- <div class="table-responsive">
-        <div class="box-footer text-black">
-            <div class="row">
-
-            </div>
-        </div>
-    </div>--%>
 </div>
 <div class="box box-info">
     <div class="box-header with-border">
