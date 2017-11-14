@@ -138,6 +138,11 @@
     .table-striped > tbody > tr:nth-of-type(odd) {
         background-color: #e6e6e6;
     }
+
+    .table thead tr{
+        background-color: #3c8dbd;
+        color: #FFFFFF;
+    }
 </style>
 
 </body>
