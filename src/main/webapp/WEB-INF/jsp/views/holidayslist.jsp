@@ -1,16 +1,15 @@
 <%@ include file="/common/taglibs.jsp" %>
 <jsp:useBean id="date" class="java.util.Date"/>
 <style>
-    /*  th, td { white-space: nowrap; }
-      div.dataTables_wrapper {
-          width: 800px;
-          margin: 0 auto;
-      }*/
-
     .text-wrap {
         word-wrap: break-word;
         text-overflow: ellipsis;
         max-width: 0px;
+    }
+
+    .table-responsive
+    {
+        overflow-x: hidden !important;
     }
 
 </style>
@@ -44,19 +43,19 @@
                                    name="fdate"></input>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                         <div class="form-group">
                             <label for="occasion">Occasion</label>
-                            <input type="text" class="form-control" placeholder="Occasion" id="occasion" maxlength="20"
-                                   name="occasion"/>
+                            <textarea class="form-control" placeholder="Occasion" id="occasion" rows="2"
+                                   name="occasion" maxlength="250"></textarea>
                         </div>
                     </div>
 
                 </div>
             </div>
             <div class="box-footer">
-                <button id="save" name="save" type="submit" class="btn btn-info">Save</button>
                 <button id="cancel" name="cancel" type="reset" class="btn btn-default">Cancel</button>
+                <button id="save" name="save" type="submit" class="btn btn-info pull-right">Save</button>
             </div>
         </div>
 </c:if>
@@ -78,21 +77,21 @@
                        cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Occasion</th>
+                        <th style="width: 20% !important;">Date</th>
+                        <th style="width: 65% !important;">Occasion</th>
                         <c:if test="${role ne '[ROLE_USER]'}">
-                            <th>Actions</th>
+                            <th style="width: 15% !important;">Actions</th>
                         </c:if>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${holidays}" var="holiday">
                     <tr>
-                        <td>${holiday[1]}</td>
-                        <td class="text-wrap">${holiday[2]}</td>
+                        <td style="width: 20% !important;">${holiday[1]}</td>
+                        <td class="text-wrap" style="width: 65% !important;">${holiday[2]}</td>
                         <c:if test="${role ne '[ROLE_USER]'}">
                             <td data-id="${holiday[0]}"
-                                class="deleteholiday btn btn-sm btn-flat btn-custom">
+                                class="deleteholiday btn btn-sm btn-flat btn-custom" style="width: 15% !important;">
                                 <b class="btn btn-danger"
                                    style="padding:3px 12px !important;text-align: left !important; display: inline !important;">Delete</b>
                             </td>
@@ -206,7 +205,7 @@
         }
 
         $('#example').DataTable({
-            //  responsive: true,
+            responsive: true,
             order: [0],
             columnDefs: [{
                 orderable: false,
@@ -217,7 +216,6 @@
                 null,
                 {"width": "20%"},
             ]
-
         });
 
         $('.deleteholiday').on('click', function () {

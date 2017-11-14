@@ -17,17 +17,14 @@
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="${ctx}/theme/img/defaultImg.png" class="user-image" alt="User Image">
+                    <a <%--href="#"--%> <%--class="dropdown-toggle" data-toggle="dropdown"--%>>
+                       <%-- <img src="${ctx}/theme/img/defaultImg.png" class="user-image" alt="User Image">--%>
                         <span class="hidden-xs"><sec:authentication property="principal.username" /></span>
                     </a>
-                    <ul class="dropdown-menu">
+                 <%--   <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <%--<img src="${ctx}/theme/img/defaultImg.png" class="img-circle" alt="User Image">--%>
-
                             <p>
                                 <sec:authentication property="principal.username" /> </small></br>
                             </p>
@@ -40,51 +37,17 @@
                                 </div>
                             </div>
                         </li>
-                        <!-- Menu Body -->
-                        <%--<li class="user-body">
-                            <div class="row">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
-                                </div>
-                            </div>
-                            <!-- /.row -->
-                        </li>--%>
-                        <!-- Menu Footer-->
                         <li class="user-footer">
-                           <%-- <div class="pull-left">
-                                <a href="/auth/user/profile" class="btn btn-primary btn-flat">Profile</a>
-                            </div>--%>
                             <div class="pull-left">
                                 <a href="/EM/auth/user/showChangePassword" class="btn btn-primary btn-flat">Change Password</a>
                             </div>
                             <div class="pull-right">
-                                <%--<c:url value="/j_spring_security_logout"  var="logoutUrl" />
-                                <form action="${logoutUrl}" method="post" id="logoutForm">
-                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                </form>--%>
-
                                 <a href="/EM/j_spring_security_logout"  class="btn btn-danger btn-flat"> Sign Out</a>
                             </div>
                         </li>
-                    </ul>
+                    </ul>--%>
                 </li>
-                <!-- Control Sidebar Toggle Button -->
-                <%--<li>
-                    <a href="#" data-toggle="control-sidebar"><sec:authentication property="principal.username" /></a>
-                </li>--%>
             </ul>
         </div>
     </nav>
 </header>
-<%--
-<script>
-    function formSubmit() {
-        document.getElementById("logoutForm").submit();
-    }
-</script>--%>

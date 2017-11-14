@@ -2,6 +2,19 @@
 <%@page contentType="text/html;charset=UTF-8" %>
 <%@page pageEncoding="UTF-8" %>
 
+<style>
+    .text-wrap {
+        word-wrap: break-word;
+        text-overflow: ellipsis;
+        max-width: 0px;
+    }
+
+    .table-responsive
+    {
+        overflow-x: hidden !important;
+    }
+
+</style>
 <div class="row">
     <div class="col-xs-12">
         <div class="box box-primary">
@@ -16,24 +29,24 @@
                        cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th> Email</th>
-                        <th>Designation</th>
-                        <th>Employee Id</th>
-                        <th>isEmployee</th>
+                        <th style="width: 20% !important;">Email</th>
+                        <th style="width: 20% !important;">Designation</th>
+                        <th style="width: 15% !important;">Employee Id</th>
+                        <th style="width: 15% !important;">isEmployee</th>
                        <%-- <th>Email</th>--%>
-                        <th>Mobile</th>
+                        <th style="width: 15% !important;">Mobile</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${users}" var="user">
                     <tr>
-                        <td><a href="${ctx}/auth/user/profile?user=${user[0]}">${user[0]}</a></td>
-                        <td>${user[1]}</td>
-                        <td>${user[2]}</td>
-                        <td>${user[3].toString().toUpperCase()}</td>
+                        <td style="width: 20% !important;" class="text-wrap"><a href="${ctx}/auth/user/profile?user=${user[0]}">${user[0]}</a></td>
+                        <td style="width: 20% !important;" class="text-wrap">${user[1]}</td>
+                        <td style="width: 15% !important;" class="text-wrap">${user[2]}</td>
+                        <td style="width: 15% !important;" class="text-wrap">${user[3].toString().toUpperCase()}</td>
                         <%--<td>${user[4]}</td>--%>
-                        <td>${user[5]}</td>
+                        <td style="width: 15% !important;" class="text-wrap">${user[5]}</td>
                         <td data-user="${user[0]}"
                             class="userAccount btn btn-${user[6].toString() == "true" ? 'primary' : 'danger'} btn-sm btn-flat btn-custom">
                                 ${user[6].toString() == "true" ? 'Active' : 'InActive'}

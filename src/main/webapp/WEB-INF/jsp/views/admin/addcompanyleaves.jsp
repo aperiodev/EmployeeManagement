@@ -4,7 +4,19 @@
 <jsp:useBean id="date" class="java.util.Date" />
 
 
+<style>
+    .text-wrap {
+        word-wrap: break-word;
+        text-overflow: ellipsis;
+        max-width: 0px;
+    }
 
+    .table-responsive
+    {
+        overflow-x: hidden !important;
+    }
+
+</style>
 <script>
     var specialKeys = new Array();
     specialKeys.push(8); //Backspace
@@ -90,20 +102,20 @@
                        cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th>Financial Year</th>
-                        <th>Sick Leaves</th>
-                        <th>Casual Leaves</th>
-                        <th>Actions</th>
+                        <th style="width: 25% !important;">Financial Year</th>
+                        <th style="width: 25% !important;">Sick Leaves</th>
+                        <th style="width: 25% !important;">Casual Leaves</th>
+                        <th style="width: 25% !important;">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${companyleaves}" var="companyleave">
                     <tr>
-                        <td>${companyleave[0]}</td>
-                        <td>${companyleave[1]}</td>
-                        <td>${companyleave[2]}</td>
+                        <td style="width: 25% !important;">${companyleave[0]}</td>
+                        <td style="width: 25% !important;">${companyleave[1]}</td>
+                        <td style="width: 25% !important;">${companyleave[2]}</td>
                         <td data-year="${companyleave[0]}"
-                            class="deletecompanyLeave btn btn-sm btn-flat btn-custom">
+                            class="deletecompanyLeave btn btn-sm btn-flat btn-custom" style="width: 25% !important;">
                             <%--<fmt:formatDate value="${date}" var="dateyear" pattern="yyyy" />
                             <c:if test="${companyleave[5] eq dateyear}">
                                 <b class="btn btn-primary" style="padding:3px 12px !important; text-align: left !important; display: inline !important;">Edit</b>
@@ -222,6 +234,9 @@
             $('#financialyear').val('');
             $('#sickleaves').val('');
             $('#casualleaves').val('');
+            $('.yearselect').yearselect({
+                order: 'desc'
+            });
         }
 
         $('#example').DataTable({

@@ -131,19 +131,22 @@
         </div>
     </div>
     <form:form id="changePasswordForm" modelAttribute="user" action="changePassword" method="post"
-               class="form-horizontal">
+               >
         <div class="box-body">
-            <div class="col-sm-6 col-md-4 col-md-offset-4">
-                <div class="box-body">
+            <div class="row">
+                <%--<div class="box-body">--%>
+                    <div class="col-md-4">
                     <form:hidden path="password" id="password"/>
                     <div class="form-group">
-                        <label for="oldPassword">Current Password :</label>
+                        <label for="oldPassword">Current Password</label>
                         <input type="password" id="oldPassword" name="oldPassword" class="form-control"/>
                         <span></span>
                     </div>
+                    </div>
 
+                    <div class="col-md-4">
                     <div class="form-group">
-                        <label for="newPassword">New Password :</label>
+                        <label for="newPassword">New Password</label>
                         <input type="password" id="newPassword" name="newPassword" class="form-control"/>
                         <span></span>
                     </div>
@@ -156,19 +159,26 @@
                             <li id="length" class="invalid">Be at least <strong>8 characters</strong></li>
                         </ul>
                     </div>
+                    </div>
 
+                    <div class="col-md-4">
                     <div class="form-group">
-                        <label for="confirmPassword">Confirm Password :</label>
+                        <label for="confirmPassword">Confirm Password</label>
                         <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"/>
                     </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary" disabled id="changePwdSubmitBtn">Submit</button>
-                        <button type="reset" class="btn btn-default">Reset</button>
                     </div>
-                </div>
+
+                   <%-- <div class="form-group">
+
+                    </div>--%>
+                <%--</div>--%>
             </div>
         </div>
+    <div class="box-footer">
+        <button type="reset" class="btn btn-default">Reset</button>
+        <button type="submit" class="btn btn-info pull-right" id="changePwdSubmitBtn">Submit</button>
+
+    </div>
     </form:form>
 </div>
 <script>
@@ -215,7 +225,7 @@
     }
 
     function checkPasswordStrength() {
-        $('#pswd_info').hide();
+        //$('#pswd_info').hide();
 
         $('input[name="newPassword"]').keyup(function () {
             var pswd = $(this).val();
@@ -248,14 +258,14 @@
                 makeClassInValid('number');
             }
 
-            submitDisabledStatus();
+            //submitDisabledStatus();
 
         }).focus(function () {
             $('#pswd_info').show();
-            submitDisabledStatus();
+            //submitDisabledStatus();
         }).blur(function () {
             $('#pswd_info').hide();
-            submitDisabledStatus();
+            //submitDisabledStatus();
         });
     }
 

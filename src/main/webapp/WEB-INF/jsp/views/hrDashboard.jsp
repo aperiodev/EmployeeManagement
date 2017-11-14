@@ -36,30 +36,43 @@
 
 </style>
 <div class="box box-solid box-primary">
-    <div class="box-header">
-        <i class="fa fa-calendar"></i>
-        <h3 class="box-title">Calendar</h3>
+    <div class="box-header with-border">
+       <h3 class="box-title">Calendar</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
     </div>
-    <!-- /.box-header -->
-    <div class="box-body no-padding">
-        <!--The calendar -->
+    <div class="box-body">
         <div id="calendar" style="width: 100%"></div>
     </div>
     <!-- /.box-body -->
-    <div class="table-responsive">
+   <%-- <div class="table-responsive">
         <div class="box-footer text-black">
             <div class="row">
-                <table id="userLeaveList" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                    <tr>
-                        <th>User</th>
-                        <th>Reason</th>
-                    </tr>
-                    </thead>
-                </table>
+
             </div>
         </div>
+    </div>--%>
+</div>
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">Leaves</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
     </div>
+    <div class="box-body">
+        <table id="userLeaveList" class="display responsive table table-striped table-bordered nowrap cell-border" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th style="width: 50% !important;">User</th>
+                <th style="width: 50% !important;">Reason</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+
 </div>
 <Script>
     $(function () {

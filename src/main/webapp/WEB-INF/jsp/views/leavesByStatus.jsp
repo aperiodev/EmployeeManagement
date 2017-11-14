@@ -10,6 +10,16 @@
         overflow: hidden !important;
         text-overflow: ellipsis;
     }
+    .text-wrap {
+        word-wrap: break-word;
+        text-overflow: ellipsis;
+        max-width: 0px;
+    }
+
+    .table-responsive
+    {
+        overflow-x: hidden !important;
+    }
 </style>
 
 <div class="box box-primary">
@@ -22,33 +32,33 @@
         </div>
     </div>
     <!-- /.box-header -->
-    <div class="table-responsive">
+   <%-- <div class="table-responsive">--%>
         <div class="box-body">
-            <table id="datatable" class="table table-striped table-bordered nowrap" cellspacing="0" width="100%">
+            <table id="datatable" class="display responsive table table-striped table-bordered nowrap cell-border" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>Requested By</th>
-                    <th>Between</th>
-                    <th>No of Day(s)</th>
-                    <th>Reason</th>
-                    <th>Status</th>
+                    <th style="width: 22% !important;">Requested By</th>
+                    <th style="width: 22% !important;">Between</th>
+                    <th style="width: 22% !important;">No of Day(s)</th>
+                    <th style="width: 22% !important;">Reason</th>
+                    <th style="width: 12% !important;">Status</th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach var="item" items="${userleaves}">
                     <tr>
-                        <td>${item.user.username}</td>
-                        <td>${item.fromDate} <b>To</b> ${item.toDate}</td>
-                        <td>${item.noOfDays}</td>
-                        <td class="reason"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}"
+                        <td style="width: 22% !important;" class="text-wrap">${item.user.username}</td>
+                        <td style="width: 22% !important;" class="text-wrap">${item.fromDate} <b>To</b> ${item.toDate}</td>
+                        <td style="width: 22% !important;">${item.noOfDays}</td>
+                        <td style="width: 22% !important;" class="reason text-wrap"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}"
                                               onclick="showModal(this)">${item.reason}</a></td>
-                        <td>${item.status}</td>
+                        <td style="width: 12% !important;" class="text-wrap">${item.status}</td>
                     </tr>
                 </c:forEach>
                 </tbody>
             </table>
         </div>
-    </div>
+   <%-- </div>--%>
 </div>
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -73,6 +83,7 @@
 <script>
     $(function () {
         $('#datatable').DataTable({
+            responsive: true
         });
     });
 

@@ -23,6 +23,17 @@
         margin: 20px 0;
         border-radius: 4px;
     }
+
+    .text-wrap {
+        word-wrap: break-word;
+        text-overflow: ellipsis;
+        max-width: 0px;
+    }
+
+    .table-responsive
+    {
+        overflow-x: hidden !important;
+    }
 </style>
 
 <div class="box box-primary">
@@ -33,31 +44,31 @@
         </div>
     </div>
     <!-- /.box-header -->
-    <div class="table-responsive">
+    <%--<div class="table-responsive">--%>
         <div class="box-body">
-            <table id="userLeaveList" class="table table-striped table-bordered table-hover nowrap" cellspacing="0"
+            <table id="userLeaveList" class="display responsive table table-striped table-bordered table-hover nowrap" cellspacing="0"
                    width="100%">
                 <thead>
                 <tr>
-                    <th>Requested By</th>
-                    <th>From Date</th>
-                    <th>To Date</th>
-                    <th>No of Days</th>
-                    <th>Reason</th>
-                    <th>To</th>
-                    <th width="60px"></th>
+                    <th style="width: 14% !important;">Requested By</th>
+                    <th style="width: 14% !important;">From Date</th>
+                    <th style="width: 14% !important;">To Date</th>
+                    <th style="width: 14% !important;">No of Days</th>
+                    <th style="width: 14% !important;">Reason</th>
+                    <th style="width: 14% !important;">To</th>
+                    <th style="width: 14% !important;"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach var="item" items="${userleaves}">
                     <tr>
-                        <td>${item.user.username}</td>
-                        <td>${item.fromDate}</td>
-                        <td>${item.toDate}</td>
-                        <td>${item.noOfDays}</td>
-                        <td class="reason"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}"
+                        <td style="width: 14% !important;" class="text-wrap">${item.user.username}</td>
+                        <td style="width: 14% !important;" class="text-wrap">${item.fromDate}</td>
+                        <td style="width: 14% !important;" class="text-wrap">${item.toDate}</td>
+                        <td style="width: 14% !important;">${item.noOfDays}</td>
+                        <td style="width: 14% !important;" class="reason text-wrap"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}"
                                               onclick="showModal(this)">${item.reason}</a></td>
-                        <td>${item.toUser.username}</td>
+                        <td style="width: 14% !important;" class="text-wrap">${item.toUser.username}</td>
                         <td>
                             <button type="button" class="cbutton btn btn-block btn-success btn-sm" data-type="APPROVED"
                                     onclick="approval_decision(${item.id}, 'APPROVED');">Approve
@@ -71,7 +82,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
+   <%-- </div>--%>
 </div>
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -98,6 +109,7 @@
 <script>
     $(function () {
         $('#userLeaveList').DataTable({
+            responsive: true,
             columnDefs: [{orderable: false, targets: [6]}]
         });
     });

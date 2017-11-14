@@ -182,3 +182,9 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:fir
 div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:last-child {
   padding-right: 0;
 }
+
+.dataTable thead
+{
+  background-color: #3C8DBC !important;
+  color:white !important;
+}

@@ -23,20 +23,26 @@
     $(function () {
         $('#doj').datepicker({
             format: 'yyyy-mm-dd',
-            setDate: new Date()
+            autoclose:true,
+            endDate: "today"
         });
 
         $('#dob').datepicker({
             format: 'yyyy-mm-dd',
-            setDate: new Date()
+            autoclose:true,
+            endDate: "today"
         });
     });
 </script>
 
 <section class="content">
-    <div class="box box-warning">
+    <div class="box box-primary">
         <div class="box-header with-border">
             <h3 class="box-title">Profile</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+            </div>
         </div>
         <form:form id="updateForm" modelAttribute="account" action="updateProfile" method="post">
             <form:hidden path="user" id="user" name="user"/>
@@ -83,7 +89,7 @@
                         <div class="form-group">
                             <label>Date of Birth</label>
                             <form:input type="text" class="form-control" id="dob" path="dob"
-                                        name="dob" value="${account.dob}" readonly="true"/>
+                                        name="dob" value="${account.dob}" readonly="true" placeholder="Date of Birth"/>
                         </div>
 
                         <div class="form-group">
@@ -160,7 +166,7 @@
                 </div>
             </div>
             <div class="box-footer">
-                <form:button id="register" name="register" type="submit" class="btn btn-primary">Update</form:button>
+                <form:button id="register" name="register" type="submit" class="btn btn-primary pull-right">Update</form:button>
             </div>
         </form:form>
     </div>

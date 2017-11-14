@@ -1,7 +1,7 @@
 <%@ include file="/common/taglibs.jsp" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="col-lg-offset-1 col-lg-10">
+
 <div class="box box-primary">
     <div class="box-header with-border">
         <h3 class="box-title">Employee Registration</h3>
@@ -10,49 +10,67 @@
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
         </div>
     </div>
-    <form:form id="regForm" modelAttribute="user" action="registration" method="post" class="form-horizontal">
+    <form:form id="regForm" modelAttribute="user" action="registration" method="post">
         <div class="box-body">
-            <div class="form-group">
-                <label for="username" class="col-sm-2 control-label">Email</label>
+            <div class="row">
 
-                <div class="col-lg-6">
-                    <form:input path="username" type="text" class="form-control" id="username" placeholder="Email"/>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="username">Email</label>
+                        <form:input path="username" type="text" class="form-control" id="username" placeholder="Email"/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="password" class="col-sm-2 control-label">Password</label>
 
-                <div class="col-lg-6">
-                    <form:input path="password" type="password" class="form-control" id="password"
-                                placeholder="Password"/>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <form:input path="password" type="password" class="form-control" id="password" placeholder="Password"/>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Role</label>
-                <div class="col-lg-6">
-                    <select name="userRole" id="userRole" class="form-control">
-                        <option value="">Select..</option>
-                        <c:forEach items="${authorities}" var="authorities">
-                            <c:if test="${authorities != 'ROLE_ADMIN'}">
-                                <option>${authorities}</option>
-                            </c:if>
-                        </c:forEach>
-                    </>
-                    </select>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Role</label>
+
+                            <select name="userRole" id="userRole" class="form-control">
+                                <option value="">Select..</option>
+                                <c:forEach items="${authorities}" var="authorities">
+                                    <c:if test="${authorities != 'ROLE_ADMIN'}">
+                                        <option>${authorities}</option>
+                                    </c:if>
+                                </c:forEach>
+                            </select>
+
+                    </div>
                 </div>
+
             </div>
         </div>
         <div class="box-footer">
-            <form:button type="submit" id="register" name="register" class="btn btn-primary ">Save</form:button>
+            <button type="reset" class="btn btn-default" id="cancel">Cancel</button>
+            <form:button type="submit" id="register" name="register" class="btn btn-info pull-right">Save</form:button>
            &nbsp;
-            <button type="reset" class="btn btn-default">Cancel</button>
+
         </div>
     </form:form>
 </div>
-</div>
+
 <script>
     $(function () {
         registerFormValidate();
+
+        $('#cancel').click(function () {
+            clearfields();
+        });
+
+        function clearfields() {
+            $('#username').val('');
+            $('#password').val('');
+
+            $('#username-error').text('');
+            $('#password-error').text('');
+            $('#userRole-error').text('');
+        }
     });
 
     function registerFormValidate() {
@@ -75,7 +93,7 @@
                 },
                 password: {
                     required: true,
-                    minlength: 6,
+                    minlength: 8,
                 },
                 userRole: "required"
             },
