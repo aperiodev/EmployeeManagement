@@ -120,7 +120,9 @@
     .form-group {
         margin-bottom: 20px !important;
     }
-
+    #changePasswordForm .error {
+        color: red;
+    }
 </style>
 <div class="box box-primary">
     <div class="box-header with-border">
@@ -138,7 +140,7 @@
                     <div class="col-md-4">
                     <form:hidden path="password" id="password"/>
                     <div class="form-group">
-                        <label for="oldPassword">Current Password</label>
+                        <label for="oldPassword"><strong style="color: red">*</strong>Current Password</label>
                         <input type="password" id="oldPassword" name="oldPassword" class="form-control"/>
                         <span></span>
                     </div>
@@ -146,7 +148,7 @@
 
                     <div class="col-md-4">
                     <div class="form-group">
-                        <label for="newPassword">New Password</label>
+                        <label for="newPassword"><strong style="color: red">*</strong>New Password</label>
                         <input type="password" id="newPassword" name="newPassword" class="form-control"/>
                         <span></span>
                     </div>
@@ -163,7 +165,7 @@
 
                     <div class="col-md-4">
                     <div class="form-group">
-                        <label for="confirmPassword">Confirm Password</label>
+                        <label for="confirmPassword"><strong style="color: red">*</strong>Confirm Password</label>
                         <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"/>
                     </div>
                     </div>
@@ -175,7 +177,7 @@
             </div>
         </div>
     <div class="box-footer">
-        <button type="reset" class="btn btn-default">Reset</button>
+        <button type="reset" class="btn btn-default" id="changeReset">Reset</button>
         <button type="submit" class="btn btn-info pull-right" id="changePwdSubmitBtn">Submit</button>
 
     </div>
@@ -288,7 +290,7 @@
             rules: {
                 oldPassword: {
                     required: true,
-                    minlength: 6
+                    minlength: 8
                 },
                 newPassword: {
                     required: true,
@@ -302,4 +304,10 @@
             }
         });
     }
+
+    $('#changeReset').click(function () {
+        $('#oldPassword-error').text('');
+        $('#newPassword-error').text('');
+        $('#confirmPassword-error').text('');
+    });
 </script>

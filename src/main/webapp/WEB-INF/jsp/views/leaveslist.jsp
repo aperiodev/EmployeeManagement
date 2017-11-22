@@ -5,11 +5,25 @@
 
 <style>
     .reason {
-        display: inline-block;
+
         width: 180px;
         white-space: nowrap;
         overflow: hidden !important;
         text-overflow: ellipsis;
+    }
+
+    .reason a p
+    {
+        width: 100% !important;
+        height:30px !important;
+
+    }
+
+    .text-wrap {
+        word-wrap: break-word !important;
+        text-overflow: ellipsis !important;
+        max-width: 0px !important;
+        white-space: normal !important;
     }
 </style>
 
@@ -26,30 +40,30 @@
         <table id="userLeaveList" class="table table-striped table-bordered nowrap" cellspacing="0" width="100%">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Requested By</th>
-                <th>From Date</th>
-                <th>To Date</th>
-                <th>No of Days</th>
-                <th>Reason</th>
-                <th>Status</th>
-                <th>To</th>
-                <th>Action</th>
+                <th style="width: 5% !important;">ID</th>
+                <th style="width: 11% !important;">Requested By</th>
+                <th style="width: 11% !important;">From Date</th>
+                <th style="width: 11% !important;">To Date</th>
+                <th style="width: 11% !important;">No of Days</th>
+                <th style="width: 17% !important;">Reason</th>
+                <th style="width: 11% !important;">Status</th>
+                <th style="width: 11% !important;">To</th>
+                <th style="width: 11% !important;">Action</th>
 
             </tr>
             </thead>
             <tbody>
             <c:forEach var="item" items="${userleaves}">
                 <tr>
-                    <td>${item.id}</td>
-                    <td>${item.user.username}</td>
-                    <td>${item.fromDate}</td>
-                    <td>${item.toDate}</td>
-                    <td>${item.noOfDays}</td>
-                    <td class="reason"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}" onclick="showModal(this)">${item.reason}</a></td>
-                    <td>${fn:replace(item.status, '_', ' ')}</td>
-                    <td>${item.toUser.username}</td>
-                    <td align="center">
+                    <td style="width: 5% !important;" class="text-wrap">${item.id}</td>
+                    <td style="width: 11% !important;" class="text-wrap">${item.user.username}</td>
+                    <td style="width: 11% !important;" class="text-wrap">${item.fromDate}</td>
+                    <td style="width: 11% !important;" class="text-wrap">${item.toDate}</td>
+                    <td style="width: 11% !important;" class="text-wrap">${item.noOfDays}</td>
+                    <td class="reason text-wrap" style="width: 17% !important;"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}" onclick="showModal(this)">${item.reason}</a></td>
+                    <td style="width: 11% !important;" class="text-wrap">${fn:replace(item.status, '_', ' ')}</td>
+                    <td style="width: 11% !important;" class="text-wrap">${item.toUser.username}</td>
+                    <td align="center" style="width: 11% !important;" class="text-wrap">
                             <c:if test="${item.status == 'WAITING_FOR_APPROVAL'}">
                                 <button type="button"
                                         class="cbutton btn btn-block btn-warning ${item.status == 'CANCEL' ?'disabled' : ''} "
@@ -106,7 +120,7 @@
             'autoWidth': true,
             'responsive': true,
             "columnDefs": [{
-                "targets": 7,
+                "targets": 8,
                 "orderable": false
             }]
         });

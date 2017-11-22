@@ -4,9 +4,10 @@
 
 <style>
     .text-wrap {
-        word-wrap: break-word;
-        text-overflow: ellipsis;
-        max-width: 0px;
+        word-wrap: break-word !important;
+        text-overflow: ellipsis !important;
+        max-width: 0px !important;
+        white-space: normal !important;
     }
 
     .table-responsive
@@ -62,7 +63,8 @@
 <script>
     $(document).ready(function () {
         $('#example').DataTable({
-            responsive: true
+            responsive: true,
+            columnDefs: [ { orderable: false, targets: [5] }]
         });
 
         $('.userAccount').on('click', function () {

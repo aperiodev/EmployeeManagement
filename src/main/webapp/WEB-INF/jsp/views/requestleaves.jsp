@@ -47,8 +47,8 @@
         </div>
 
         <div class="box-footer">
-            <button id="clear" type="reset" class="btn btn-default">Clear</button>
-            <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+            <button id="clear" type="reset" class="btn btn-default">Cancel</button>
+            <button id="submit" type="submit" class="btn btn-info pull-right">Submit</button>
         </div>
     </div>
 </div>
@@ -58,9 +58,19 @@
         $("#reason").wysihtml5();
         $("#clear").click(function () {
             $("#touser").val("select");
-            $("#reason").val("");
-            $('#fromtodate').val('').daterangepicker("update");
+            $('#fromtodate').val('').daterangepicker({"minDate": new Date(),
+                locale: {
+                    format: 'YYYY-MM-DD'
+                },
+                isInvalidDate: function(date) {
+                    return (date.day() == 0 || date.day() == 6);
+                }
+            });
             $("#datecount").val("1");
+
+            $(".wysihtml5-sandbox").contents().find("body").html("");
+
+            /*$('#reason').data("wysihtml5").editor.text('');*/
         });
 
         $("#submit").click(function () {

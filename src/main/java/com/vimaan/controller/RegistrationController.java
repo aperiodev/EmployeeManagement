@@ -71,13 +71,23 @@ public class RegistrationController extends BaseController {
         user.setPassword(request.getParameter("password"));
 
         String userRole = request.getParameter("userRole");
-        userService.userRegistration(user, userRole);
-        String message = new MailMessages().loginMessage(user);
+
         try {
-            mailService.sendMail("admi@apeiro.us", user.getUsername(), "Account Creation", message);
-        } catch (Exception e) {
-            mav.addObject("msg", e.getMessage());
+            userService.userRegistration(user, userRole);
+            String message = new MailMessages().loginMessage(user);
+            try {
+                mailService.sendMail("admi@apeiro.us", user.getUsername(), "Account Creation", message);
+            } catch (Exception e) {
+                mav.addObject("msg", e.getMessage());
+            }
         }
+        catch (Exception ex)
+        {
+            mav = new ModelAndView("redirect:/auth/admin/register");
+            mav.addObject("msg", ex.getMessage());
+        }
+
+
         return mav;
     }
 

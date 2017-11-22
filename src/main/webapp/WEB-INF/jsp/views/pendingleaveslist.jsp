@@ -5,12 +5,20 @@
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 <style>
     .reason {
-        display: inline-block;
-        width: 180px;
+
+        width: 180px !important;
         white-space: nowrap;
         overflow: hidden !important;
         text-overflow: ellipsis;
     }
+
+    .reason a p
+    {
+        width: 100% !important;
+        height:30px !important;
+
+    }
+
 
     div.dataTables_wrapper div.dataTables_paginate ul.pagination {
         margin: 2px 0;
@@ -25,9 +33,10 @@
     }
 
     .text-wrap {
-        word-wrap: break-word;
-        text-overflow: ellipsis;
-        max-width: 0px;
+        word-wrap: break-word !important;
+        text-overflow: ellipsis !important;
+        max-width: 0px !important;
+        white-space: normal !important;
     }
 
     .table-responsive

@@ -17,6 +17,17 @@
 
     </c:if>
     </sec:authorize>
+
+    #updateForm .error {
+        color: red;
+    }
+
+   div.error
+   {
+       position: absolute;
+       font-weight: bold;
+
+   }
 </style>
 
 <script>
@@ -51,13 +62,13 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="firstname">Firstname</label>
+                            <label for="firstname"><strong style="color: red">*</strong>Firstname</label>
                             <form:input type="text" class="form-control" id="firstname" placeholder="Firstname"
                                         path="firstname" name="firstname"/>
                         </div>
 
                         <div class="form-group">
-                            <label for="email">Email</label>
+                            <label for="email"><strong style="color: red">*</strong>Email</label>
                             <form:input type="text" class="form-control" id="email" placeholder="Email" path="email"
                                         readonly="true"
                                         name="email"/>
@@ -67,14 +78,14 @@
                     <div class="col-md-6">
 
                         <div class="form-group">
-                            <label for="lastname">Lastname</label>
+                            <label for="lastname"><strong style="color: red">*</strong>Lastname</label>
                             <form:input type="text" class="form-control" id="lastname" placeholder="Lastname"
                                         path="lastname" name="lastname"/>
                         </div>
 
                         <div class="form-group">
                             <label>
-                                Gender
+                                <strong style="color: red">*</strong>Gender
                             </label>
                             <form:select class="form-control" data-placeholder="Select a Role" id="gender" path="gender"
                                          name="gender">
@@ -87,13 +98,13 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Date of Birth</label>
+                            <label><strong style="color: red">*</strong>Date of Birth</label>
                             <form:input type="text" class="form-control" id="dob" path="dob"
                                         name="dob" value="${account.dob}" readonly="true" placeholder="Date of Birth"/>
                         </div>
 
                         <div class="form-group">
-                            <label>Designation</label>
+                            <label><strong style="color: red">*</strong>Designation</label>
                             <form:input type="text" class="form-control" id="designation" placeholder="Designation"
                                         path="designation" name="designation"/>
                         </div>
@@ -102,7 +113,7 @@
                     <div class="col-md-6">
 
                         <div class="form-group">
-                            <label>Phonenumber</label>
+                            <label><strong style="color: red">*</strong>Phonenumber</label>
                             <form:input type="text" class="form-control" id="phonenumber" placeholder="Phonenumber"
                                         path="phonenumber" name="phonenumber"/>
                         </div>
@@ -123,7 +134,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Date of Joining</label>
+                            <label><strong style="color: red">*</strong>Date of Joining</label>
                             <form:input type="text" class="form-control" id="doj" placeholder="Date of Joining"
                                         readonly="true"
                                         path="doj" name="doj" value="${account.doj}"/>
@@ -137,7 +148,7 @@
                                         path="aadharnumber" name="aadharnumber"/>
                         </div>
                         <div class="form-group">
-                            <label>Employee Code</label>
+                            <label><strong style="color: red">*</strong>Employee Code</label>
                             <form:input type="text" class="form-control" id="employeecode" placeholder="Employee Code"
                                         path="employeecode" name="employeecode"/>
                         </div>
@@ -241,30 +252,20 @@
                     maxlength: 10,
                     minlength: 10
                 },
-                emergencycontactnumber: {
-                    number: true,
-                    minlength: 10,
-                    maxlength: 10
-                },
-                pannumber:{
-                    required: {
-                        depends: function () {
-                            $(this).val($.trim($(this).val()));
-                            return true;
-                        }
-                    },
-                },
-                aadharnumber: {
-                    required: {
-                        depends: function () {
-                            $(this).val($.trim($(this).val()));
-                            return true;
-                        }
-                    },
-                },
-                // employeecode: "required",
+
+                employeecode: "required"
                 // currentemployee: "required"
             },
+            errorElement: "div",
+            // a wrapper around the error message
+            /* errorPlacement: function(error, element) {
+                offset = element.offset();
+                error.insertBefore(element)
+                error.addClass('message');  // add a class to the wrapper
+                error.css('position', 'absolute');
+                error.css('left', offset.left + element.outerWidth());
+                error.css('top', offset.top);
+            },*/
             submitHandler: function (form) {
                 form.submit();
             }

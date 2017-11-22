@@ -4,16 +4,25 @@
 
 <style>
     .reason {
-        display: inline-block;
-        width: 344px !important;
+
+        width: 250px !important;
         white-space: nowrap;
         overflow: hidden !important;
         text-overflow: ellipsis;
     }
+
+    .reason a p
+    {
+        width: 100% !important;
+        height:30px !important;
+
+    }
+
     .text-wrap {
-        word-wrap: break-word;
-        text-overflow: ellipsis;
-        max-width: 0px;
+        word-wrap: break-word !important;
+        text-overflow: ellipsis !important;
+        max-width: 0px !important;
+        white-space: normal !important;
     }
 
     .table-responsive
@@ -47,12 +56,12 @@
                 <tbody>
                 <c:forEach var="item" items="${userleaves}">
                     <tr>
-                        <td>${item.user.username}</td>
-                        <td>${item.fromDate} <b>To</b> ${item.toDate}</td>
-                        <td>${item.noOfDays}</td>
-                        <td class="reason"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}"
+                        <td style="width: 22% !important;" class="text-wrap">${item.user.username}</td>
+                        <td style="width: 22% !important;" class="text-wrap">${item.fromDate} <b> To </b> ${item.toDate}</td>
+                        <td style="width: 22% !important;" class="text-wrap">${item.noOfDays}</td>
+                        <td style="width: 22% !important;" class="reason"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}"
                                               onclick="showModal(this)">${item.reason}</a></td>
-                        <td>${item.status}</td>
+                        <td style="width: 12% !important;" class="text-wrap">${item.status}</td>
                     </tr>
                 </c:forEach>
                 </tbody>

@@ -2,15 +2,16 @@
 <jsp:useBean id="date" class="java.util.Date"/>
 <style>
     .text-wrap {
-        word-wrap: break-word;
-        text-overflow: ellipsis;
-        max-width: 0px;
+        word-wrap: break-word !important;
+        text-overflow: ellipsis !important;
+        max-width: 0px !important;
+        white-space: normal !important;
     }
-
     .table-responsive
     {
         overflow-x: hidden !important;
     }
+
 
 </style>
 <script>
@@ -38,14 +39,14 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="fdate">Date</label>
+                            <label for="fdate"><strong style="color: red">*</strong>Date</label>
                             <input type="text" class="form-control" id="fdate" placeholder="Date"
                                    name="fdate"></input>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="form-group">
-                            <label for="occasion">Occasion</label>
+                            <label for="occasion"><strong style="color: red">*</strong>Occasion</label>
                             <textarea class="form-control" placeholder="Occasion" id="occasion" rows="2"
                                    name="occasion" maxlength="250"></textarea>
                         </div>
@@ -107,7 +108,7 @@
     $(function () {
         $('#save').click(function () {
             var fdate = $('#fdate').val();
-            var occasion = $('#occasion').val();
+            var occasion = $('#occasion').val().trim();
 
 
             if (fdate.length != 0 && occasion.length != 0) {
@@ -204,19 +205,6 @@
             $('#occasion').val('');
         }
 
-        $('#example').DataTable({
-            responsive: true,
-            order: [0],
-            columnDefs: [{
-                orderable: false,
-                targets: [2]
-            }],
-            "columns": [
-                {"width": "20%"},
-                null,
-                {"width": "20%"},
-            ]
-        });
 
         $('.deleteholiday').on('click', function () {
             var id = $(this).data("id");
@@ -258,7 +246,12 @@
                     toastr.error("Holiday cannot be deleted, Please try again!");
                 }
             });
-        })
+        });
+
+        $('#example').DataTable({
+            responsive: true
+
+        });
 
     });
 </script>

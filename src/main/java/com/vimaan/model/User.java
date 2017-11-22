@@ -38,7 +38,7 @@ public class User implements Serializable {
 
     @Id
     @Column(name = "username", unique = true,
-            nullable = false, length = 45)
+            nullable = false, length = 200)
     public String getUsername() {
         return this.username;
     }

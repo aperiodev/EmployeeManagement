@@ -6,9 +6,10 @@
 
 <style>
     .text-wrap {
-        word-wrap: break-word;
-        text-overflow: ellipsis;
-        max-width: 0px;
+        word-wrap: break-word !important;
+        text-overflow: ellipsis !important;
+        max-width: 0px !important;
+        white-space: normal !important;
     }
 
     .table-responsive
@@ -56,7 +57,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="financialyear">Financial Year</label>
+                        <label for="financialyear"><strong style="color: red">*</strong>Financial Year</label>
                         <input type="text" class="form-control yearselect" id="financialyear" placeholder="Financial year"
                                name="financialyear"></input>
                     </div>
@@ -65,7 +66,7 @@
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="sickleaves">Sick Leaves</label>
+                        <label for="sickleaves"><strong style="color: red">*</strong>Sick Leaves</label>
                         <input type="text" class="form-control numeric" id="sickleaves" placeholder="Sick Leaves"
                                name="sickleaves" maxlength="2"></input>
                     </div>
@@ -73,7 +74,7 @@
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="casualleaves">Casual Leaves</label>
+                        <label for="casualleaves"><strong style="color: red">*</strong>Casual Leaves</label>
                         <input type="text" class="form-control numeric" id="casualleaves" placeholder="Casual Leaves"
                                name="casualleaves" maxlength="2"></input>
                     </div>
@@ -239,11 +240,7 @@
             });
         }
 
-        $('#example').DataTable({
-            responsive: true,
-            order: [0],
-            columnDefs: [ { orderable: false, targets: [3] } ]
-        });
+
 
         $('.deletecompanyLeave').on('click', function () {
             var year = $(this).data("year");
@@ -286,7 +283,13 @@
                     toastr.error("Financial Year leaves cannot be deleted, Please try again!");
                 }
             });
-        })
+        });
+
+        $('#example').DataTable({
+            responsive: true,
+            order: [0],
+            columnDefs: [ { orderable: false, targets: [3] } ]
+        });
 
     });
 </script>
