@@ -56,7 +56,13 @@ public class LeavesDaoImpl extends BaseDao implements LeavesDao {
     }
 
     public List<Leaves> getLeavesByStatus(Status status) {
-        String sql = "from Leaves where status = '"+ status +"'";
+        String sql = "from Leaves where status = '"+ status +"' order by id desc";
+        List<Leaves> leaves = getSession().createQuery(sql).list();
+        return leaves.size() > 0 ? leaves : null;
+    }
+
+    public List<Leaves> getLeavesByStatusByUser(Status status,String user) {
+        String sql = "from Leaves where status = '"+ status +"' and toUser_username='"+user+"' order by id desc";
         List<Leaves> leaves = getSession().createQuery(sql).list();
         return leaves.size() > 0 ? leaves : null;
     }

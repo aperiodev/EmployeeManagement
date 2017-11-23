@@ -4,8 +4,6 @@
 
 <style>
     .reason {
-
-        width: 250px !important;
         white-space: nowrap;
         overflow: hidden !important;
         text-overflow: ellipsis;
@@ -14,7 +12,7 @@
     .reason a p
     {
         width: 100% !important;
-        height:30px !important;
+        height:50px !important;
 
     }
 
@@ -59,8 +57,8 @@
                         <td style="width: 22% !important;" class="text-wrap">${item.user.username}</td>
                         <td style="width: 22% !important;" class="text-wrap">${item.fromDate} <b> To </b> ${item.toDate}</td>
                         <td style="width: 22% !important;" class="text-wrap">${item.noOfDays}</td>
-                        <td style="width: 22% !important;" class="reason"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}"
-                                              onclick="showModal(this)">${item.reason}</a></td>
+                        <td style="width: 22% !important;" class="reason text-wrap"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}"
+                                              onclick="showModal(this)" style="width: 100%;">${item.reason}</a></td>
                         <td style="width: 12% !important;" class="text-wrap">${item.status}</td>
                     </tr>
                 </c:forEach>

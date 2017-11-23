@@ -153,7 +153,7 @@
                     "render": function (data, type, row, meta) {
                         var sc = '<script> function showModal(identifier) {console.log($(identifier).data("reason")); $("#myModal").modal();$("#reasonTxt").empty().html($(identifier).data("reason"));} ';
 
-                        var str = '<a data-reason= '+ hex2a(data) +' class="reason" onclick="showModal(this);">'+hex2a(data)+'</a> '+ sc;
+                        var str = '<a class="reason" data-reason="'+hex2a(data)+'" onclick="showModal(this);">'+hex2a(data)+'</a>' + sc;
                         return  str;
                     }
                 }
@@ -167,7 +167,7 @@
                 if (v) str += String.fromCharCode(v);
             }
             //return str.replace(/"/g, '');
-            return str.replace(/[_\s]/g, '');
+            return str;
         }
 
         function go(selecteddate) {

@@ -18,4 +18,5 @@ public interface LeavesService {
     List<Leaves> getLeaves();
     List<Leaves> getLeaves(User user);
     List<Leaves> getLeavesByStatus(Status status);
+    List<Leaves> getLeavesByStatusByUser(Status status,String user);
 }

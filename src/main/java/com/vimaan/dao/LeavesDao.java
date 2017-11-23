@@ -16,4 +16,6 @@ public interface LeavesDao {
     List<Leaves> getLeaves(User user);
     List<Leaves> gettodayleave(String todaydate);
     List<Leaves> getLeavesByStatus(Status status);
+
+    List<Leaves> getLeavesByStatusByUser(Status status,String User);
 }

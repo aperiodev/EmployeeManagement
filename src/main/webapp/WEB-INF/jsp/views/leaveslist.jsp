@@ -5,8 +5,6 @@
 
 <style>
     .reason {
-
-        width: 180px;
         white-space: nowrap;
         overflow: hidden !important;
         text-overflow: ellipsis;
@@ -15,7 +13,7 @@
     .reason a p
     {
         width: 100% !important;
-        height:30px !important;
+        height:50px !important;
 
     }
 
@@ -60,7 +58,7 @@
                     <td style="width: 11% !important;" class="text-wrap">${item.fromDate}</td>
                     <td style="width: 11% !important;" class="text-wrap">${item.toDate}</td>
                     <td style="width: 11% !important;" class="text-wrap">${item.noOfDays}</td>
-                    <td class="reason text-wrap" style="width: 17% !important;"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}" onclick="showModal(this)">${item.reason}</a></td>
+                    <td class="reason text-wrap" style="width: 17% !important;"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}" onclick="showModal(this)" style="width: 100%;">${item.reason}</a></td>
                     <td style="width: 11% !important;" class="text-wrap">${fn:replace(item.status, '_', ' ')}</td>
                     <td style="width: 11% !important;" class="text-wrap">${item.toUser.username}</td>
                     <td align="center" style="width: 11% !important;" class="text-wrap">
@@ -122,7 +120,8 @@
             "columnDefs": [{
                 "targets": 8,
                 "orderable": false
-            }]
+            }],
+            "order": [[ 0, "desc" ]]
         });
     });
     function showModal(identifier) {

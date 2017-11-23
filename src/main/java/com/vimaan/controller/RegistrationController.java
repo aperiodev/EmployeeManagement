@@ -84,7 +84,7 @@ public class RegistrationController extends BaseController {
         catch (Exception ex)
         {
             mav = new ModelAndView("redirect:/auth/admin/register");
-            mav.addObject("msg", ex.getMessage());
+            mav.addObject("msg", "Email already exists or something went wrong. Please try with different email");
         }
 
 

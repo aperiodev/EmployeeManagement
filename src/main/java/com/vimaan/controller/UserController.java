@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
@@ -66,7 +68,9 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping(value = "/leaves", method = RequestMethod.GET)
-    public ModelAndView showLeavesLists(HttpServletRequest request) {
+    public ModelAndView showLeavesLists(HttpServletRequest request,Authentication authentication) {
+        Collection authorities = authentication.getAuthorities();
+
         User user = getLoggedInUser();
         Status status;
         ModelAndView model = null;
@@ -81,7 +85,18 @@ public class UserController extends BaseController {
             status = Status.valueOf(request.getParameter("status"));
             model = new ModelAndView("views/leavesByStatus");
         }
-        List<Leaves> user_leaves = leavesService.getLeavesByStatus(status);
+
+        List<Leaves> user_leaves = null;
+        if (authentication.getAuthorities().toString().contains("ROLE_HR"))
+        {
+            user_leaves=leavesService.getLeavesByStatusByUser(status,user.getUsername().toString());
+        }
+        else
+        {
+            user_leaves=leavesService.getLeavesByStatus(status);
+        }
+
+
         model.addObject("userleaves", user_leaves);
         model.addObject("LeaveType", status);
         return model;

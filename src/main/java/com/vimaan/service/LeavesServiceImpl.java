@@ -89,4 +89,9 @@ public class LeavesServiceImpl implements LeavesService {
         List<Leaves> leaves = leavesDao.getLeavesByStatus(status);
         return leaves;
     }
+
+    public List<Leaves> getLeavesByStatusByUser(Status status, String user){
+        List<Leaves> leaves = leavesDao.getLeavesByStatusByUser(status,user);
+        return leaves;
+    }
 }

@@ -53,7 +53,7 @@ public class AccountServiceImpl implements AccountService {
         accountObj.setPannumber(request.getParameter("pannumber").trim());
         accountObj.setFirstname(request.getParameter("firstname").trim());
         accountObj.setLastname(request.getParameter("lastname").trim());
-        accountObj.setEmployeecode(request.getParameter("employeecode").trim());
+        accountObj.setEmployeecode(request.getParameter("employeecode").trim().toUpperCase());
         accountObj.setGender(request.getParameter("gender").trim());
         accountObj.setPhonenumber(Long.parseLong(request.getParameter("phonenumber").trim()));
         accountDao.saveOrUpdateAccount(accountObj);

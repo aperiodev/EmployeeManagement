@@ -294,6 +294,7 @@
                 },
                 newPassword: {
                     required: true,
+                    pwcheck: true,
                     minlength: 8
                 },
                 confirmPassword: {
@@ -301,7 +302,18 @@
                     minlength: 8,
                     equalTo: "#newPassword",
                 },
+            },
+            messages: {
+                newPassword: {
+                pwcheck: "Password must be 8 characters, one capital and one number"
             }
+        },
+        });
+
+        $.validator.addMethod("pwcheck", function(value) {
+            return /^[A-Za-z0-9\d=!\-@._*]*$/.test(value) // consists of only these
+                && /[A-Z]/.test(value) // has a lowercase letter
+                && /\d/.test(value) // has a digit
         });
     }
 

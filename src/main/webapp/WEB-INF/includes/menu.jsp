@@ -16,6 +16,7 @@
                 <ul class="treeview-menu">
                     <li><a href="/EM/auth/user/holidaysList"><i class="fa pull-left"></i> Holidays</a></li>
                     <li><a href="/EM/auth/companyleaves"><i class="fa pull-left"></i>Leaves Setup</a>
+                    <li><a href="/EM/auth/read"><i class="fa pull-left"></i>Upload Payslips</a>
                     </li>
                 </ul>
             </li>

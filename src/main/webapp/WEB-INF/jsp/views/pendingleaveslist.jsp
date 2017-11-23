@@ -5,8 +5,6 @@
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 <style>
     .reason {
-
-        width: 180px !important;
         white-space: nowrap;
         overflow: hidden !important;
         text-overflow: ellipsis;
@@ -15,7 +13,7 @@
     .reason a p
     {
         width: 100% !important;
-        height:30px !important;
+        height:50px !important;
 
     }
 
@@ -76,7 +74,7 @@
                         <td style="width: 14% !important;" class="text-wrap">${item.toDate}</td>
                         <td style="width: 14% !important;">${item.noOfDays}</td>
                         <td style="width: 14% !important;" class="reason text-wrap"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}"
-                                              onclick="showModal(this)">${item.reason}</a></td>
+                                              onclick="showModal(this)" style="width: 100%;">${item.reason}</a></td>
                         <td style="width: 14% !important;" class="text-wrap">${item.toUser.username}</td>
                         <td>
                             <button type="button" class="cbutton btn btn-block btn-success btn-sm" data-type="APPROVED"
