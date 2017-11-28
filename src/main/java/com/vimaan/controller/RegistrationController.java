@@ -76,7 +76,7 @@ public class RegistrationController extends BaseController {
             userService.userRegistration(user, userRole);
             String message = new MailMessages().loginMessage(user);
             try {
-                mailService.sendMail("admi@apeiro.us", user.getUsername(), "Account Creation", message);
+                mailService.sendMail("admi@apeiro.us", user.getUsername(), "Account Creation", message,"","");
             } catch (Exception e) {
                 mav.addObject("msg", e.getMessage());
             }

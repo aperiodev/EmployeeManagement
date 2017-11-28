@@ -12,4 +12,6 @@ public interface AccountDao {
     Account getAccount(User user);
     void registerAccount(Account account);
     void saveOrUpdateAccount(Account account);
+
+    Account getUserByEmpcode(String empcode);
 }

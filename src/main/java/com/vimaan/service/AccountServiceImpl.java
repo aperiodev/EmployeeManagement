@@ -62,4 +62,9 @@ public class AccountServiceImpl implements AccountService {
     public void registerAccount(Account account) {
         accountDao.registerAccount(account);
     }
+
+    public Account getUserByEmpcode(String empcode) {
+        Account account = accountDao.getUserByEmpcode(empcode);
+        return account;
+    }
 }

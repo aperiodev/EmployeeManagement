@@ -59,7 +59,7 @@ public class LeavesServiceImpl implements LeavesService {
 
             leavesDao.saveleave(leaves);
 
-            mailService.sendMail(leaves.getUser().getUsername(), request.getParameter("touser"),"Leave Request",leaves.getReason());
+            mailService.sendMail(leaves.getUser().getUsername(), request.getParameter("touser"),"Leave Request",leaves.getReason(),"","");
         } catch (Exception e) {
             System.out.println("Exception === " + e.getMessage());
         }

@@ -14,6 +14,8 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.io.FileNotFoundException;
 import java.util.Properties;
+import org.springframework.core.io.FileSystemResource;
+import java.io.File;
 
 public class MailService {
 
@@ -24,7 +26,7 @@ public class MailService {
         this.mailSender = mailSender;
     }
 
-    public void sendMail(String from, String to, String subject, String msg) throws Exception {
+    public void sendMail(String from, String to, String subject, String msg, String filename, String filepath) throws Exception {
     /* SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(to);
@@ -85,7 +87,36 @@ public class MailService {
 */
 
             // Send the actual HTML message, as big as you like
-            message.setContent(msg,"text/html");
+
+            if(filename!=null)
+            {
+                BodyPart messageBodyPart = new MimeBodyPart();
+
+                // Now set the actual message
+                messageBodyPart.setText(msg);
+
+                // Create a multipar message
+                Multipart multipart = new MimeMultipart();
+
+                // Set text message part
+                multipart.addBodyPart(messageBodyPart);
+
+                // Part two is attachment
+                messageBodyPart = new MimeBodyPart();
+
+                DataSource source = new FileDataSource(filepath);
+                messageBodyPart.setDataHandler(new DataHandler(source));
+                messageBodyPart.setFileName(filename);
+                multipart.addBodyPart(messageBodyPart);
+
+                // Send the complete message parts
+                message.setContent(multipart,"text/html");
+            }
+            else
+            {
+                message.setContent(msg,"text/html");
+            }
+
 
             // Send message
             Transport.send(message);

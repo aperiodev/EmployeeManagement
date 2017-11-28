@@ -38,4 +38,10 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
         session.saveOrUpdate(account);
         tx.commit();
     }
+
+    public Account getUserByEmpcode(String empcode) {
+        String sql = "from Account where employeecode='" + empcode + "'";
+        List<Account> accounts = getSession().createQuery(sql).list();
+        return accounts.size() > 0 ? accounts.get(0) : null;
+    }
 }

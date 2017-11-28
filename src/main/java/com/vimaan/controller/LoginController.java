@@ -478,7 +478,7 @@ public class LoginController extends BaseController {
         try {
             if (user != null) {
                 String message = new MailMessages().forgotPasswordMsg(user);
-                mailService.sendMail("vimaan@gmail.com", userEmail, "Forgot Password", message);
+                mailService.sendMail("vimaan@gmail.com", userEmail, "Forgot Password", message,"","");
                 mav.addObject("msg", "Thanks! You password was sent to given email successfully!");
             } else {
                 mav.addObject("msg", "User not registered with provided email or does not exist!");
