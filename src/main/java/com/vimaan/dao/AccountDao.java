@@ -14,4 +14,6 @@ public interface AccountDao {
     void saveOrUpdateAccount(Account account);
 
     Account getUserByEmpcode(String empcode);
+
+    Account checkEmployeeCode(Account account);
 }

@@ -160,6 +160,7 @@ public class LoginController extends BaseController {
                         } else {
                             model.addObject("username", user_account.getFirstname() + " " + user_account.getLastname());
                             model.addObject("userrole", user_account.getDesignation());
+
                             if (user_leaves != null) {
                                 model.addObject("totalleaves", uerLeaves);
                                 int wfa = 0, apr = 0, rej = 0, can = 0, nol = 0;
@@ -229,86 +230,100 @@ public class LoginController extends BaseController {
                                 date_all.clear();
                                 date_all.addAll(hashSet);
 
-                                for (int i = 0; i < date_all.size(); i++) {
-                                    for (int j = 0; j < date_array.size(); j++) {
-                                        if (date_all.get(i).equals(date_array.get(j))) {
-                                            date_all.remove(date_array.get(j));
+                                try
+                                {
+                                    for (int i = 0; i < date_all.size(); i++) {
+                                        for (int j = 0; j < date_array.size(); j++) {
+                                            if (date_all.get(i).equals(date_array.get(j))) {
+                                                //date_all.remove(date_array.get(j));
+                                                date_all.set(date_all.indexOf(date_array.get(j)),"testxxx");
+                                            }
                                         }
                                     }
-                                }
 
-                                Collections.sort(date_all);
-                                Collections.reverse(date_all);
-                                //yearInString
+                                    hashSet.addAll(date_all);
+                                    date_all.clear();
+                                    date_all.addAll(hashSet);
+                                    date_all.remove("testxxx");
 
-                                int jan = 0, feb = 0, mar = 0, api = 0, may = 0, jun = 0, july = 0, aug = 0, spt = 0, oct = 0, nov = 0, dec = 0;
-                                int totala = 0;
-                                for (int i = 0; i < date_all.size(); i++) {
-                                    String yar[] = date_all.get(i).split("-");
-                                    if (yar[0].equals(yearInString)) {
-                                        totala = totala + 1;
-                                        if (yar[1].equals("01")) {
-                                            jan = jan + 1;
-                                        } else if (yar[1].equals("02")) {
-                                            feb = feb + 1;
-                                        } else if (yar[1].equals("03")) {
-                                            mar = mar + 1;
-                                        } else if (yar[1].equals("04")) {
-                                            api = api + 1;
-                                        } else if (yar[1].equals("05")) {
-                                            may = may + 1;
-                                        } else if (yar[1].equals("06")) {
-                                            jun = jun + 1;
-                                        } else if (yar[1].equals("07")) {
-                                            july = july + 1;
-                                        } else if (yar[1].equals("08")) {
-                                            aug = aug + 1;
-                                        } else if (yar[1].equals("09")) {
-                                            spt = spt + 1;
-                                        } else if (yar[1].equals("10")) {
-                                            oct = oct + 1;
-                                        } else if (yar[1].equals("11")) {
-                                            nov = nov + 1;
-                                        } else if (yar[1].equals("12")) {
-                                            dec = dec + 1;
-                                        }
-                                    }
-                                }
-                                String cymonth = "[{y: '" + yearInString + "-01', item1: " + jan + "}," +
-                                        "{y: '" + yearInString + "-02', item1: " + feb + "}," +
-                                        "{y: '" + yearInString + "-03', item1: " + mar + "}," +
-                                        "{y: '" + yearInString + "-04', item1: " + api + "}," +
-                                        "{y: '" + yearInString + "-05', item1: " + may + "}," +
-                                        "{y: '" + yearInString + "-06', item1: " + jun + "}," +
-                                        "{y: '" + yearInString + "-07', item1: " + july + "}," +
-                                        "{y: '" + yearInString + "-08', item1: " + aug + "}," +
-                                        "{y: '" + yearInString + "-09', item1: " + spt + "}," +
-                                        "{y: '" + yearInString + "-10', item1: " + oct + "}," +
-                                        "{y: '" + yearInString + "-11', item1: " + nov + "}," +
-                                        "{y: '" + yearInString + "-12', item1: " + dec + "}]";
+                                    Collections.sort(date_all);
+                                    Collections.reverse(date_all);
+                                    //yearInString
 
-                                model.addObject("nol", totala);
-
-                                model.addObject("cymonth", cymonth);
-
-                                String allyears = "[";
-                                for (int y = (Integer.parseInt(yearInString) - 5); y <= (Integer.parseInt(yearInString) + 5); y++) {
-                                    int total = 0;
+                                    int jan = 0, feb = 0, mar = 0, api = 0, may = 0, jun = 0, july = 0, aug = 0, spt = 0, oct = 0, nov = 0, dec = 0;
+                                    int totala = 0;
                                     for (int i = 0; i < date_all.size(); i++) {
                                         String yar[] = date_all.get(i).split("-");
-                                        if (yar[0].equals(y + "")) {
-                                            total = total + 1;
+                                        if (yar[0].equals(yearInString)) {
+                                            totala = totala + 1;
+                                            if (yar[1].equals("01")) {
+                                                jan = jan + 1;
+                                            } else if (yar[1].equals("02")) {
+                                                feb = feb + 1;
+                                            } else if (yar[1].equals("03")) {
+                                                mar = mar + 1;
+                                            } else if (yar[1].equals("04")) {
+                                                api = api + 1;
+                                            } else if (yar[1].equals("05")) {
+                                                may = may + 1;
+                                            } else if (yar[1].equals("06")) {
+                                                jun = jun + 1;
+                                            } else if (yar[1].equals("07")) {
+                                                july = july + 1;
+                                            } else if (yar[1].equals("08")) {
+                                                aug = aug + 1;
+                                            } else if (yar[1].equals("09")) {
+                                                spt = spt + 1;
+                                            } else if (yar[1].equals("10")) {
+                                                oct = oct + 1;
+                                            } else if (yar[1].equals("11")) {
+                                                nov = nov + 1;
+                                            } else if (yar[1].equals("12")) {
+                                                dec = dec + 1;
+                                            }
                                         }
                                     }
-                                    if (allyears.equals("[")) {
-                                        allyears = allyears + "{y: '" + y + "', item1: " + total + "}";
-                                    } else {
-                                        allyears = allyears + ",{y: '" + y + "', item1: " + total + "}";
-                                    }
-                                }
-                                allyears = allyears + "]";
 
-                                model.addObject("allyears", allyears);
+                                    String cymonth = "[{y: '" + yearInString + "-01', item1: " + jan + "}," +
+                                            "{y: '" + yearInString + "-02', item1: " + feb + "}," +
+                                            "{y: '" + yearInString + "-03', item1: " + mar + "}," +
+                                            "{y: '" + yearInString + "-04', item1: " + api + "}," +
+                                            "{y: '" + yearInString + "-05', item1: " + may + "}," +
+                                            "{y: '" + yearInString + "-06', item1: " + jun + "}," +
+                                            "{y: '" + yearInString + "-07', item1: " + july + "}," +
+                                            "{y: '" + yearInString + "-08', item1: " + aug + "}," +
+                                            "{y: '" + yearInString + "-09', item1: " + spt + "}," +
+                                            "{y: '" + yearInString + "-10', item1: " + oct + "}," +
+                                            "{y: '" + yearInString + "-11', item1: " + nov + "}," +
+                                            "{y: '" + yearInString + "-12', item1: " + dec + "}]";
+
+                                    model.addObject("nol", totala);
+
+                                    model.addObject("cymonth", cymonth);
+
+                                    String allyears = "[";
+                                    for (int y = (Integer.parseInt(yearInString) - 5); y <= (Integer.parseInt(yearInString) + 5); y++) {
+                                        int total = 0;
+                                        for (int i = 0; i < date_all.size(); i++) {
+                                            String yar[] = date_all.get(i).split("-");
+                                            if (yar[0].equals(y + "")) {
+                                                total = total + 1;
+                                            }
+                                        }
+                                        if (allyears.equals("[")) {
+                                            allyears = allyears + "{y: '" + y + "', item1: " + total + "}";
+                                        } else {
+                                            allyears = allyears + ",{y: '" + y + "', item1: " + total + "}";
+                                        }
+                                    }
+                                    allyears = allyears + "]";
+
+                                    model.addObject("allyears", allyears);
+                                }
+                                catch (Exception ex)
+                                {
+
+                                }
                             } else {
                                 model.addObject("leavesapply", 0);
                                 model.addObject("approvedleaves", 0);

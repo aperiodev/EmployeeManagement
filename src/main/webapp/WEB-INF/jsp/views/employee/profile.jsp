@@ -147,10 +147,11 @@
                             <form:input type="text" class="form-control" id="aadharnumber" placeholder="Aadharnumber"
                                         path="aadharnumber" name="aadharnumber"/>
                         </div>
+
                         <div class="form-group">
                             <label><strong style="color: red">*</strong>Employee Code</label>
                             <form:input type="text" class="form-control" id="employeecode" placeholder="Employee Code"
-                                        path="employeecode" name="employeecode"/>
+                                        path="employeecode" name="employeecode" cssStyle="text-transform: uppercase;"/>
                         </div>
                     </div>
 

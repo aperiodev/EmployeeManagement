@@ -177,7 +177,7 @@
             </div>
         </div>
     <div class="box-footer">
-        <button type="reset" class="btn btn-default" id="changeReset">Reset</button>
+        <button type="reset" class="btn btn-default" id="changeReset">Cancel</button>
         <button type="submit" class="btn btn-info pull-right" id="changePwdSubmitBtn">Submit</button>
 
     </div>

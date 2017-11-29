@@ -17,4 +17,6 @@ public interface AccountService {
     void saveOrUpdateAccount(HttpServletRequest request, Date doj, Date dob);
 
     Account getUserByEmpcode(String empcode);
+
+    Account checkEmployeeCode(Account account);
 }

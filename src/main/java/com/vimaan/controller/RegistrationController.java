@@ -167,6 +167,27 @@ public class RegistrationController extends BaseController {
         return status;
     }
 
+    @RequestMapping(value = "/checkEmployeeCode", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String checkempcode(HttpServletRequest request, HttpServletResponse response) throws ParseException {
+        Account account=new Account();
+
+        account.setEmployeecode(request.getParameter("employeecode"));
+        account.setId(parseInt(request.getParameter("id")));
+
+        Account checkempcode = accountService.checkEmployeeCode(account);
+        //System.out.println("financial year---" + financialyear);
+
+        String status = " ";
+        if (checkempcode != null) {
+            status = "employeecodeexists";
+        } else {
+            status = "success";
+        }
+        return status;
+    }
+
     /*@RequestMapping(value = "/addemployee", method = RequestMethod.GET)
     public ModelAndView showRegister(HttpServletRequest request, HttpServletResponse response) {
         User user = getLoggedInUser();

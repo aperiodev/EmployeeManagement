@@ -44,4 +44,10 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
         List<Account> accounts = getSession().createQuery(sql).list();
         return accounts.size() > 0 ? accounts.get(0) : null;
     }
+
+    public Account checkEmployeeCode(Account account) {
+        String sql = "from Account where employeecode='" + account.getEmployeecode() + "' and user_account_id="+account.getId()+"";
+        List<Account> accounts = getSession().createQuery(sql).list();
+        return accounts.size() > 0 ? accounts.get(0) : null;
+    }
 }

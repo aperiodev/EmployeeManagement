@@ -20,7 +20,8 @@
 
     $(function () {
         $('#fdate').datepicker({
-            format: 'yyyy-mm-dd'
+            format: 'yyyy-mm-dd',
+            autoclose:true
         });
 
     });
@@ -41,7 +42,7 @@
                         <div class="form-group">
                             <label for="fdate"><strong style="color: red">*</strong>Date</label>
                             <input type="text" class="form-control" id="fdate" placeholder="Date"
-                                   name="fdate"></input>
+                                   name="fdate" readonly="true"></input>
                         </div>
                     </div>
                     <div class="col-md-8">

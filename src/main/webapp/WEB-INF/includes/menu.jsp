@@ -15,9 +15,8 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="${ctx}/auth/user/holidaysList"><i class="fa pull-left"></i> Holidays</a></li>
-                    <li><a href="${ctx}/auth/companyleaves"><i class="fa pull-left"></i>Leaves Setup</a>
-                    <li><a href="${ctx}/auth/read"><i class="fa pull-left"></i>Upload Payslips</a>
-                    </li>
+                    <li><a href="${ctx}/auth/companyleaves"><i class="fa pull-left"></i>Leaves Setup</a></li>
+                    <li><a href="${ctx}/auth/read"><i class="fa pull-left"></i>Upload Payslips</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -75,9 +74,9 @@
                        </span>
                    </a>
                    <ul class="treeview-menu">
-                       <li><a href="${ctx}/auth/user/holidaysList"><i class="fa pull-left"></i> Holidays</a></li>
-                       <li><a href="${ctx}/auth/companyleaves"><i class="fa pull-left"></i>Leaves Setup</a>
-                       </li>
+                       <li><a href="${ctx}/auth/user/holidaysList"><i class="fa pull-left"></i>Holidays</a></li>
+                       <li><a href="${ctx}/auth/companyleaves"><i class="fa pull-left"></i>Leaves Setup</a></li>
+                       <li><a href="${ctx}/auth/read"><i class="fa pull-left"></i>Upload Payslips</a></li>
                    </ul>
                </li>
                <li class="treeview">

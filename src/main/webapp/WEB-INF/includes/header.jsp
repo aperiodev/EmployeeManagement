@@ -18,11 +18,11 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 <li class="dropdown user user-menu">
-                    <a <%--href="#"--%> <%--class="dropdown-toggle" data-toggle="dropdown"--%>>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                        <%-- <img src="${ctx}/theme/img/defaultImg.png" class="user-image" alt="User Image">--%>
                         <span class="hidden-xs"><sec:authentication property="principal.username" /></span>
                     </a>
-                 <%--   <ul class="dropdown-menu">
+                    <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
                             <p>
@@ -45,7 +45,7 @@
                                 <a href="${ctx}/j_spring_security_logout"  class="btn btn-danger btn-flat"> Sign Out</a>
                             </div>
                         </li>
-                    </ul>--%>
+                    </ul>
                 </li>
             </ul>
         </div>

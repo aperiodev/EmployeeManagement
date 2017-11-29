@@ -8,6 +8,7 @@
         white-space: nowrap;
         overflow: hidden !important;
         text-overflow: ellipsis;
+        height:80px !important;
     }
 
     .reason a p

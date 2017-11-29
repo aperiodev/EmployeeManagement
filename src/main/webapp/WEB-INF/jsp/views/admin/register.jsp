@@ -203,7 +203,7 @@
 
         <sec:authorize access="!hasRole('ROLE_ADMIN')">
         <c:if test="${account.firstname == null || account.lastname == null || account.designation == null}">
-        $("body").removeClass("skin-blue sidebar-mini").addClass("skin-blue sidebar-mini sidebar-collapse");
+       /* $("body").removeClass("skin-blue sidebar-mini").addClass("skin-blue sidebar-mini sidebar");*/
         </c:if>
         </sec:authorize>
 

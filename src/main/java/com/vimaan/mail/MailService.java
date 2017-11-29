@@ -88,7 +88,12 @@ public class MailService {
 
             // Send the actual HTML message, as big as you like
 
-            if(filename!=null)
+            if(filename.isEmpty())
+            {
+                message.setContent(msg,"text/html");
+
+            }
+            else
             {
                 BodyPart messageBodyPart = new MimeBodyPart();
 
@@ -111,10 +116,6 @@ public class MailService {
 
                 // Send the complete message parts
                 message.setContent(multipart,"text/html");
-            }
-            else
-            {
-                message.setContent(msg,"text/html");
             }
 
 

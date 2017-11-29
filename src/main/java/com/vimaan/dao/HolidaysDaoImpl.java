@@ -29,7 +29,7 @@ import java.util.Date;
 public class HolidaysDaoImpl extends BaseDao implements HolidaysDao {
 
     public List<Holidays> getHolidays() {
-        String sql = "from Holidays";
+        String sql = "from Holidays where isactive = true";
         List<Holidays> holidays = getSession().createQuery(sql).list();
         return holidays.size() > 0 ? holidays : null;
     }

@@ -67,4 +67,10 @@ public class AccountServiceImpl implements AccountService {
         Account account = accountDao.getUserByEmpcode(empcode);
         return account;
     }
+
+    public Account checkEmployeeCode(Account account) {
+        Account account1 = accountDao.checkEmployeeCode(account);
+        return account1;
+    }
+
 }
