@@ -1,7 +1,7 @@
 <%@include file="/common/taglibs.jsp" %>
 <header class="main-header">
     <!-- Logo -->
-    <a href="/EM/welcome" class="logo">
+    <a href="${ctx}/welcome" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>EM</b></span>
         <!-- logo for regular state and mobile devices -->
@@ -28,7 +28,7 @@
                             <p>
                                 <sec:authentication property="principal.username" /> </small></br>
                             </p>
-                            <p><a style="color: #FFFFFF;" href="/EM/auth/user/profile" ><i class="fa  fa-pencil"></i> Profile</a></p>
+                            <p><a style="color: #FFFFFF;" href="${ctx}/auth/user/profile" ><i class="fa  fa-pencil"></i> Profile</a></p>
                         </li>
                         <li>
                             <div class="row">
@@ -39,10 +39,10 @@
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="/EM/auth/user/showChangePassword" class="btn btn-primary btn-flat">Change Password</a>
+                                <a href="${ctx}/auth/user/showChangePassword" class="btn btn-primary btn-flat">Change Password</a>
                             </div>
                             <div class="pull-right">
-                                <a href="/EM/j_spring_security_logout"  class="btn btn-danger btn-flat"> Sign Out</a>
+                                <a href="${ctx}/j_spring_security_logout"  class="btn btn-danger btn-flat"> Sign Out</a>
                             </div>
                         </li>
                     </ul>--%>

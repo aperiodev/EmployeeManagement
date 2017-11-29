@@ -29,8 +29,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -63,110 +66,159 @@ public class PdfReaderclaa {
     }
 
     @RequestMapping(value = "/savefile", method = RequestMethod.POST)
-    @ResponseBody
-    String savefile(HttpServletRequest request, HttpServletResponse response) {
-        String status = "";
+    public ModelAndView addUser(HttpServletRequest request,@RequestParam("file") MultipartFile file) throws Exception {
 
+        ModelAndView mav = new ModelAndView("redirect:/auth/read");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         try {
-
             PathMatchingResourcePatternResolver loader = new PathMatchingResourcePatternResolver();
-            Resource[] resources = loader.getResources("classpath:/payslips/*.zip");
-            for (Resource resource : resources) {
+            //Resource resourcezip=loader.getResource("classpath:/payslips/test.zip");
 
-                File zip = File.createTempFile(UUID.randomUUID().toString(), "temp");
-                FileOutputStream o = new FileOutputStream(zip);
-                IOUtils.copy(resource.getInputStream(), o);
-                o.close();
+            //Resource resources = loader.getResources("classpath:/payslips/*.zip");
+            //for (Resource resource : resources) {
 
-                String destination = request.getSession().getServletContext().getRealPath("/resources/payslips/zip");
+            File zip = File.createTempFile(UUID.randomUUID().toString(), "temp");
+            FileOutputStream o = new FileOutputStream(zip);
+            IOUtils.copy(file.getInputStream(), o);
+            o.close();
 
+            File resour=new File(request.getSession().getServletContext().getRealPath("/resources"));
+            if (!resour.exists()) {
+                if (resour.mkdir()) {
 
-                try {
-                    ZipFile zipFile = new ZipFile(zip);
-                    zipFile.extractAll(destination);
-                } catch (ZipException e) {
-                    e.printStackTrace();
-                } finally {
-                    /**
-                     * delete temp file
-                     */
-                    zip.delete();
+                } else {
+
                 }
-
-
             }
 
+            File payslip=new File(request.getSession().getServletContext().getRealPath("/resources/payslips"));
+            if (!payslip.exists()) {
+                if (payslip.mkdir()) {
+                } else {
+                }
+            }
+
+            File zi=new File(request.getSession().getServletContext().getRealPath("/resources/payslips/zip"));
+            if (!zi.exists()) {
+                if (zi.mkdir()) {
+                } else {
+                }
+            }
+
+            String destination = request.getSession().getServletContext().getRealPath("/resources/payslips/zip/") + sdf.format(timestamp);
+            //String destination = request.getSession().getServletContext().getContextPath() + "/resources/payslips/zip";
 
 
+            File newfolder=new File(destination);
+            if (!newfolder.exists()) {
+                if (newfolder.mkdir()) {
+
+                    try {
+                        ZipFile zipFile = new ZipFile(zip);
+                        zipFile.extractAll(destination);
+
+                        try {
+
+                            //PathMatchingResourcePatternResolver loader = new PathMatchingResourcePatternResolver();
+                                /*Resource[] resources = loader.getResources(destination+"*//*.pdf");*/
+                            File directory=new File(destination);
+                            File[] fList = directory.listFiles();
+                            for (File pdffile : fList) {
+                                // process resource
+                                PDDocument document = null;
+                                document = PDDocument.load(new File(pdffile.getPath()));
+                                document.getClass();
+                                if (!document.isEncrypted()) {
+                                    PDFTextStripperByArea stripper = new PDFTextStripperByArea();
+                                    stripper.setSortByPosition(true);
+                                    PDFTextStripper Tstripper = new PDFTextStripper();
+                                    String st = Tstripper.getText(document);
+
+                                    int employeecode=st.lastIndexOf("Employee Code :") + 16;
+                                    int location=st.indexOf("Location");
+
+                                    String empcode=st.substring(employeecode,location).trim();
+
+                                    if(empcode!=null)
+                                    {
+                                        Account account = accountService.getUserByEmpcode(empcode);
+
+                                        if(account!=null)
+                                        {
+                                            int mon=st.indexOf("Salary Slip for the Month of") + 29;
+                                            int name=st.indexOf("Name");
+
+                                            String month=st.substring(mon,name).trim();
+
+                                            String message = new MailMessages().payslipMessage(account,month);
+                                            try {
+                                                mailService.sendMail("admi@apeiro.us", account.getEmail(),   month + " " + "Pay Slip - " + account.getFirstname() + " " + account.getLastname(), message, pdffile.getName(),pdffile.getPath());
+                                                //status="Pay Slip sent successfully.";
+                                            } catch (Exception e) {
+                                                //status="Something went wrong on email";
+                                            }
+                                            //status="Pay Slip sent successfully.";
+                                        }
+                                        else
+                                        {
+                                            //status="User not exists with the employee code " + empcode + " Please check the employee code";
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        //status="Employee Code not exists in PDF. Please check it";
+                                    }
+                                }
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            //status="Failure";
+                            mav.addObject("msg", "Failure");
+                        }
+                    } catch (ZipException e) {
+                        e.printStackTrace();
+
+                        mav.addObject("msg", "Failure");
+                    } finally {
+                        /**
+                         * delete temp file
+                         */
+                        zip.delete();
+                        mav.addObject("msg", "Payslips sent successfully");
+
+                    }
+                    mav.addObject("msg", "Payslips sent successfully");
+                } else {
+                    mav.addObject("msg", "Failure");
+                }
+            }
+            //}
         }
         catch (IOException e)
         {
-
+            mav.addObject("msg", "Failure");
         }
 
-        /**
-         * unizp file from temp by zip4j
-         */
-
-
-        /*try {
-
-            PathMatchingResourcePatternResolver loader = new PathMatchingResourcePatternResolver();
-            Resource[] resources = loader.getResources("classpath:/payslips/*.pdf");
-            for (Resource resource : resources) {
-                // process resource
-                PDDocument document = null;
-                document = PDDocument.load(new File(resource.getFile().getPath()));
-                document.getClass();
-                if (!document.isEncrypted()) {
-                    PDFTextStripperByArea stripper = new PDFTextStripperByArea();
-                    stripper.setSortByPosition(true);
-                    PDFTextStripper Tstripper = new PDFTextStripper();
-                    String st = Tstripper.getText(document);
-
-                    int employeecode=st.lastIndexOf("Employee Code :") + 16;
-                    int location=st.indexOf("Location");
-
-                    String empcode=st.substring(employeecode,location).trim();
-
-                    if(empcode!=null)
-                    {
-                        Account account = accountService.getUserByEmpcode(empcode);
-
-                        if(account!=null)
-                        {
-                            int mon=st.indexOf("Salary Slip for the Month of") + 29;
-                            int name=st.indexOf("Name");
-
-                            String month=st.substring(mon,name).trim();
-
-                            String message = new MailMessages().payslipMessage(account,month);
-                            try {
-                                mailService.sendMail("admi@apeiro.us", account.getEmail(),   month + " " + "Pay Slip - " + account.getFirstname() + " " + account.getLastname(), message, resource.getFilename(),resource.getFile().getPath());
-                                //status="Pay Slip sent successfully.";
-                            } catch (Exception e) {
-                                status="Something went wrong on email";
-                            }
-                            status="Pay Slip sent successfully.";
-                        }
-                        else
-                        {
-                            status="User not exists with the employee code " + empcode + " Please check the employee code";
-                        }
-
-                    }
-                    else
-                    {
-                        status="Employee Code not exists in PDF. Please check it";
-                    }
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            status="Failure";
-        }*/
-        return status;
+        return mav;
     }
+
+   /* @RequestMapping(value = "/savefile", method = RequestMethod.POST)
+    @ResponseBody
+    String savefile(HttpServletRequest request,@RequestParam("file") MultipartFile file) throws IOException{
+        String status = "";
+
+
+        *//**
+         * unizp file from temp by zip4j
+         *//*
+
+
+        *//**//*
+        return status;
+    }*/
 }

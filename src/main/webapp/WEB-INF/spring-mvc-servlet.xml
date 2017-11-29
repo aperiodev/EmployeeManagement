@@ -131,6 +131,11 @@
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
 
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+    <!--<bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>-->
+
     <!-- This tag allows for mapping the DispatcherServlet to "/" -->
   <!--  <mvc:default-servlet-handler/>-->
 </beans>

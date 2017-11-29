@@ -93,7 +93,7 @@ public class MailService {
                 BodyPart messageBodyPart = new MimeBodyPart();
 
                 // Now set the actual message
-                messageBodyPart.setText(msg);
+                messageBodyPart.setContent(msg,"text/html");
 
                 // Create a multipar message
                 Multipart multipart = new MimeMultipart();
