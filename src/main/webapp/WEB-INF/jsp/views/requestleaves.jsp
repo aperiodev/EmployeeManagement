@@ -85,7 +85,7 @@
                     toastr.error("Please select TO");
                 }
                 if ($("#datecount").val().trim() == 0) {
-                    toastr.error("No of day must be greater then \"0\"");
+                    toastr.error("No of day must be greater than \"0\"");
                 }
                 if ($("#reason").val().trim() == "") {
                     toastr.error("Reason Cannot be Empty");

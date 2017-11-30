@@ -62,10 +62,6 @@
 
 <script>
     $(document).ready(function () {
-        $('#example').DataTable({
-            responsive: true,
-            columnDefs: [ { orderable: false, targets: [5] }]
-        });
 
         $('.userAccount').on('click', function () {
             var username = $(this).data("user");
@@ -92,6 +88,10 @@
                     toastr.error("Account status cannot be changed, Please try again!");
                 }
             });
-        })
+        });
+
+        $('#example').DataTable({
+            responsive: true
+        });
     });
 </script>

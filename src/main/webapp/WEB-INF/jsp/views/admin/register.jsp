@@ -127,7 +127,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="username"><strong style="color: red">*</strong>Email</label>
-                        <form:input path="username" type="text" class="form-control" id="username" placeholder="Email" maxlength="45"/>
+                        <form:input path="username" type="text" class="form-control" id="username" placeholder="Email" />
                     </div>
                 </div>
 
@@ -150,7 +150,7 @@
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label"><strong style="color: red">*</strong>Role</label>
+                        <label for="userRole"><strong style="color: red">*</strong>Role</label>
 
                             <select name="userRole" id="userRole" class="form-control">
                                 <option value="">Select..</option>
@@ -233,7 +233,7 @@
 
         // email
         jQuery.validator.addMethod("emailValidator", function (value, element) {
-            var emailPattern = /^([A-Za-z]{1})([A-Za-z0-9+_.-])+([\w$]{1})\@(([\w]{1})([\w-]+([\w$]{1})\.)+)([a-zA-Z0-9]{2,3})$/;
+            var emailPattern = /^([A-Za-z]{0})([A-Za-z0-9+_.-])+([\w$]{1})\@(([\w]{1})([\w-]+([\w$]{1})\.)+)([a-zA-Z0-9]{2,3})$/;
             if (value.length > 0) {
                 return (emailPattern.test(value));
             }

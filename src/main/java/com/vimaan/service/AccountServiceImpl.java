@@ -73,4 +73,9 @@ public class AccountServiceImpl implements AccountService {
         return account1;
     }
 
+    public Account getUserByEmpcodeById(String empcode,String email) {
+        Account account = accountDao.getUserByEmpcodeById(empcode,email);
+        return account;
+    }
+
 }

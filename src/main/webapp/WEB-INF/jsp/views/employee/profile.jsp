@@ -192,7 +192,26 @@
                 $("body").removeClass("skin-blue sidebar-mini").addClass("skin-blue sidebar-mini sidebar-collapse");
             </c:if>
         </sec:authorize>
+
+        onChangeEmployeeCode();
+
+        var msg=getParameterByName('msg');
+
+        if(msg.length)
+        {
+            toastr.success(msg);
+        }
     });
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
 
     function updateFormValidate() {
         var updateForm = $("#updateForm");

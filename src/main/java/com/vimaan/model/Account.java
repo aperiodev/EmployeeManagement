@@ -63,7 +63,7 @@ public class Account implements Serializable {
     @Column(columnDefinition = "boolean default true")
     private boolean currentemployee = new Boolean(true);
 
-    @Column
+    @Column(unique = true)
     private String employeecode;
 
     public int getId() {

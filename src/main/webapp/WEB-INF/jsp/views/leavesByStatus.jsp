@@ -91,7 +91,8 @@
 <script>
     $(function () {
         $('#datatable').DataTable({
-            responsive: true
+            responsive: true,
+            columnDefs: [{orderable: false, targets: [4]}]
         });
     });
 

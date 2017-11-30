@@ -138,13 +138,20 @@ public class RegistrationController extends BaseController {
                                       @RequestParam("doj") @DateTimeFormat(pattern = "yyyy-MM-dd") Date doj,
                                       @RequestParam("dob") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dob) {
         ModelAndView mav = new ModelAndView("redirect:/auth/home");
-        /*String empcode=request.getParameter("employeecode").trim().toUpperCase();
+        String empcode=request.getParameter("employeecode").trim().toUpperCase();
+        String email=request.getParameter("email");
 
-        Account employeeCode=accountService.getUserByEmpcode(empcode);*/
+        Account employeeCode=accountService.getUserByEmpcodeById(empcode,email);
 
-        accountService.saveOrUpdateAccount(request, doj, dob);
-
-
+        if(employeeCode!=null)
+        {
+            mav = new ModelAndView("redirect:/auth/user/profile");
+            mav.addObject("msg", "Employee Code already exists for another user. Please try with different Employee Code");
+        }
+        else
+        {
+            accountService.saveOrUpdateAccount(request, doj, dob);
+        }
         //mav.addObject("msg", "Email already exists or something went wrong. Please try with different email");
         return mav;
     }

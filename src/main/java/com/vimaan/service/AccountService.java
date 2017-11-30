@@ -19,4 +19,6 @@ public interface AccountService {
     Account getUserByEmpcode(String empcode);
 
     Account checkEmployeeCode(Account account);
+
+    Account getUserByEmpcodeById(String empcode,String email);
 }
