@@ -34,12 +34,40 @@
         border: white solid 5px !important;
     }
 
-    .reason {
+    /*.reason {
         display: inline-block;
         width: 180px;
         white-space: nowrap;
         overflow: hidden !important;
         text-overflow: ellipsis;
+    }*/
+
+    .reason {
+        white-space: nowrap;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+        height:80px !important;
+        display: inline-block;
+    }
+
+    .reason a
+    {
+        width: 100% !important;
+        height:50px !important;
+    }
+
+    .text-wrap {
+        word-wrap: break-word !important;
+        text-overflow: ellipsis !important;
+        max-width: 0px !important;
+        white-space: normal !important;
+    }
+
+    .wraptext
+    {
+        width:100% !important;
+        height:100px !important;
+        overflow: hidden !important;
     }
 
 </style>

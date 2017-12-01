@@ -22,6 +22,7 @@ import javax.mail.MessagingException;
 import javax.mail.SendFailedException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -63,12 +64,20 @@ public class LoginController extends BaseController {
      * @return
      */
     @RequestMapping(value = {"/", "/welcome**"}, method = RequestMethod.GET)
-    public ModelAndView welcomePage(Authentication authentication) {
-        log.info("isAuthenticated: " + authentication.isAuthenticated());
+    public ModelAndView welcomePage(Authentication authentication) throws IOException{
+        try {
+            log.info("isAuthenticated: " + authentication.isAuthenticated());
 
-        if (authentication.isAuthenticated()) {
-            return new ModelAndView("redirect:/auth/home");
-        } else {
+            if (authentication.isAuthenticated()) {
+                return new ModelAndView("redirect:/auth/home");
+            } else {
+                ModelAndView model = new ModelAndView();
+                model.setViewName("login/login");
+                return model;
+            }
+        }
+        catch (Exception ex)
+        {
             ModelAndView model = new ModelAndView();
             model.setViewName("login/login");
             return model;

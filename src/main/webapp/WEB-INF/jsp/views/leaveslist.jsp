@@ -11,11 +11,10 @@
         height:80px !important;
     }
 
-    .reason a p
+    .reason a
     {
         width: 100% !important;
         height:50px !important;
-
     }
 
     .text-wrap {
@@ -23,6 +22,13 @@
         text-overflow: ellipsis !important;
         max-width: 0px !important;
         white-space: normal !important;
+    }
+
+    .wraptext
+    {
+        width:100% !important;
+        height:100px !important;
+        overflow: hidden !important;
     }
 </style>
 
@@ -59,7 +65,7 @@
                     <td style="width: 11% !important;" class="text-wrap">${item.fromDate}</td>
                     <td style="width: 11% !important;" class="text-wrap">${item.toDate}</td>
                     <td style="width: 11% !important;" class="text-wrap">${item.noOfDays}</td>
-                    <td class="reason text-wrap" style="width: 17% !important;"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}" onclick="showModal(this)" style="width: 100%;">${item.reason}</a></td>
+                    <td class="reason text-wrap" style="width: 17% !important;"><div class="wraptext"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}" onclick="showModal(this)" style="width: 100%;">${item.reason}</a></div></td>
                     <td style="width: 11% !important;" class="text-wrap">${fn:replace(item.status, '_', ' ')}</td>
                     <td style="width: 11% !important;" class="text-wrap">${item.toUser.username}</td>
                     <td align="center" style="width: 11% !important;" class="text-wrap">

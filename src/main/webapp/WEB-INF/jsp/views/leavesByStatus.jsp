@@ -10,7 +10,7 @@
         height:80px !important;
     }
 
-    .reason a p
+    .reason a
     {
         width: 100% !important;
         height:50px !important;
@@ -22,6 +22,13 @@
         text-overflow: ellipsis !important;
         max-width: 0px !important;
         white-space: normal !important;
+    }
+
+    .wraptext
+    {
+        width:100% !important;
+        height:100px !important;
+        overflow: hidden !important;
     }
 
     .table-responsive
@@ -58,8 +65,8 @@
                         <td style="width: 22% !important;" class="text-wrap">${item.user.username}</td>
                         <td style="width: 22% !important;" class="text-wrap">${item.fromDate} <b> To </b> ${item.toDate}</td>
                         <td style="width: 22% !important;" class="text-wrap">${item.noOfDays}</td>
-                        <td style="width: 22% !important;" class="reason text-wrap"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}"
-                                              onclick="showModal(this)" style="width: 100%;">${item.reason}</a></td>
+                        <td style="width: 22% !important;" class="reason text-wrap"><div class="wraptext"><a href="#" data-reason="${item.reason.replaceAll("\"", "\'")}"
+                                                                                                             onclick="showModal(this)" style="width: 100%;">${item.reason}</a></div></td>
                         <td style="width: 12% !important;" class="text-wrap">${item.status}</td>
                     </tr>
                 </c:forEach>
