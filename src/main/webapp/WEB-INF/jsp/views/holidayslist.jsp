@@ -29,7 +29,7 @@
 <c:if test="${role ne '[ROLE_USER]'}">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Add Holiday's</h3>
+                <h3 class="box-title">Add Holiday</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -64,7 +64,7 @@
 
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title">Holidays Lists</h3>
+            <h3 class="box-title">Holidays List</h3>
 
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -250,7 +250,8 @@
         });
 
         $('#example').DataTable({
-            responsive: true
+            responsive: true,
+            columnDefs: [{orderable: false, targets: [2]}]
 
         });
 

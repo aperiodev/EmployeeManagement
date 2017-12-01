@@ -193,8 +193,6 @@
             </c:if>
         </sec:authorize>
 
-        onChangeEmployeeCode();
-
         var msg=getParameterByName('msg');
 
         if(msg.length)

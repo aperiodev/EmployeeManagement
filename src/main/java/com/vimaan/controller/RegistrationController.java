@@ -137,7 +137,7 @@ public class RegistrationController extends BaseController {
     public ModelAndView updateProfile(HttpServletRequest request,
                                       @RequestParam("doj") @DateTimeFormat(pattern = "yyyy-MM-dd") Date doj,
                                       @RequestParam("dob") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dob) {
-        ModelAndView mav = new ModelAndView("redirect:/auth/home");
+        ModelAndView mav = null;
         String empcode=request.getParameter("employeecode").trim().toUpperCase();
         String email=request.getParameter("email");
 
@@ -145,11 +145,17 @@ public class RegistrationController extends BaseController {
 
         if(employeeCode!=null)
         {
-            mav = new ModelAndView("redirect:/auth/user/profile");
+            if (request.getParameter("email")==getLoggedInUserName()) {
+                mav = new ModelAndView("redirect:/auth/user/profile");
+            } else {
+                mav = new ModelAndView("redirect:/auth/user/profile");
+                mav.addObject("user",request.getParameter("email"));
+            }
             mav.addObject("msg", "Employee Code already exists for another user. Please try with different Employee Code");
         }
         else
         {
+            mav = new ModelAndView("redirect:/auth/home");
             accountService.saveOrUpdateAccount(request, doj, dob);
         }
         //mav.addObject("msg", "Email already exists or something went wrong. Please try with different email");
